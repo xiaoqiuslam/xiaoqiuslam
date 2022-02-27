@@ -25,7 +25,11 @@ void creatAlphaMat(Mat &mat)
 
 int main ()
 {
-    Mat mat(480, 640, CV_8UC4);
+    Mat mat(400, 500, CV_8UC4);
+    int step3 = (int)mat.step1();
+    cout << "(int)image.step1()= " << step3 << endl;
+    int step4 = (int)mat.step;
+    cout << "(int)image.step()= " << step4 << endl;
     creatAlphaMat(mat);
     vector<int> compression_params;
     compression_params.push_back(IMWRITE_PNG_COMPRESSION);

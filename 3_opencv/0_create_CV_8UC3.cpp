@@ -36,9 +36,12 @@ int main ()
      * 【3】CV_8UC4--则可以创建-----8位无符号的四通道---带透明色的RGB图像
      *  #define CV_8UC4 CV_MAKETYPE(CV_8U,4)
      ***************************************************************************/
-
     // CV_8UC3 表示使用8位的 unsigned char 型，每个像素由三个元素组成三通道,初始化为（50,100,255）
     Mat M(800,800, CV_8UC3, Scalar(50,100,255));
+    int step3 = (int)M.step1();
+    cout << "(int)image.step1()= " << step3 << endl;
+    int step4 = (int)M.step;
+    cout << "(int)image.step()= " << step4 << endl;
     cv::namedWindow("M");
     cv::imshow("M", M);
     cv::waitKey(0);

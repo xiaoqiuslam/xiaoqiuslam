@@ -17,6 +17,10 @@ int main(){
             }
         }
     }
+    int step1 = (int)image.step1();
+    cout << "(int)image.step1()= " << step1 << endl;
+    int step2 = (int)image.step;
+    cout << "(int)image.step()= " << step2 << endl;
     cv::namedWindow("image", CV_WINDOW_NORMAL);
     imshow("image", image);
     cv::waitKey(0);
@@ -31,7 +35,10 @@ int main(){
         }
         cout << endl;
     }
-
+    int step3 = (int)image.step1();
+    cout << "(int)image.step1()= " << step3 << endl;
+    int step4 = (int)image.step;
+    cout << "(int)image.step()= " << step4 << endl;
     cv::namedWindow("image_gray", CV_WINDOW_NORMAL);
     imshow("image_gray",image_gray);
     cv::waitKey(0);
