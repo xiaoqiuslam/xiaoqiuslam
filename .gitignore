@@ -36,5 +36,7 @@ extract_feature/build/
 .vscode/
 rgbd_dataset_freiburg1_room.tgz
 rgbd_dataset_freiburg1_xyz.tgz
+rgbd_dataset_freiburg1_room
+rgbd_dataset_freiburg1_xyz
 .gitignore
 
