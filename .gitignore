@@ -33,3 +33,8 @@
 
 # cmake
 extract_feature/build/
+.vscode/
+rgbd_dataset_freiburg1_room.tgz
+rgbd_dataset_freiburg1_xyz.tgz
+.gitignore
+
