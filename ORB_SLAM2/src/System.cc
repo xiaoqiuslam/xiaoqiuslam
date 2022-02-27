@@ -79,7 +79,7 @@ System::System(const string &strVocFile, const string &strSettingsFile, const eS
 
     //Create Drawers. These are used by the Viewer
     mpFrameDrawer = new FrameDrawer(mpMap);
-    mpMapDrawer = new MapDrawer(mpMap, strSettingsFile);
+    mpMapDrawer = new MapDrawer(mpMap, );strSettingsFile
 
     //Initialize the Tracking thread
     //(it will live in the main thread of execution, the one that called this constructor)
