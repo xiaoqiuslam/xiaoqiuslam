@@ -1,0 +1,42 @@
+%YAML:1.0
+
+Camera.fx: 520.908620
+Camera.fy: 521.007327
+Camera.cx: 325.141442
+Camera.cy: 249.701764
+
+Camera.k1: 0.231222
+Camera.k2: -0.784899
+Camera.p1: -0.003257
+Camera.p2: -0.000105
+Camera.k3: 0.917205
+
+# 下面这种格式的的矩阵才可以被  cv::FileStorage 读取
+# 不是这种格式的只能是yaml_cpp 或者 ifstream 读取
+cameraMatrix: !!opencv-matrix
+  rows: 3
+  cols: 3
+  dt: d
+  data: [ 1000., 0., 320., 0., 1000., 240., 0., 0., 1. ]
+
+distCoeffs: !!opencv-matrix
+  rows: 5
+  cols: 1
+  dt: d
+  data: [ 1.0000000000000001e-01, 1.0000000000000000e-02, -1.0000000000000000e-03, 0., 0. ]
+
+features:
+  - { x:167, y:49, lbp:[ 1, 0, 0, 1, 1, 0, 1, 1 ] }
+  - { x:298, y:130, lbp:[ 0, 0, 0, 1, 0, 0, 1, 1 ] }
+  - { x:344, y:158, lbp:[ 1, 1, 0, 0, 0, 0, 1, 0 ] }
+
+K : !!opencv-matrix
+  rows: 3
+  cols: 3
+  dt: f
+  data: [ 5.20908630e+02, 0., 3.25141449e+02, 0., 5.21007324e+02,
+          2.49701767e+02, 0., 0., 1. ]
+
+
+
+

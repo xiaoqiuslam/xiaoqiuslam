@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/q/projects/CLionProjects/mcptam_calibrations2multicol_calibrations/main.cpp
+dirent.h
+-
+stdio.h
+-
+string.h
+-
+iostream
+-
+yaml-cpp/yaml.h
+-
+fstream
+-
+opencv2/core/core.hpp
+-
+opencv2/highgui/highgui.hpp
+-
+vector
+-
+string
+-
+iomanip
+-
+boost/filesystem.hpp
+/home/q/projects/CLionProjects/mcptam_calibrations2multicol_calibrations/boost/filesystem.hpp
+dirent.h
+-
+stdio.h
+-
+string.h
+-
+

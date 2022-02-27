@@ -1,0 +1,35 @@
+%YAML:1.0
+Camera.Iw: 800
+Camera.Ih: 600
+
+Camera.nrpol: 5
+Camera.nrinvpol: 12
+
+Camera.a0: -207.34934555469598649
+Camera.a1: 0
+Camera.a2: 0.0019082002337960500982
+Camera.a3: -2.3212708686608401816e-06
+Camera.a4: 1.4038030026972299439e-08
+
+Camera.pol0: 292.199
+Camera.pol1: 152.070007
+Camera.pol2: -5.79232
+Camera.pol3: 28.419399
+Camera.pol4: 7.54195
+Camera.pol5: 1.546840
+Camera.pol6: 8.44297
+Camera.pol7: 0.456958
+Camera.pol8: -3.01678
+Camera.pol9: 1.259850
+Camera.pol10: 1.83957
+Camera.pol11: 0.411562
+
+Camera.c: 0.99833424368719803077
+Camera.d: 0.0014034056316408400397
+Camera.e: 0.00096617668345557101463
+
+Camera.u0: 409.08275176710799315
+Camera.v0: 295.2539051921500004
+
+Camera.mirrorMask: 1
+

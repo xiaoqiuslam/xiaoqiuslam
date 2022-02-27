@@ -1,0 +1,4 @@
+/home/q/packages/clion-2020.1.1/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/q/projects/CLionProjects/mcptam_calibrations2multicol_calibrations
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/q/projects/CLionProjects/mcptam_calibrations2multicol_calibrations/cmake-build-debug
