@@ -17,7 +17,7 @@ main ()
   // Read in the cloud data
   pcl::PCDReader reader;
   pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>), cloud_f (new pcl::PointCloud<pcl::PointXYZ>);
-  reader.read ("table_scene_lms400.pcd", *cloud);
+  reader.read ("/home/q/xiaoqiuslamshizhanjiaocheng/pcl_stu/data/tutorials/table_scene_lms400.pcd", *cloud);
   std::cout << "PointCloud before filtering has: " << cloud->size () << " data points." << std::endl; //*
 
   // Create the filtering object: downsample the dataset using a leaf size of 1cm
@@ -85,8 +85,8 @@ main ()
   for (std::vector<pcl::PointIndices>::const_iterator it = cluster_indices.begin (); it != cluster_indices.end (); ++it)
   {
     pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_cluster (new pcl::PointCloud<pcl::PointXYZ>);
-    for (const auto& idx : it->indices)
-      cloud_cluster->push_back ((*cloud_filtered)[idx]); //*
+    for (const auto& idxx : it->indices)
+      cloud_cluster->push_back ((*cloud_filtered)[idxx]); //*
     cloud_cluster->width = cloud_cluster->size ();
     cloud_cluster->height = 1;
     cloud_cluster->is_dense = true;
