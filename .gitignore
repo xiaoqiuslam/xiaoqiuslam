@@ -46,4 +46,4 @@ extract_feature/cmake-build-debug/*
 3_opencv/cmake-build-debug/*
 /voxel_grid/build/*
 /statistical_removal/build/*
-
+/pcl_stu/cluster_extraction/build*
