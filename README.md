@@ -1,16 +1,18 @@
-### Hi there 👋
+### 小秋SLAM实战教程
 
-<!--
-**xiaoqiuslamshizhanjiaocheng/xiaoqiuslamshizhanjiaocheng** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+[remote "origin"]
+	url = https://github.com/xiaoqiuslamshizhanjiaocheng/xiaoqiuslamshizhanjiaocheng.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "main"]
+	remote = origin
+	merge = refs/heads/main
 
-Here are some ideas to get you started:
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+[remote "origin"]
+	url = https://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@github.com/xiaoqiuslamshizhanjiaocheng/xiaoqiuslamshizhanjiaocheng.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "main"]
+	remote = origin
+	merge = refs/heads/main
+
+
