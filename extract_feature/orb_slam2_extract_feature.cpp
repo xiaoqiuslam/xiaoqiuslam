@@ -7,7 +7,7 @@
 #include <opencv2/core/core.hpp>
 #include <opencv2/imgcodecs.hpp>
 
-#include"ORBextractor.h"
+#include "ORBextractor.h"
 
 #include <opencv2/opencv.hpp>
 
@@ -15,10 +15,8 @@ using namespace std;
 
 void LoadImages(const string &strAssociationFilename, vector<string> &vstrImageFilenamesRGB, vector<string> &vstrImageFilenamesD, vector<double> &vTimestamps);
 
-int main(int argc, char **argv)
-{
-    if(argc != 4)
-    {
+int main(int argc, char **argv){
+    if(argc != 4){
         cerr << endl << "Usage: ./rgbd_tum path_to_settings path_to_sequence path_to_association" << endl;
         return 1;
     }
