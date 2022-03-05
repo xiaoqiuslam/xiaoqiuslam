@@ -13,8 +13,7 @@
 
 using namespace std;
 
-void LoadImages(const string &strAssociationFilename, vector<string> &vstrImageFilenamesRGB,
-                vector<string> &vstrImageFilenamesD, vector<double> &vTimestamps);
+void LoadImages(const string &strAssociationFilename, vector<string> &vstrImageFilenamesRGB, vector<string> &vstrImageFilenamesD, vector<double> &vTimestamps);
 
 int main(int argc, char **argv)
 {
@@ -44,14 +43,13 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    cv::FileStorage fsSettings(argv[1], cv::FileStorage::READ);
-    if(!fsSettings.isOpened()){
+    cv::FileStorage fSettings(argv[1], cv::FileStorage::READ);
+    if(!fSettings.isOpened()){
        cerr << "Failed to open settings file at: " << argv[1] << endl;
        exit(-1);
     }
 
     // Load camera parameters from settings file
-    cv::FileStorage fSettings(argv[1], cv::FileStorage::READ);
     float fx = fSettings["Camera.fx"];
     float fy = fSettings["Camera.fy"];
     float cx = fSettings["Camera.cx"];
@@ -133,8 +131,7 @@ int main(int argc, char **argv)
     // Main loop
     cv::Mat imRGB, imD;
 
-    ORBextractor* mpORBextractorLeft;
-    mpORBextractorLeft = new ORBextractor(nFeatures,fScaleFactor,nLevels,fIniThFAST,fMinThFAST);
+
 
     for(int ni=0; ni<nImages; ni++){
         // Read image and depthmap from file
@@ -149,32 +146,160 @@ int main(int argc, char **argv)
             return 1;
         }
 
-        std::chrono::steady_clock::time_point t1 = std::chrono::steady_clock::now();
+        cv::Mat mImGray;
+        mImGray = imRGB;
+        cv::Mat imDepth = imD;
+
+        if(mImGray.channels()==3)
+        {
+            if(mbRGB)
+                cvtColor(mImGray,mImGray,CV_RGB2GRAY);
+            else
+                cvtColor(mImGray,mImGray,CV_BGR2GRAY);
+        }
+        else if(mImGray.channels()==4)
+        {
+            if(mbRGB)
+                cvtColor(mImGray,mImGray,CV_RGBA2GRAY);
+            else
+                cvtColor(mImGray,mImGray,CV_BGRA2GRAY);
+        }
+
+        if((fabs(mDepthMapFactor-1.0f)>1e-5) || imDepth.type()!=CV_32F)
+            imDepth.convertTo(imDepth,CV_32F,mDepthMapFactor);
 
 
-        // Pass the image to the SLAM system
-//        SLAM.TrackRGBD(imRGB,imD,tframe);
+        ORBextractor* mpORBextractorLeft;
+        mpORBextractorLeft = new ORBextractor(nFeatures,fScaleFactor,nLevels,fIniThFAST,fMinThFAST);
 
-        std::chrono::steady_clock::time_point t2 = std::chrono::steady_clock::now();
+        mCurrentFrame = Frame(mImGray,imDepth,timestamp,mpORBextractorLeft,mpORBVocabulary,mK,mDistCoef,mbf,mThDepth);
+        Frame::Frame(const cv::Mat &imGray, const cv::Mat &imDepth, const double &timeStamp, ORBextractor* extractor,ORBVocabulary* voc, cv::Mat &K, cv::Mat &distCoef, const float &bf, const float &thDepth)
+        :mpORBvocabulary(voc),mpORBextractorLeft(extractor),mpORBextractorRight(static_cast<ORBextractor*>(NULL)), mTimeStamp(timeStamp), mK(K.clone()),mDistCoef(distCoef.clone()), mbf(bf), mThDepth(thDepth)
+        {
+            // Frame ID
+            mnId=nNextId++;
+
+            // Scale Level Info
+            mnScaleLevels = nLevels;
+            mfScaleFactor = fScaleFactor;
+            mfLogScaleFactor = log(mfScaleFactor);
+            mvScaleFactors = mvScaleFactor;
+            mvInvScaleFactors = mvInvScaleFactor;
+            mvLevelSigma2 = mvLevelSigma2;
+            mvInvLevelSigma2 = mvInvLevelSigma2;
+
+            // ORB extraction
+            // ExtractORB(0,imGray);
+
+            // Compute the ORB features and descriptors on an image.
+            // ORB are dispersed on the image using an octree.
+            // Mask is ignored in the current implementation.
+            void operator()(cv::InputArray image, cv::InputArray mask, std::vector<cv::KeyPoint> &keypoints, cv::OutputArray descriptors);
+
+            (*mpORBextractorLeft)(im,cv::Mat(),mvKeys,mDescriptors);
+
+            void ORBextractor::operator()( InputArray _image, InputArray _mask, vector<KeyPoint>& _keypoints, OutputArray _descriptors)
+            {
+                if(_image.empty())
+                    return;
+
+                Mat image = _image.getMat();
+                assert(image.type() == CV_8UC1 );
+
+                // Pre-compute the scale pyramid
+                ComputePyramid(image);
+
+                vector < vector<KeyPoint> > allKeypoints;
+                ComputeKeyPointsOctTree(allKeypoints);
+                //ComputeKeyPointsOld(allKeypoints);
+
+                Mat descriptors;
+
+                int nkeypoints = 0;
+                for (int level = 0; level < nlevels; ++level)
+                    nkeypoints += (int)allKeypoints[level].size();
+                if( nkeypoints == 0 )
+                    _descriptors.release();
+                else
+                {
+                    _descriptors.create(nkeypoints, 32, CV_8U);
+                    descriptors = _descriptors.getMat();
+                }
+
+                _keypoints.clear();
+                _keypoints.reserve(nkeypoints);
+
+                int offset = 0;
+                for (int level = 0; level < nlevels; ++level)
+                {
+                    vector<KeyPoint>& keypoints = allKeypoints[level];
+                    int nkeypointsLevel = (int)keypoints.size();
+
+                    if(nkeypointsLevel==0)
+                        continue;
+
+                    // preprocess the resized image
+                    Mat workingMat = mvImagePyramid[level].clone();
+                    GaussianBlur(workingMat, workingMat, Size(7, 7), 2, 2, BORDER_REFLECT_101);
+
+                    // Compute the descriptors
+                    Mat desc = descriptors.rowRange(offset, offset + nkeypointsLevel);
+                    computeDescriptors(workingMat, keypoints, desc, pattern);
+
+                    offset += nkeypointsLevel;
+
+                    // Scale keypoint coordinates
+                    if (level != 0)
+                    {
+                        float scale = mvScaleFactor[level]; //getScale(level, firstLevel, scaleFactor);
+                        for (vector<KeyPoint>::iterator keypoint = keypoints.begin(),
+                                     keypointEnd = keypoints.end(); keypoint != keypointEnd; ++keypoint)
+                            keypoint->pt *= scale;
+                    }
+                    // And add the keypoints to the output
+                    _keypoints.insert(_keypoints.end(), keypoints.begin(), keypoints.end());
+                }
+            }
+
+            N = mvKeys.size();
+
+            if(mvKeys.empty())
+                return;
+
+            UndistortKeyPoints();
+
+            ComputeStereoFromRGBD(imDepth);
+
+            mvpMapPoints = vector<MapPoint*>(N,static_cast<MapPoint*>(NULL));
+            mvbOutlier = vector<bool>(N,false);
+
+            // This is done only for the first Frame (or after a change in the calibration)
+            if(mbInitialComputations)
+            {
+                ComputeImageBounds(imGray);
+
+                mfGridElementWidthInv=static_cast<float>(FRAME_GRID_COLS)/static_cast<float>(mnMaxX-mnMinX);
+                mfGridElementHeightInv=static_cast<float>(FRAME_GRID_ROWS)/static_cast<float>(mnMaxY-mnMinY);
+
+                fx = K.at<float>(0,0);
+                fy = K.at<float>(1,1);
+                cx = K.at<float>(0,2);
+                cy = K.at<float>(1,2);
+                invfx = 1.0f/fx;
+                invfy = 1.0f/fy;
+
+                mbInitialComputations=false;
+            }
+
+            mb = mbf/fx;
+
+            AssignFeaturesToGrid();
+        }
 
 
-        double ttrack= std::chrono::duration_cast<std::chrono::duration<double> >(t2 - t1).count();
 
 
 
-
-        vTimesTrack[ni]=ttrack;
-
-        // Wait to load the next frame
-        double T=0;
-        if(ni<nImages-1)
-            T = vTimestamps[ni+1]-tframe;
-        else if(ni>0)
-            T = tframe-vTimestamps[ni-1];
-
-        if(ttrack<T)
-            usleep((T-ttrack)*1e6);
-    }
 
     return 0;
 }
