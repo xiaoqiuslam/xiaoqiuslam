@@ -1,5 +1,7 @@
 ## 小秋SLAM实战教程
 
+./orb_slam2_extract_feature path_to_settings path_to_sequence path_to_association
+
 ### CSDN
 ![](./iamge/csdn.jpg)
 
