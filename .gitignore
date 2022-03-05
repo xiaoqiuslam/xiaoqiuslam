@@ -40,7 +40,7 @@ rgbd_dataset_freiburg1_room
 rgbd_dataset_freiburg1_xyz
 .gitignore
 ../3_opencv/cmake-build-debug/*
-.idea/
+.idea/*
 cmake-build-debug/*
 extract_feature/cmake-build-debug/*
 3_opencv/cmake-build-debug/*
