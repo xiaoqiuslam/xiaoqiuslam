@@ -1,6 +1,7 @@
 ## 小秋SLAM实战教程
 
-./orb_slam2_extract_feature path_to_settings path_to_sequence path_to_association
+python associate.py ../rgbd_dataset_freiburg1_desk/rgb.txt ../rgbd_dataset_freiburg1_desk/depth.txt > associations.txt
+./orb_slam2_extract_feature ../rgbd_dataset_freiburg1_desk/TUM1.yaml ../rgbd_dataset_freiburg1_desk ../rgbd_dataset_freiburg1_desk/associations.txt
 
 ### CSDN
 ![](./iamge/csdn.jpg)

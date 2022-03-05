@@ -112,13 +112,13 @@ int main(int argc, char **argv){
 
     for(int ni=0; ni<nImages; ni++){
         imRGB = cv::imread(string(argv[2])+"/"+vstrImageFilenamesRGB[ni],CV_LOAD_IMAGE_UNCHANGED);
-        cout << "Images RGB in the sequence: " << string(argv[2])+"/"+vstrImageFilenamesRGB[ni] << endl << endl;
+        // cout << "Images RGB in the sequence: " << string(argv[2])+"/"+vstrImageFilenamesRGB[ni] << endl << endl;
         imD = cv::imread(string(argv[2])+"/"+vstrImageFilenamesD[ni],CV_LOAD_IMAGE_UNCHANGED);
-        cout << "Images imD in the sequence: " << string(argv[2])+"/"+vstrImageFilenamesD[ni] << endl << endl;
+        // cout << "Images imD in the sequence: " << string(argv[2])+"/"+vstrImageFilenamesD[ni] << endl << endl;
         double tframe = vTimestamps[ni];
 
         if(imRGB.empty()){
-            cerr << endl << "Failed to load image at: " << string(argv[3]) << "/" << vstrImageFilenamesRGB[ni] << endl;
+            cerr << endl << "Failed to load image at: " << string(argv[2]) << "/" << vstrImageFilenamesRGB[ni] << endl;
             return 1;
         }
 
