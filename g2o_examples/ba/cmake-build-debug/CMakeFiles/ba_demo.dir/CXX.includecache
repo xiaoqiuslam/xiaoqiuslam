@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/q/projects/slambook2/examples/ba/ba_demo.cpp
+g2o/core/sparse_optimizer.h
+/home/q/projects/slambook2/examples/ba/g2o/core/sparse_optimizer.h
+g2o/core/block_solver.h
+/home/q/projects/slambook2/examples/ba/g2o/core/block_solver.h
+g2o/core/solver.h
+/home/q/projects/slambook2/examples/ba/g2o/core/solver.h
+g2o/core/robust_kernel_impl.h
+/home/q/projects/slambook2/examples/ba/g2o/core/robust_kernel_impl.h
+g2o/core/optimization_algorithm_levenberg.h
+/home/q/projects/slambook2/examples/ba/g2o/core/optimization_algorithm_levenberg.h
+g2o/solvers/cholmod/linear_solver_cholmod.h
+/home/q/projects/slambook2/examples/ba/g2o/solvers/cholmod/linear_solver_cholmod.h
+g2o/solvers/dense/linear_solver_dense.h
+/home/q/projects/slambook2/examples/ba/g2o/solvers/dense/linear_solver_dense.h
+g2o/types/sba/types_six_dof_expmap.h
+/home/q/projects/slambook2/examples/ba/g2o/types/sba/types_six_dof_expmap.h
+g2o/solvers/structure_only/structure_only_solver.h
+/home/q/projects/slambook2/examples/ba/g2o/solvers/structure_only/structure_only_solver.h
+

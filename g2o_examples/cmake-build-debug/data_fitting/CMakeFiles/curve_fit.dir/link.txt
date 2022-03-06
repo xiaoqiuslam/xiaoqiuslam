@@ -1,0 +1,1 @@
+/usr/bin/c++  -g  -rdynamic CMakeFiles/curve_fit.dir/curve_fit.o  -o curve_fit  -lcore 

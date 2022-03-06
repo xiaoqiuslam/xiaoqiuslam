@@ -1,0 +1,3 @@
+/home/q/projects/slambook2/examples/ba/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/q/projects/slambook2/examples/ba/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/q/projects/slambook2/examples/ba/cmake-build-debug/CMakeFiles/ba_demo.dir

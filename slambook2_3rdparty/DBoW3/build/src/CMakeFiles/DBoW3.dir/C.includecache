@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/q/projects/slambook2/3rdparty/DBoW3/src/quicklz.c
+quicklz.h
+/home/q/projects/slambook2/3rdparty/DBoW3/src/quicklz.h
+
+/home/q/projects/slambook2/3rdparty/DBoW3/src/quicklz.h
+string.h
+-
+
