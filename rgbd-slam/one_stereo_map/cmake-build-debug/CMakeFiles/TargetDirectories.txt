@@ -1,0 +1,3 @@
+/media/q/q/rgbd-slam-tutorial/one_stereo_map/cmake-build-debug/CMakeFiles/edit_cache.dir
+/media/q/q/rgbd-slam-tutorial/one_stereo_map/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/media/q/q/rgbd-slam-tutorial/one_stereo_map/cmake-build-debug/CMakeFiles/stereoVision.dir

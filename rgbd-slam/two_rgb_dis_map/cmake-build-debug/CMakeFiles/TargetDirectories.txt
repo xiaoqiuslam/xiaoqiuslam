@@ -1,0 +1,3 @@
+/media/q/Q/CLionProjects/q/Stereo_sgbm/cmake-build-debug/CMakeFiles/edit_cache.dir
+/media/q/Q/CLionProjects/q/Stereo_sgbm/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/media/q/Q/CLionProjects/q/Stereo_sgbm/cmake-build-debug/CMakeFiles/stereoVision.dir

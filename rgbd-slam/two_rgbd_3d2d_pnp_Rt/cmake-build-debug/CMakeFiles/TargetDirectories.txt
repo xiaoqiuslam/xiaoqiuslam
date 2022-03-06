@@ -1,0 +1,3 @@
+/media/q/q/rgbd-slam-tutorial/two_rgbd_Rt/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/media/q/q/rgbd-slam-tutorial/two_rgbd_Rt/cmake-build-debug/CMakeFiles/edit_cache.dir
+/media/q/q/rgbd-slam-tutorial/two_rgbd_Rt/cmake-build-debug/CMakeFiles/cv_solvePnPRansac.dir
