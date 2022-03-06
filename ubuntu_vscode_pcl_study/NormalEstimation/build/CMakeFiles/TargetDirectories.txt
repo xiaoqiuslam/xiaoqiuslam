@@ -1,0 +1,3 @@
+/media/q/q/xiaoqiuslamshizhanjiaocheng/ubuntu_vscode_pcl_study/NormalEstimation/build/CMakeFiles/edit_cache.dir
+/media/q/q/xiaoqiuslamshizhanjiaocheng/ubuntu_vscode_pcl_study/NormalEstimation/build/CMakeFiles/rebuild_cache.dir
+/media/q/q/xiaoqiuslamshizhanjiaocheng/ubuntu_vscode_pcl_study/NormalEstimation/build/CMakeFiles/NormalEstimation.dir
