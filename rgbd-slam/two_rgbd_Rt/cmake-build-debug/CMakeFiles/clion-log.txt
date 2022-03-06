@@ -1,1 +1,0 @@
-CMakeLists.txt not found in /media/q/q/rgbd-slam-tutorial/two_rgbd_Rt Select CMakeLists.txt

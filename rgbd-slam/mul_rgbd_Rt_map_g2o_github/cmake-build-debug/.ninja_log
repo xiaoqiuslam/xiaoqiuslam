@@ -1,0 +1,4 @@
+# ninja log v5
+17406	20043	1640682199892379500	visualOdometry	2059d46ef29d6bc0
+1	292	1640682762454592400	build.ninja	418a41eb475c8e77
+9	17406	1640682197255679000	CMakeFiles/visualOdometry.dir/visualOdometry.cpp.o	ba6d2f4d7afda627
