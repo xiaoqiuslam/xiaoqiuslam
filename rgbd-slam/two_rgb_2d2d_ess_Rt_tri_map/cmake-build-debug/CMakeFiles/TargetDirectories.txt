@@ -1,3 +1,0 @@
-/media/q/q/ch7_1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/media/q/q/ch7_1/cmake-build-debug/CMakeFiles/edit_cache.dir
-/media/q/q/ch7_1/cmake-build-debug/CMakeFiles/triangulation.dir
