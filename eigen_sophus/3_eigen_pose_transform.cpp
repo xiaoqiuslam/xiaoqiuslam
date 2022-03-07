@@ -13,7 +13,7 @@ int main( int argc, char** argv ){
     Eigen::AngleAxisd rotation_vector_y(M_PI/2, Eigen::Vector3d ( 0,1,0 ) );
     std::cout << "rotation_vector y" << "angle is: " << rotation_vector_y.angle() * 180 / M_PI << " axis is: " << rotation_vector_y.axis().transpose() << std::endl;
 
-    Eigen::AngleAxisd rotation_vector(M_PI/2, Eigen::Vector3d ( 1,0,0 ) );
+    Eigen::AngleAxisd rotation_vector(M_PI/2, Eigen::Vector3d ( 1,0,1 ) );
     std::cout << "rotation_vector x " << "angle is: " << rotation_vector.angle() * 180 / M_PI << " axis is: " << rotation_vector.axis().transpose() << std::endl;
 
     //旋转向量转化为旋转矩阵
