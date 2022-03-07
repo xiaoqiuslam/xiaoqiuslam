@@ -3,6 +3,7 @@
 #include <opencv2/features2d/features2d.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/calib3d/calib3d.hpp>
+
 using namespace std;
 using namespace cv;
 
@@ -18,7 +19,6 @@ void pose_estimation_2d2d(
         std::vector<DMatch> matches,
         Mat &R, Mat &t);
 
-
 Point2d pixel2cam(const Point2d &p, const Mat &K);
 
 int main(int argc, char **argv) {
@@ -29,7 +29,7 @@ int main(int argc, char **argv) {
     vector<KeyPoint> keypoints_1, keypoints_2;
     vector<DMatch> matches;
     find_feature_matches(img_1, img_2, keypoints_1, keypoints_2, matches);
-    cout << "一共找到了" << matches.size() << "组匹配点" << endl;
+    // cout << "一共找到了" << matches.size() << "组匹配点" << endl;
 
     Mat R, t;
     pose_estimation_2d2d(keypoints_1, keypoints_2, matches, R, t);
@@ -60,7 +60,7 @@ int main(int argc, char **argv) {
         Mat y2 = (Mat_<double>(3, 1) << pt2.x, pt2.y, 1); // 构建归一化平面上面的点
 
         Mat d = y2.t() * t_x * R * y1; // 重新投影误差　d = x2T∗E∗x1 ＝　$x^T_2 * E * x_1$
-        cout << "epipolar constraint = " << d << endl;
+        // cout << "epipolar constraint = " << d << endl;
     }
     return 0;
 }
@@ -140,20 +140,12 @@ void pose_estimation_2d2d(std::vector<KeyPoint> keypoints_1,
         points2.push_back(keypoints_2[matches[i].trainIdx].pt);
     }
 
-    // 计算基础矩阵 本程序计算R,t没有用到
-    Mat fundamental_matrix = findFundamentalMat(points1, points2, CV_FM_8POINT);
-    cout << "fundamental_matrix is " << endl << fundamental_matrix << endl;
-
     // 计算本质矩阵
     double focal_length = 521;  //相机焦距, TUM dataset 标定值
     Point2d principal_point(325.1, 249.7);  //相机光心, TUM dataset 标定值
     // 调用opencv函数计算本质矩阵
     Mat essential_matrix = findEssentialMat(points1, points2, focal_length, principal_point);
     cout << "essential_matrix is " << endl << essential_matrix << endl;
-
-    //　计算单应矩阵 但是本例中场景不是平面 单应矩阵意义不大　本程序计算R,t没有用到
-    Mat homography_matrix = findHomography(points1, points2, RANSAC, 3);
-    cout << "homography_matrix is " << endl << homography_matrix << endl;
 
     // 从本质矩阵中恢复旋转R和平移t信息 此函数仅在Opencv3中提供
     recoverPose(essential_matrix, points1, points2, R, t, focal_length, principal_point);
