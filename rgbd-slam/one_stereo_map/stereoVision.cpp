@@ -8,13 +8,11 @@
 using namespace std;
 using namespace Eigen;
 
-// 文件路径
 string left_file = "../left.png";
 string right_file = "../right.png";
 
 // 在pangolin中画图，已写好，无需调整
-void showPointCloud(
-    const vector<Vector4d, Eigen::aligned_allocator<Vector4d>> &pointcloud);
+void showPointCloud(const vector<Vector4d, Eigen::aligned_allocator<Vector4d>> &pointcloud);
 
 int main(int argc, char **argv) {
 
@@ -26,8 +24,7 @@ int main(int argc, char **argv) {
     // 读取图像
     cv::Mat left = cv::imread(left_file, 0);
     cv::Mat right = cv::imread(right_file, 0);
-    cv::Ptr<cv::StereoSGBM> sgbm = cv::StereoSGBM::create(
-        0, 96, 9, 8 * 9 * 9, 32 * 9 * 9, 1, 63, 10, 100, 32);    // 神奇的参数
+    cv::Ptr<cv::StereoSGBM> sgbm = cv::StereoSGBM::create( 0, 96, 9, 8 * 9 * 9, 32 * 9 * 9, 1, 63, 10, 100, 32);    // 神奇的参数
     cv::Mat disparity_sgbm, disparity;
     sgbm->compute(left, right, disparity_sgbm);
     disparity_sgbm.convertTo(disparity, CV_32F, 1.0 / 16.0f);

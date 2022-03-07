@@ -6,8 +6,6 @@ SET(CMAKE_CXX_COMPILER "g++")
 
 SET(CMAKE_BUILD_TYPE Debug)
 
-
-# 增加opencv的依赖
 FIND_PACKAGE( OpenCV REQUIRED )
 find_package(Pangolin REQUIRED)
 
