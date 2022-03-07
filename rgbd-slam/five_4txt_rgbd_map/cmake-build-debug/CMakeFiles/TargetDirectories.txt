@@ -1,4 +1,0 @@
-/home/q/joinMap/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/q/joinMap/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/q/joinMap/cmake-build-debug/CMakeFiles/joinMap.dir
-/home/q/joinMap/cmake-build-debug/CMakeFiles/4_plot_trajectory.dir
