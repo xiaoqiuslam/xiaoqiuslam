@@ -1,3 +1,0 @@
-/home/q/rgbd-slam-tutorial/2_point_transform/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/q/rgbd-slam-tutorial/2_point_transform/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/q/rgbd-slam-tutorial/2_point_transform/cmake-build-debug/CMakeFiles/two_rgbd_map.dir
