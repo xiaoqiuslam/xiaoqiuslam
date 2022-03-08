@@ -47,3 +47,6 @@ extract_feature/cmake-build-debug/*
 /voxel_grid/build/*
 /statistical_removal/build/*
 /pcl_stu/cluster_extraction/build*
+
+
+ubuntu_vscode_pcl_study/build/
