@@ -49,4 +49,5 @@ extract_feature/cmake-build-debug/*
 /pcl_stu/cluster_extraction/build*
 
 
-ubuntu_vscode_pcl_study/build/
+pcl_study/build/
+pcl_study/table_scene_lms400.pcd
