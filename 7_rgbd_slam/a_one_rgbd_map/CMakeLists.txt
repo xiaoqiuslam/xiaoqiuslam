@@ -17,5 +17,5 @@ LINK_LIBRARIES( ${PCL_LIBRARY_DIRS} )
 find_package(Pangolin REQUIRED)
 include_directories(${Pangolin_INCLUDE_DIRS})
 
-ADD_EXECUTABLE( generate_pointcloud generatePointCloud.cpp )
-TARGET_LINK_LIBRARIES( generate_pointcloud ${OpenCV_LIBS} ${PCL_LIBRARIES} )
+ADD_EXECUTABLE(one_rgbd one_rgbd.cpp)
+TARGET_LINK_LIBRARIES(one_rgbd ${OpenCV_LIBS} ${PCL_LIBRARIES} )
