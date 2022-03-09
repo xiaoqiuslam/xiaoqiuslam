@@ -48,6 +48,4 @@ extract_feature/cmake-build-debug/*
 /statistical_removal/build/*
 /pcl_stu/cluster_extraction/build*
 
-
-pcl_study/build/
-pcl_study/table_scene_lms400.pcd
+5_point_cloud/build/

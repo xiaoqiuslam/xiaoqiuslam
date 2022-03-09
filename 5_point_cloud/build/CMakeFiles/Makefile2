@@ -54,10 +54,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/q/xiaoqiuslamshizhanjiaocheng/ubuntu_vscode_pcl_study
+CMAKE_SOURCE_DIR = /home/q/xiaoqiuslamshizhanjiaocheng/5_point_cloud
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/q/xiaoqiuslamshizhanjiaocheng/ubuntu_vscode_pcl_study/build
+CMAKE_BINARY_DIR = /home/q/xiaoqiuslamshizhanjiaocheng/5_point_cloud/build
 
 #=============================================================================
 # Target rules for target CMakeFiles/loadPCDFile.dir
@@ -66,7 +66,7 @@ CMAKE_BINARY_DIR = /home/q/xiaoqiuslamshizhanjiaocheng/ubuntu_vscode_pcl_study/b
 CMakeFiles/loadPCDFile.dir/all:
 	$(MAKE) -f CMakeFiles/loadPCDFile.dir/build.make CMakeFiles/loadPCDFile.dir/depend
 	$(MAKE) -f CMakeFiles/loadPCDFile.dir/build.make CMakeFiles/loadPCDFile.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/q/xiaoqiuslamshizhanjiaocheng/ubuntu_vscode_pcl_study/build/CMakeFiles --progress-num=1,2 "Built target loadPCDFile"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/q/xiaoqiuslamshizhanjiaocheng/5_point_cloud/build/CMakeFiles --progress-num=1,2 "Built target loadPCDFile"
 .PHONY : CMakeFiles/loadPCDFile.dir/all
 
 # Include target in all.
@@ -76,9 +76,9 @@ all: CMakeFiles/loadPCDFile.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/loadPCDFile.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/q/xiaoqiuslamshizhanjiaocheng/ubuntu_vscode_pcl_study/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/q/xiaoqiuslamshizhanjiaocheng/5_point_cloud/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/loadPCDFile.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/q/xiaoqiuslamshizhanjiaocheng/ubuntu_vscode_pcl_study/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/q/xiaoqiuslamshizhanjiaocheng/5_point_cloud/build/CMakeFiles 0
 .PHONY : CMakeFiles/loadPCDFile.dir/rule
 
 # Convenience name for target.

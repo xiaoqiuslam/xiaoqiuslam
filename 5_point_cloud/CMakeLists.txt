@@ -11,5 +11,5 @@ include_directories(${PCL_INCLUDE_DIRS})
 link_directories(${PCL_LIBRARY_DIRS})
 add_definitions(${PCL_DEFINITIONS})
 
-add_executable(loadPCDFile loadPCDFile.cpp)
-target_link_libraries(loadPCDFile ${PCL_LIBRARIES})
+add_executable(PointIndices PointIndices.cpp)
+target_link_libraries(PointIndices ${PCL_LIBRARIES})

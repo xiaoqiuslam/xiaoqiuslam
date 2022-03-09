@@ -1,4 +1,4 @@
-# Install script for directory: /home/q/xiaoqiuslamshizhanjiaocheng/ubuntu_vscode_pcl_study
+# Install script for directory: /home/q/xiaoqiuslamshizhanjiaocheng/5_point_cloud
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/q/xiaoqiuslamshizhanjiaocheng/ubuntu_vscode_pcl_study/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/q/xiaoqiuslamshizhanjiaocheng/5_point_cloud/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

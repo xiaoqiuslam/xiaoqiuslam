@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/q/xiaoqiuslamshizhanjiaocheng/ubuntu_vscode_pcl_study/loadPCDFile.cpp" "/home/q/xiaoqiuslamshizhanjiaocheng/ubuntu_vscode_pcl_study/build/CMakeFiles/loadPCDFile.dir/loadPCDFile.cpp.o"
+  "/home/q/xiaoqiuslamshizhanjiaocheng/5_point_cloud/loadPCDFile.cpp" "/home/q/xiaoqiuslamshizhanjiaocheng/5_point_cloud/build/CMakeFiles/loadPCDFile.dir/loadPCDFile.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
