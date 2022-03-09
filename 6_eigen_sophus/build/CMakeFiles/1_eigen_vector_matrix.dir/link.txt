@@ -1,1 +1,0 @@
-/usr/bin/c++   -O3 -O3 -DNDEBUG   CMakeFiles/1_eigen_vector_matrix.dir/1_eigen_vector_matrix.cpp.o  -o 1_eigen_vector_matrix -rdynamic 

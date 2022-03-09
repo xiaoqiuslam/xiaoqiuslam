@@ -1,1 +1,0 @@
-/usr/bin/c++   -O3 -O3 -DNDEBUG   CMakeFiles/6_sophus_pose_transform.dir/6_sophus_pose_transform.cpp.o  -o 6_sophus_pose_transform -rdynamic /usr/local/lib/libSophus.so -Wl,-rpath,/usr/local/lib 

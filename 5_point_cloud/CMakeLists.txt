@@ -13,3 +13,6 @@ add_definitions(${PCL_DEFINITIONS})
 
 add_executable(PointIndices PointIndices.cpp)
 target_link_libraries(PointIndices ${PCL_LIBRARIES})
+
+add_executable(transformPointCloud transformPointCloud.cpp)
+target_link_libraries(transformPointCloud ${PCL_LIBRARIES})
