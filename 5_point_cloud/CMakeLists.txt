@@ -11,6 +11,10 @@ include_directories(${PCL_INCLUDE_DIRS})
 link_directories(${PCL_LIBRARY_DIRS})
 add_definitions(${PCL_DEFINITIONS})
 
+
+add_executable(point_cloud_at point_cloud_at.cpp)
+target_link_libraries(point_cloud_at ${PCL_LIBRARIES})
+
 add_executable(PointIndices PointIndices.cpp)
 target_link_libraries(PointIndices ${PCL_LIBRARIES})
 
