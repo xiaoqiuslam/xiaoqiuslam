@@ -29,7 +29,8 @@ int main(int argc, char *argv[]){
     indices.indices.push_back(0);
     indices.indices.push_back(10);
     indices.indices.push_back(100);
-    pcl::IndicesPtr  indices_ptr(new std::vector<int>(indices.indices));
+    // 指向int类型的vector类的空智能指针 智能指针的转化
+    pcl::IndicesPtr indices_ptr(new std::vector<int>(indices.indices));
 
     pcl::ExtractIndices<pcl::PointXYZRGB> extract_indices;
     extract_indices.setInputCloud(cloud);
