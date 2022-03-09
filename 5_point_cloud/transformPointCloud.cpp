@@ -6,7 +6,7 @@
 
 int main (int argc, char** argv){
     pcl::PointCloud<pcl::PointXYZ>::Ptr source_cloud (new pcl::PointCloud<pcl::PointXYZ> ());
-    pcl::io::loadPCDFile<pcl::PointXYZ> ("../table_scene_lms400.pcd", *source_cloud);
+    pcl::io::loadPCDFile<pcl::PointXYZ> ("../DensePointCloud.pcd", *source_cloud);
     /* transformation matrices work :
             |-------> This column is the translation
     | 1 0 0 x |  \
@@ -16,15 +16,33 @@ int main (int argc, char** argv){
     */
     Eigen::Matrix4f transformation = Eigen::Matrix4f::Identity();
     // rotation matrix: defined a 90° (PI/2) rotation around the Z axis and a translation on the X axis.
-    float theta = M_PI/2; // angle of rotation in radians
-    transformation (0,0) = cos (theta);
-    transformation (0,1) = -sin(theta);
-    transformation (1,0) = sin (theta);
-    transformation (1,1) = cos (theta); 
+    // float theta = M_PI/2; // angle of rotation in radians
+    // transformation (0,0) = cos (theta);
+    // transformation (0,1) = -sin(theta);
+    // transformation (1,0) = sin (theta);
+    // transformation (1,1) = cos (theta); 
     // translation 0 meters on the x, y, z axis.
     transformation (0,3) = 0; //(row, column)
     transformation (1,3) = 0; //(row, column)
     transformation (2,3) = 0; //(row, column)
+
+    //  0.0,  0.0, 1.0, 0.0,
+    // -1.0,  0.0, 0.0, 0.0,
+    //  0.0, -1.0, 0.0, 0.0,
+    //  0.0,  0.0, 0.0, 1.0,
+
+    transformation (0,0) =  0.0;
+    transformation (0,1) =  0.0;
+    transformation (0,2) =  1.0;
+
+    transformation (1,0) = -1.0;
+    transformation (1,1) =  0.0;
+    transformation (1,2) =  0.0;
+
+    transformation (2,0) =  0.0;
+    transformation (2,1) = -1.0;
+    transformation (2,2) =  0.0; 
+
     // Print the transformation
     printf ("using a Matrix4f\n");
     std::cout << transformation << std::endl;
