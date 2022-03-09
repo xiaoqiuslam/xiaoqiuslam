@@ -54,10 +54,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/two_rgbd_3d2d_pnp_Rt_dep_map
+CMAKE_SOURCE_DIR = /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/b_two_rgbd_map
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/two_rgbd_3d2d_pnp_Rt_dep_map/build
+CMAKE_BINARY_DIR = /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/b_two_rgbd_map/build
 
 #=============================================================================
 # Target rules for target CMakeFiles/two_rgbd_map.dir
@@ -66,7 +66,7 @@ CMAKE_BINARY_DIR = /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/two_rgbd_3d2d
 CMakeFiles/two_rgbd_map.dir/all:
 	$(MAKE) -f CMakeFiles/two_rgbd_map.dir/build.make CMakeFiles/two_rgbd_map.dir/depend
 	$(MAKE) -f CMakeFiles/two_rgbd_map.dir/build.make CMakeFiles/two_rgbd_map.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/two_rgbd_3d2d_pnp_Rt_dep_map/build/CMakeFiles --progress-num=1,2 "Built target two_rgbd_map"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/b_two_rgbd_map/build/CMakeFiles --progress-num=1,2 "Built target two_rgbd_map"
 .PHONY : CMakeFiles/two_rgbd_map.dir/all
 
 # Include target in all.
@@ -76,9 +76,9 @@ all: CMakeFiles/two_rgbd_map.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/two_rgbd_map.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/two_rgbd_3d2d_pnp_Rt_dep_map/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/b_two_rgbd_map/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/two_rgbd_map.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/two_rgbd_3d2d_pnp_Rt_dep_map/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/b_two_rgbd_map/build/CMakeFiles 0
 .PHONY : CMakeFiles/two_rgbd_map.dir/rule
 
 # Convenience name for target.

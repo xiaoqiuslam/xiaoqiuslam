@@ -10,8 +10,10 @@ set(CMAKE_CXX_FLAGS "-O3")
 # 增加opencv的依赖
 FIND_PACKAGE( OpenCV REQUIRED )
 
-# 增加PCL库的依赖
-FIND_PACKAGE( PCL REQUIRED COMPONENTS common io visualization )
+find_package(PCL REQUIRED)
+include_directories(${PCL_INCLUDE_DIRS})
+link_directories(${PCL_LIBRARY_DIRS})
+add_definitions(${PCL_DEFINITIONS})
 
 include_directories("/usr/include/eigen3")
 

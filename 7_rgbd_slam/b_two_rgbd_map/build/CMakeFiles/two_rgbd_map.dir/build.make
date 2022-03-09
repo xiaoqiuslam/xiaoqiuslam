@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/two_rgbd_3d2d_pnp_Rt_dep_map
+CMAKE_SOURCE_DIR = /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/b_two_rgbd_map
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/two_rgbd_3d2d_pnp_Rt_dep_map/build
+CMAKE_BINARY_DIR = /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/b_two_rgbd_map/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/two_rgbd_map.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/two_rgbd_map.dir/flags.make
 
 CMakeFiles/two_rgbd_map.dir/two_rgbd_map.cpp.o: CMakeFiles/two_rgbd_map.dir/flags.make
 CMakeFiles/two_rgbd_map.dir/two_rgbd_map.cpp.o: ../two_rgbd_map.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/two_rgbd_3d2d_pnp_Rt_dep_map/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/two_rgbd_map.dir/two_rgbd_map.cpp.o"
-	g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/two_rgbd_map.dir/two_rgbd_map.cpp.o -c /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/two_rgbd_3d2d_pnp_Rt_dep_map/two_rgbd_map.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/b_two_rgbd_map/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/two_rgbd_map.dir/two_rgbd_map.cpp.o"
+	g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/two_rgbd_map.dir/two_rgbd_map.cpp.o -c /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/b_two_rgbd_map/two_rgbd_map.cpp
 
 CMakeFiles/two_rgbd_map.dir/two_rgbd_map.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/two_rgbd_map.dir/two_rgbd_map.cpp.i"
-	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/two_rgbd_3d2d_pnp_Rt_dep_map/two_rgbd_map.cpp > CMakeFiles/two_rgbd_map.dir/two_rgbd_map.cpp.i
+	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/b_two_rgbd_map/two_rgbd_map.cpp > CMakeFiles/two_rgbd_map.dir/two_rgbd_map.cpp.i
 
 CMakeFiles/two_rgbd_map.dir/two_rgbd_map.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/two_rgbd_map.dir/two_rgbd_map.cpp.s"
-	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/two_rgbd_3d2d_pnp_Rt_dep_map/two_rgbd_map.cpp -o CMakeFiles/two_rgbd_map.dir/two_rgbd_map.cpp.s
+	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/b_two_rgbd_map/two_rgbd_map.cpp -o CMakeFiles/two_rgbd_map.dir/two_rgbd_map.cpp.s
 
 CMakeFiles/two_rgbd_map.dir/two_rgbd_map.cpp.o.requires:
 
@@ -129,7 +129,14 @@ two_rgbd_map: /usr/lib/x86_64-linux-gnu/libboost_atomic.so
 two_rgbd_map: /usr/lib/x86_64-linux-gnu/libboost_regex.so
 two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpthread.so
 two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_common.so
+two_rgbd_map: /usr/lib/x86_64-linux-gnu/libflann_cpp_s.a
+two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_kdtree.so
 two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_octree.so
+two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_search.so
+two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_sample_consensus.so
+two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_filters.so
+two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_features.so
+two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_keypoints.so
 two_rgbd_map: /usr/lib/libOpenNI.so
 two_rgbd_map: /usr/lib/libOpenNI2.so
 two_rgbd_map: /usr/lib/x86_64-linux-gnu/libz.so
@@ -155,10 +162,15 @@ two_rgbd_map: /usr/lib/x86_64-linux-gnu/libogg.so
 two_rgbd_map: /usr/lib/x86_64-linux-gnu/libxml2.so
 two_rgbd_map: /usr/lib/x86_64-linux-gnu/libproj.so
 two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_io.so
-two_rgbd_map: /usr/lib/x86_64-linux-gnu/libflann_cpp_s.a
-two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_kdtree.so
-two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_search.so
 two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_visualization.so
+two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_segmentation.so
+two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_people.so
+two_rgbd_map: /usr/lib/x86_64-linux-gnu/libqhull.so
+two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_surface.so
+two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_registration.so
+two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_tracking.so
+two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_recognition.so
+two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_outofcore.so
 two_rgbd_map: /usr/lib/x86_64-linux-gnu/libboost_system.so
 two_rgbd_map: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so
 two_rgbd_map: /usr/lib/x86_64-linux-gnu/libboost_thread.so
@@ -169,6 +181,7 @@ two_rgbd_map: /usr/lib/x86_64-linux-gnu/libboost_chrono.so
 two_rgbd_map: /usr/lib/x86_64-linux-gnu/libboost_atomic.so
 two_rgbd_map: /usr/lib/x86_64-linux-gnu/libboost_regex.so
 two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpthread.so
+two_rgbd_map: /usr/lib/x86_64-linux-gnu/libqhull.so
 two_rgbd_map: /usr/lib/libOpenNI.so
 two_rgbd_map: /usr/lib/libOpenNI2.so
 two_rgbd_map: /usr/lib/x86_64-linux-gnu/libflann_cpp_s.a
@@ -264,11 +277,22 @@ two_rgbd_map: /usr/lib/x86_64-linux-gnu/libvtkImagingMath-6.2.so.6.2.0
 two_rgbd_map: /usr/lib/x86_64-linux-gnu/libvtkFiltersSMP-6.2.so.6.2.0
 two_rgbd_map: /usr/lib/x86_64-linux-gnu/libvtkIOPostgreSQL-6.2.so.6.2.0
 two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_common.so
-two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_octree.so
-two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_io.so
 two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_kdtree.so
+two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_octree.so
 two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_search.so
+two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_sample_consensus.so
+two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_filters.so
+two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_features.so
+two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_keypoints.so
+two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_io.so
 two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_visualization.so
+two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_segmentation.so
+two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_people.so
+two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_surface.so
+two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_registration.so
+two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_tracking.so
+two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_recognition.so
+two_rgbd_map: /usr/lib/x86_64-linux-gnu/libpcl_outofcore.so
 two_rgbd_map: /usr/lib/x86_64-linux-gnu/libGLEW.so
 two_rgbd_map: /usr/lib/x86_64-linux-gnu/libavcodec.so
 two_rgbd_map: /usr/lib/x86_64-linux-gnu/libavformat.so
@@ -398,7 +422,7 @@ two_rgbd_map: /usr/lib/x86_64-linux-gnu/libvtkCommonMisc-6.2.so.6.2.0
 two_rgbd_map: /usr/lib/x86_64-linux-gnu/libvtkCommonMath-6.2.so.6.2.0
 two_rgbd_map: /usr/lib/x86_64-linux-gnu/libvtkCommonCore-6.2.so.6.2.0
 two_rgbd_map: CMakeFiles/two_rgbd_map.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/two_rgbd_3d2d_pnp_Rt_dep_map/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable two_rgbd_map"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/b_two_rgbd_map/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable two_rgbd_map"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/two_rgbd_map.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -415,6 +439,6 @@ CMakeFiles/two_rgbd_map.dir/clean:
 .PHONY : CMakeFiles/two_rgbd_map.dir/clean
 
 CMakeFiles/two_rgbd_map.dir/depend:
-	cd /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/two_rgbd_3d2d_pnp_Rt_dep_map/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/two_rgbd_3d2d_pnp_Rt_dep_map /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/two_rgbd_3d2d_pnp_Rt_dep_map /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/two_rgbd_3d2d_pnp_Rt_dep_map/build /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/two_rgbd_3d2d_pnp_Rt_dep_map/build /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/two_rgbd_3d2d_pnp_Rt_dep_map/build/CMakeFiles/two_rgbd_map.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/b_two_rgbd_map/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/b_two_rgbd_map /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/b_two_rgbd_map /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/b_two_rgbd_map/build /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/b_two_rgbd_map/build /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/b_two_rgbd_map/build/CMakeFiles/two_rgbd_map.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/two_rgbd_map.dir/depend
 

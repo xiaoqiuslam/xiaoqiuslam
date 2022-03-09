@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/two_rgbd_3d2d_pnp_Rt_dep_map/two_rgbd_map.cpp" "/home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/two_rgbd_3d2d_pnp_Rt_dep_map/build/CMakeFiles/two_rgbd_map.dir/two_rgbd_map.cpp.o"
+  "/home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/b_two_rgbd_map/two_rgbd_map.cpp" "/home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/b_two_rgbd_map/build/CMakeFiles/two_rgbd_map.dir/two_rgbd_map.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -18,6 +18,7 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
   "QT_CORE_LIB"
   "QT_GUI_LIB"
   "QT_WIDGETS_LIB"
+  "qh_QHpointer"
   "vtkFiltersFlowPaths_AUTOINIT=1(vtkFiltersParallelFlowPaths)"
   "vtkIOExodus_AUTOINIT=1(vtkIOParallelExodus)"
   "vtkIOGeometry_AUTOINIT=1(vtkIOMPIParallel)"
@@ -45,11 +46,11 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/lib/openmpi/include/openmpi/opal/mca/event/libevent2021/libevent/include"
   "/usr/lib/openmpi/include"
   "/usr/lib/openmpi/include/openmpi"
-  "/usr/include/eigen3"
-  "/usr/local/lib/cmake/Pangolin/../../../include"
   "/usr/include/pcl-1.7"
+  "/usr/include/eigen3"
   "/usr/include/ni"
   "/usr/include/openni2"
+  "/usr/local/lib/cmake/Pangolin/../../../include"
   "/opt/ros/kinetic/include/opencv-3.3.1-dev"
   "/opt/ros/kinetic/include/opencv-3.3.1-dev/opencv"
   "/usr/include/x86_64-linux-gnu/qt5"

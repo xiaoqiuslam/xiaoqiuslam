@@ -17,6 +17,25 @@
 #include <pcl/filters/voxel_grid.h>
 #include <pcl/visualization/cloud_viewer.h>
 
+#include <pcl/point_types.h>
+#include <pcl/features/normal_3d.h>
+#include <pcl/io/pcd_io.h>
+#include <iostream>
+#include <pcl/ModelCoefficients.h>
+#include <pcl/io/pcd_io.h>
+#include <pcl/point_types.h>
+#include <pcl/sample_consensus/method_types.h>
+#include <pcl/sample_consensus/model_types.h>
+#include <pcl/segmentation/sac_segmentation.h>
+#include <pcl/filters/voxel_grid.h>
+#include <pcl/filters/extract_indices.h>
+
+#include <pcl/visualization/cloud_viewer.h>
+#include <iostream>
+#include <pcl/io/io.h>
+#include <pcl/io/pcd_io.h>
+
+
 using namespace std;
 
 // 类型定义
@@ -62,34 +81,32 @@ int main(int argc, char **argv){
 
     std::vector<cv::DMatch> goodMatches;
     double minDis = 9999;
-    for (size_t i = 0; i < matches.size(); i++)
-    {
+    for (size_t i = 0; i < matches.size(); i++){
         if (matches[i].distance < minDis)
             minDis = matches[i].distance;
     }
     cout << "min dis = " << minDis << endl;
 
-    for (size_t i = 0; i < matches.size(); i++)
-    {
+    for (size_t i = 0; i < matches.size(); i++){
         if (matches[i].distance < 10 * minDis)
             goodMatches.push_back(matches[i]);
     }
     cout << "good matches=" << goodMatches.size() << endl;
+
     cv::drawMatches(rgb1, kp1, rgb2, kp2, goodMatches, imgMatches);
     cv::imshow("good matches", imgMatches);
     cv::waitKey(0);
 
-    // 计算图像间的运动关系cv::solvePnPRansac()为调用此函数准备必要的参数
-    // 第一个帧的三维点
+    // 调用cv::solvePnPRansac()函数计算两张图像间的运动关系
+    // 第一个张图像的三维点
     std::vector<cv::Point3f> pts_obj;
-    // 第二个帧的图像点
+    // 第二个张图像的特征点
     std::vector<cv::Point2f> pts_img;
 
-    for (size_t i = 0; i < goodMatches.size(); i++)
-    {
-        // query 是第一帧, train 是第二帧
+    for (size_t i = 0; i < goodMatches.size(); i++){
+        // query 是第一个张图像, train 是第二个张图像
         cv::Point2f p = kp1[goodMatches[i].queryIdx].pt;
-        // 获取dx,y是行,x是列
+        // 获取深度d, y是图像的行, x是图像的列
         ushort d = depth1.ptr<ushort>(int(p.y))[int(p.x)];
         if (d == 0)
             continue;
@@ -106,17 +123,18 @@ int main(int argc, char **argv){
         pd.x = (p.x - cx) * pd.z / fx;
         pd.y = (p.y - cy) * pd.z / fy;
 
+        // 第一张图像的特征点对应的三维点（和第二张图像匹配）
         pts_obj.push_back(pd);
-
+        // 第二张图像的特征点（和第一张图像匹配）
         pts_img.push_back(cv::Point2f(kp2[goodMatches[i].trainIdx].pt));
     }
 
     double camera_matrix[3][3] = {
-        {518.0, 0, 325.5},
-        {0, 519.0, 253.5},
-        {0, 0, 1}};
+        {518.0, 0,     325.5},
+        {0,     519.0, 253.5},
+        {0,     0,     1}};
 
-    // 构建相机矩阵
+    // 构建相机内参矩阵
     cv::Mat cameraMatrix(3, 3, CV_64F, camera_matrix);
     cv::Mat rvec, tvec, inliers;
     cv::solvePnPRansac(pts_obj, pts_img, cameraMatrix, cv::Mat(), rvec, tvec, false, 100, 1.0, 0.99, inliers);
@@ -130,72 +148,101 @@ int main(int argc, char **argv){
     for (size_t i=0; i<inliers.rows; i++){
         matchesShow.push_back( goodMatches[inliers.ptr<int>(i)[0]] );    
     }
-    cv::drawMatches( rgb1, kp1, rgb2, kp2, matchesShow, imgMatches );
+    cv::drawMatches(rgb1, kp1, rgb2, kp2, matchesShow, imgMatches );
     cv::imshow( "inlier matches", imgMatches );
     cv::waitKey( 0 );
 
-    // 将旋转向量转化为旋转矩阵
+    // 旋转向量转旋转矩阵
     cv::Mat R;
     cv::Rodrigues(rvec, R);
     Eigen::Matrix3d r;
     cv::cv2eigen(R, r);
 
-    // 将平移向量和旋转矩阵转换成变换矩阵
+    // 旋转矩阵和平移向量转变换矩阵
     Eigen::Isometry3d transform_matrix = Eigen::Isometry3d::Identity();
-    transform_matrix.rotate(r);
     transform_matrix.pretranslate(Eigen::Vector3d(tvec.at<double>(0, 0), tvec.at<double>(0, 0), tvec.at<double>(0, 0)));
+    transform_matrix.rotate(r);
     std::cout << "Transform matrix = \n" << transform_matrix.matrix() << std::endl;
 
-    // 第一对rgbd图像的点云
+    // 生成第一对rgbd图像的点云
     pcl::PointCloud<pcl::PointXYZRGBA>::Ptr cloud1 = image2PointCloud(rgb1, depth1);
 
-    // 第二对rgbd图像的点云
+    pcl::io::savePCDFile("../cloud1.pcd", *cloud1);
+    cout << "cloud1 saved" << endl;
+
+    // 生成第二对rgbd图像的点云
     pcl::PointCloud<pcl::PointXYZRGBA>::Ptr cloud2 = image2PointCloud(rgb2, depth2);
+
+    pcl::io::savePCDFile("../cloud2.pcd", *cloud1);
+    cout << "cloud2 saved" << endl;
 
     // 第一对、第二对rgbd图像的点云变换位姿后叠加
     pcl::PointCloud<pcl::PointXYZRGBA>::Ptr output1(new pcl::PointCloud<pcl::PointXYZRGBA>());
+    pcl::PointCloud<pcl::PointXYZRGBA>::Ptr spft(new pcl::PointCloud<pcl::PointXYZRGBA>());
     pcl::transformPointCloud(*cloud1, *output1, transform_matrix.matrix());
-    *cloud2 += *output1;
-    pcl::io::savePCDFile("../t1plus2.pcd", *output1);
-    cout << "t1plus2 saved" << endl;
+    *spft = *cloud2 + *output1;
+    pcl::io::savePCDFile("../spft.pcd", *spft);
+    cout << "spft saved" << endl;
+
+    // 第一对、第二对rgbd图像的点云变换位姿后叠加
+    pcl::PointCloud<pcl::PointXYZRGBA>::Ptr output2(new pcl::PointCloud<pcl::PointXYZRGBA>());
+    pcl::PointCloud<pcl::PointXYZRGBA>::Ptr fpst(new pcl::PointCloud<pcl::PointXYZRGBA>());
+    pcl::transformPointCloud(*cloud2, *output2, transform_matrix.matrix());
+    *fpst = *cloud1 + *output2;
+    pcl::io::savePCDFile("../fpst.pcd", *fpst);
+    cout << "fpst saved" << endl;
+
+    // //创建点云渲染句柄
+    // pcl::visualization::CloudViewer viewer("Cloud Viewer"); //创建viewer对象
+    // //showCloud函数是同步的，在此处等待直到渲染显示为止
+    // viewer.showCloud(cloud1);
+    // while (!viewer.wasStopped()){
+    // }
+
+    // pcl::visualization::PCLVisualizer viewer ("Matrix transformation example");
+    // viewer.addPointCloud (cloud2, "original_cloud");
+    // viewer.addPointCloud (output1, "transformed_cloud");
+    // viewer.addCoordinateSystem (1.0, 0); 
+    // viewer.setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 2, "original_cloud");
+    // viewer.setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 2, "transformed_cloud");
+    // while (!viewer.wasStopped ()) { // Display the visualiser until 'q' key is pressed
+    //     viewer.spinOnce ();
+    // }
 
     return 0;
 }
 
 
 pcl::PointCloud<pcl::PointXYZRGBA>::Ptr image2PointCloud(cv::Mat &rgb, cv::Mat &depth){
-
     // 相机内参
     const float cx = 325.5;
     const float cy = 253.5;
     const float fx = 518.0;
     const float fy = 519.0;
-
     pcl::PointCloud<pcl::PointXYZRGBA>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZRGBA>);
-
-    for (int m = 0; m < depth.rows; m++)
-       for (int n = 0; n < depth.cols; n++)
+    for (int y = 0; y < depth.rows; y++)
+       for (int x = 0; x < depth.cols; x++)
        {
-           // 获取深度图中(m,n)处的值
-           ushort d = depth.ptr<ushort>(m)[n];
-           // d 可能没有值，若如此，跳过此点
+           // 深度图中坐标(m,n)处的值是彩色图像像素坐标(m,n)处的深度值
+           // ushort d = depth.ptr<ushort>(m)[n];
+           // 获取深度d, y是图像的行, x是图像的列
+           ushort d = depth.ptr<ushort>(int(y))[int(x)];
            if (d == 0)
                continue;
-           // d 存在值，则向点云增加一个点
-           pcl::PointXYZRGBA p;
+           pcl::PointXYZRGBA point;
            // 计算这个点的空间坐标
-           p.z = double(d) / 1000.0;
-           p.x = (n - cx) * p.z / fx;
-           p.y = -(m - cy) * p.z / fy;
+           point.z = double(d) / 1000.0;
+           point.x = (x - cx) * point.z / fx;
+           point.y = -(y - cy) * point.z / fy;
 
            // 从rgb图像中获取它的颜色
            // rgb是三通道的BGR格式图，所以按下面的顺序获取颜色
-           p.b = rgb.ptr<uchar>(m)[n * 3];
-           p.g = rgb.ptr<uchar>(m)[n * 3 + 1];
-           p.r = rgb.ptr<uchar>(m)[n * 3 + 2];
+           point.b = rgb.ptr<uchar>(y)[x * 3];
+           point.g = rgb.ptr<uchar>(y)[x * 3 + 1];
+           point.r = rgb.ptr<uchar>(y)[x * 3 + 2];
 
            // 把p加入到点云中
-           cloud->points.push_back(p);
+           cloud->points.push_back(point);
        }
    // 设置并保存点云
    cloud->height = 1;
