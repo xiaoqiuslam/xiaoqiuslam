@@ -5,8 +5,8 @@
 #include <pcl/visualization/pcl_visualizer.h>
 
 int main (int argc, char** argv){
-    pcl::PointCloud<pcl::PointXYZ>::Ptr source_cloud (new pcl::PointCloud<pcl::PointXYZ> ());
-    pcl::io::loadPCDFile<pcl::PointXYZ> ("../DensePointCloud.pcd", *source_cloud);
+    pcl::PointCloud<pcl::PointXYZRGB>::Ptr source_cloud (new pcl::PointCloud<pcl::PointXYZRGB> ());
+    pcl::io::loadPCDFile<pcl::PointXYZRGB> ("../DensePointCloud.pcd", *source_cloud);
     /* transformation matrices work :
             |-------> This column is the translation
     | 1 0 0 x |  \
@@ -48,7 +48,7 @@ int main (int argc, char** argv){
     std::cout << transformation << std::endl;
 
     // Executing the transformation
-    pcl::PointCloud<pcl::PointXYZ>::Ptr transformed_cloud (new pcl::PointCloud<pcl::PointXYZ> ());
+    pcl::PointCloud<pcl::PointXYZRGB>::Ptr transformed_cloud (new pcl::PointCloud<pcl::PointXYZRGB> ());
     // Apply an affine transform defined by an Eigen Transform.
     pcl::transformPointCloud (*source_cloud, *transformed_cloud, transformation);
 
@@ -58,11 +58,11 @@ int main (int argc, char** argv){
     pcl::visualization::PCLVisualizer viewer ("Matrix transformation example");
 
     // Define R,G,B colors for the point cloud
-    pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> source_cloud_color_handler (source_cloud, 255, 255, 255);
+    pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZRGB> source_cloud_color_handler (source_cloud, 255, 255, 255);
     // We add the point cloud to the viewer and pass the color handler
     viewer.addPointCloud (source_cloud, source_cloud_color_handler, "original_cloud");
 
-    pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> transformed_cloud_color_handler (transformed_cloud, 230, 20, 20); // Red
+    pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZRGB> transformed_cloud_color_handler (transformed_cloud, 230, 20, 20); // Red
     viewer.addPointCloud (transformed_cloud, transformed_cloud_color_handler, "transformed_cloud");
     viewer.addCoordinateSystem (1.0, 0);  //Adds 3D axes describing a coordinate system to screen at 0,0,0. 
     viewer.initCameraParameters();
