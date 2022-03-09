@@ -60,10 +60,10 @@ int main (int argc, char** argv){
     // Define R,G,B colors for the point cloud
     pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZRGB> source_cloud_color_handler (source_cloud, 255, 255, 255);
     // We add the point cloud to the viewer and pass the color handler
-    viewer.addPointCloud (source_cloud, source_cloud_color_handler, "original_cloud");
+    viewer.addPointCloud (source_cloud, "original_cloud");
 
     pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZRGB> transformed_cloud_color_handler (transformed_cloud, 230, 20, 20); // Red
-    viewer.addPointCloud (transformed_cloud, transformed_cloud_color_handler, "transformed_cloud");
+    viewer.addPointCloud (transformed_cloud, "transformed_cloud");
     viewer.addCoordinateSystem (1.0, 0);  //Adds 3D axes describing a coordinate system to screen at 0,0,0. 
     viewer.initCameraParameters();
     viewer.setBackgroundColor(0.05, 0.05, 0.05, 0); // Setting background to a dark grey
