@@ -10,8 +10,7 @@
 
 using namespace std;
 
-int main( int argc, char** argv )
-{
+int main( int argc, char** argv ){
     // 彩色图和深度图
     vector<cv::Mat> colorImgs, depthImgs;
     // 相机位姿 变换矩阵　4×4
