@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/media/q/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/joinMap.cpp" "/media/q/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles/joinMap.dir/joinMap.cpp.o"
+  "/home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/joinMap.cpp" "/home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles/joinMap.dir/joinMap.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

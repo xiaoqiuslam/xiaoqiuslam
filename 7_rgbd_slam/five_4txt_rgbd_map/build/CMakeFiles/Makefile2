@@ -54,10 +54,47 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /media/q/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map
+CMAKE_SOURCE_DIR = /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /media/q/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build
+CMAKE_BINARY_DIR = /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build
+
+#=============================================================================
+# Target rules for target CMakeFiles/plot_trajectory.dir
+
+# All Build rule for target.
+CMakeFiles/plot_trajectory.dir/all:
+	$(MAKE) -f CMakeFiles/plot_trajectory.dir/build.make CMakeFiles/plot_trajectory.dir/depend
+	$(MAKE) -f CMakeFiles/plot_trajectory.dir/build.make CMakeFiles/plot_trajectory.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles --progress-num=7,8 "Built target plot_trajectory"
+.PHONY : CMakeFiles/plot_trajectory.dir/all
+
+# Include target in all.
+all: CMakeFiles/plot_trajectory.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/plot_trajectory.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/plot_trajectory.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles 0
+.PHONY : CMakeFiles/plot_trajectory.dir/rule
+
+# Convenience name for target.
+plot_trajectory: CMakeFiles/plot_trajectory.dir/rule
+
+.PHONY : plot_trajectory
+
+# clean rule for target.
+CMakeFiles/plot_trajectory.dir/clean:
+	$(MAKE) -f CMakeFiles/plot_trajectory.dir/build.make CMakeFiles/plot_trajectory.dir/clean
+.PHONY : CMakeFiles/plot_trajectory.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/plot_trajectory.dir/clean
+
+.PHONY : clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/joinMap.dir
@@ -66,7 +103,7 @@ CMAKE_BINARY_DIR = /media/q/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_
 CMakeFiles/joinMap.dir/all:
 	$(MAKE) -f CMakeFiles/joinMap.dir/build.make CMakeFiles/joinMap.dir/depend
 	$(MAKE) -f CMakeFiles/joinMap.dir/build.make CMakeFiles/joinMap.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/q/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles --progress-num=3,4 "Built target joinMap"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles --progress-num=3,4 "Built target joinMap"
 .PHONY : CMakeFiles/joinMap.dir/all
 
 # Include target in all.
@@ -76,9 +113,9 @@ all: CMakeFiles/joinMap.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/joinMap.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /media/q/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/joinMap.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /media/q/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles 0
 .PHONY : CMakeFiles/joinMap.dir/rule
 
 # Convenience name for target.
@@ -97,39 +134,76 @@ clean: CMakeFiles/joinMap.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/4_plot_trajectory.dir
+# Target rules for target CMakeFiles/joinMap_pnp.dir
 
 # All Build rule for target.
-CMakeFiles/4_plot_trajectory.dir/all:
-	$(MAKE) -f CMakeFiles/4_plot_trajectory.dir/build.make CMakeFiles/4_plot_trajectory.dir/depend
-	$(MAKE) -f CMakeFiles/4_plot_trajectory.dir/build.make CMakeFiles/4_plot_trajectory.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/q/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles --progress-num=1,2 "Built target 4_plot_trajectory"
-.PHONY : CMakeFiles/4_plot_trajectory.dir/all
+CMakeFiles/joinMap_pnp.dir/all:
+	$(MAKE) -f CMakeFiles/joinMap_pnp.dir/build.make CMakeFiles/joinMap_pnp.dir/depend
+	$(MAKE) -f CMakeFiles/joinMap_pnp.dir/build.make CMakeFiles/joinMap_pnp.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles --progress-num=5,6 "Built target joinMap_pnp"
+.PHONY : CMakeFiles/joinMap_pnp.dir/all
 
 # Include target in all.
-all: CMakeFiles/4_plot_trajectory.dir/all
+all: CMakeFiles/joinMap_pnp.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/4_plot_trajectory.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /media/q/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/4_plot_trajectory.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /media/q/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles 0
-.PHONY : CMakeFiles/4_plot_trajectory.dir/rule
+CMakeFiles/joinMap_pnp.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/joinMap_pnp.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles 0
+.PHONY : CMakeFiles/joinMap_pnp.dir/rule
 
 # Convenience name for target.
-4_plot_trajectory: CMakeFiles/4_plot_trajectory.dir/rule
+joinMap_pnp: CMakeFiles/joinMap_pnp.dir/rule
 
-.PHONY : 4_plot_trajectory
-
-# clean rule for target.
-CMakeFiles/4_plot_trajectory.dir/clean:
-	$(MAKE) -f CMakeFiles/4_plot_trajectory.dir/build.make CMakeFiles/4_plot_trajectory.dir/clean
-.PHONY : CMakeFiles/4_plot_trajectory.dir/clean
+.PHONY : joinMap_pnp
 
 # clean rule for target.
-clean: CMakeFiles/4_plot_trajectory.dir/clean
+CMakeFiles/joinMap_pnp.dir/clean:
+	$(MAKE) -f CMakeFiles/joinMap_pnp.dir/build.make CMakeFiles/joinMap_pnp.dir/clean
+.PHONY : CMakeFiles/joinMap_pnp.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/joinMap_pnp.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/five_rgbd_map.dir
+
+# All Build rule for target.
+CMakeFiles/five_rgbd_map.dir/all:
+	$(MAKE) -f CMakeFiles/five_rgbd_map.dir/build.make CMakeFiles/five_rgbd_map.dir/depend
+	$(MAKE) -f CMakeFiles/five_rgbd_map.dir/build.make CMakeFiles/five_rgbd_map.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles --progress-num=1,2 "Built target five_rgbd_map"
+.PHONY : CMakeFiles/five_rgbd_map.dir/all
+
+# Include target in all.
+all: CMakeFiles/five_rgbd_map.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/five_rgbd_map.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/five_rgbd_map.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles 0
+.PHONY : CMakeFiles/five_rgbd_map.dir/rule
+
+# Convenience name for target.
+five_rgbd_map: CMakeFiles/five_rgbd_map.dir/rule
+
+.PHONY : five_rgbd_map
+
+# clean rule for target.
+CMakeFiles/five_rgbd_map.dir/clean:
+	$(MAKE) -f CMakeFiles/five_rgbd_map.dir/build.make CMakeFiles/five_rgbd_map.dir/clean
+.PHONY : CMakeFiles/five_rgbd_map.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/five_rgbd_map.dir/clean
 
 .PHONY : clean
 

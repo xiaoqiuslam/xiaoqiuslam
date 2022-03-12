@@ -251,6 +251,8 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
+  "CMakeFiles/plot_trajectory.dir/DependInfo.cmake"
   "CMakeFiles/joinMap.dir/DependInfo.cmake"
-  "CMakeFiles/4_plot_trajectory.dir/DependInfo.cmake"
+  "CMakeFiles/joinMap_pnp.dir/DependInfo.cmake"
+  "CMakeFiles/five_rgbd_map.dir/DependInfo.cmake"
   )

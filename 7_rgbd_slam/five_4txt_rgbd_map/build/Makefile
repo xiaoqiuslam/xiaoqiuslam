@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /media/q/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map
+CMAKE_SOURCE_DIR = /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /media/q/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build
+CMAKE_BINARY_DIR = /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /media/q/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles /media/q/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /media/q/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named plot_trajectory
+
+# Build rule for target.
+plot_trajectory: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 plot_trajectory
+.PHONY : plot_trajectory
+
+# fast build rule for target.
+plot_trajectory/fast:
+	$(MAKE) -f CMakeFiles/plot_trajectory.dir/build.make CMakeFiles/plot_trajectory.dir/build
+.PHONY : plot_trajectory/fast
+
+#=============================================================================
 # Target rules for targets named joinMap
 
 # Build rule for target.
@@ -124,44 +137,57 @@ joinMap/fast:
 .PHONY : joinMap/fast
 
 #=============================================================================
-# Target rules for targets named 4_plot_trajectory
+# Target rules for targets named joinMap_pnp
 
 # Build rule for target.
-4_plot_trajectory: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 4_plot_trajectory
-.PHONY : 4_plot_trajectory
+joinMap_pnp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 joinMap_pnp
+.PHONY : joinMap_pnp
 
 # fast build rule for target.
-4_plot_trajectory/fast:
-	$(MAKE) -f CMakeFiles/4_plot_trajectory.dir/build.make CMakeFiles/4_plot_trajectory.dir/build
-.PHONY : 4_plot_trajectory/fast
+joinMap_pnp/fast:
+	$(MAKE) -f CMakeFiles/joinMap_pnp.dir/build.make CMakeFiles/joinMap_pnp.dir/build
+.PHONY : joinMap_pnp/fast
 
-4_plot_trajectory.o: 4_plot_trajectory.cpp.o
+#=============================================================================
+# Target rules for targets named five_rgbd_map
 
-.PHONY : 4_plot_trajectory.o
+# Build rule for target.
+five_rgbd_map: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 five_rgbd_map
+.PHONY : five_rgbd_map
+
+# fast build rule for target.
+five_rgbd_map/fast:
+	$(MAKE) -f CMakeFiles/five_rgbd_map.dir/build.make CMakeFiles/five_rgbd_map.dir/build
+.PHONY : five_rgbd_map/fast
+
+five_rgbd_map.o: five_rgbd_map.cpp.o
+
+.PHONY : five_rgbd_map.o
 
 # target to build an object file
-4_plot_trajectory.cpp.o:
-	$(MAKE) -f CMakeFiles/4_plot_trajectory.dir/build.make CMakeFiles/4_plot_trajectory.dir/4_plot_trajectory.cpp.o
-.PHONY : 4_plot_trajectory.cpp.o
+five_rgbd_map.cpp.o:
+	$(MAKE) -f CMakeFiles/five_rgbd_map.dir/build.make CMakeFiles/five_rgbd_map.dir/five_rgbd_map.cpp.o
+.PHONY : five_rgbd_map.cpp.o
 
-4_plot_trajectory.i: 4_plot_trajectory.cpp.i
+five_rgbd_map.i: five_rgbd_map.cpp.i
 
-.PHONY : 4_plot_trajectory.i
+.PHONY : five_rgbd_map.i
 
 # target to preprocess a source file
-4_plot_trajectory.cpp.i:
-	$(MAKE) -f CMakeFiles/4_plot_trajectory.dir/build.make CMakeFiles/4_plot_trajectory.dir/4_plot_trajectory.cpp.i
-.PHONY : 4_plot_trajectory.cpp.i
+five_rgbd_map.cpp.i:
+	$(MAKE) -f CMakeFiles/five_rgbd_map.dir/build.make CMakeFiles/five_rgbd_map.dir/five_rgbd_map.cpp.i
+.PHONY : five_rgbd_map.cpp.i
 
-4_plot_trajectory.s: 4_plot_trajectory.cpp.s
+five_rgbd_map.s: five_rgbd_map.cpp.s
 
-.PHONY : 4_plot_trajectory.s
+.PHONY : five_rgbd_map.s
 
 # target to generate assembly for a file
-4_plot_trajectory.cpp.s:
-	$(MAKE) -f CMakeFiles/4_plot_trajectory.dir/build.make CMakeFiles/4_plot_trajectory.dir/4_plot_trajectory.cpp.s
-.PHONY : 4_plot_trajectory.cpp.s
+five_rgbd_map.cpp.s:
+	$(MAKE) -f CMakeFiles/five_rgbd_map.dir/build.make CMakeFiles/five_rgbd_map.dir/five_rgbd_map.cpp.s
+.PHONY : five_rgbd_map.cpp.s
 
 joinMap.o: joinMap.cpp.o
 
@@ -190,6 +216,60 @@ joinMap.cpp.s:
 	$(MAKE) -f CMakeFiles/joinMap.dir/build.make CMakeFiles/joinMap.dir/joinMap.cpp.s
 .PHONY : joinMap.cpp.s
 
+joinMap_pnp.o: joinMap_pnp.cpp.o
+
+.PHONY : joinMap_pnp.o
+
+# target to build an object file
+joinMap_pnp.cpp.o:
+	$(MAKE) -f CMakeFiles/joinMap_pnp.dir/build.make CMakeFiles/joinMap_pnp.dir/joinMap_pnp.cpp.o
+.PHONY : joinMap_pnp.cpp.o
+
+joinMap_pnp.i: joinMap_pnp.cpp.i
+
+.PHONY : joinMap_pnp.i
+
+# target to preprocess a source file
+joinMap_pnp.cpp.i:
+	$(MAKE) -f CMakeFiles/joinMap_pnp.dir/build.make CMakeFiles/joinMap_pnp.dir/joinMap_pnp.cpp.i
+.PHONY : joinMap_pnp.cpp.i
+
+joinMap_pnp.s: joinMap_pnp.cpp.s
+
+.PHONY : joinMap_pnp.s
+
+# target to generate assembly for a file
+joinMap_pnp.cpp.s:
+	$(MAKE) -f CMakeFiles/joinMap_pnp.dir/build.make CMakeFiles/joinMap_pnp.dir/joinMap_pnp.cpp.s
+.PHONY : joinMap_pnp.cpp.s
+
+plot_trajectory.o: plot_trajectory.cpp.o
+
+.PHONY : plot_trajectory.o
+
+# target to build an object file
+plot_trajectory.cpp.o:
+	$(MAKE) -f CMakeFiles/plot_trajectory.dir/build.make CMakeFiles/plot_trajectory.dir/plot_trajectory.cpp.o
+.PHONY : plot_trajectory.cpp.o
+
+plot_trajectory.i: plot_trajectory.cpp.i
+
+.PHONY : plot_trajectory.i
+
+# target to preprocess a source file
+plot_trajectory.cpp.i:
+	$(MAKE) -f CMakeFiles/plot_trajectory.dir/build.make CMakeFiles/plot_trajectory.dir/plot_trajectory.cpp.i
+.PHONY : plot_trajectory.cpp.i
+
+plot_trajectory.s: plot_trajectory.cpp.s
+
+.PHONY : plot_trajectory.s
+
+# target to generate assembly for a file
+plot_trajectory.cpp.s:
+	$(MAKE) -f CMakeFiles/plot_trajectory.dir/build.make CMakeFiles/plot_trajectory.dir/plot_trajectory.cpp.s
+.PHONY : plot_trajectory.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -197,15 +277,23 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... edit_cache"
+	@echo "... plot_trajectory"
 	@echo "... joinMap"
-	@echo "... 4_plot_trajectory"
-	@echo "... 4_plot_trajectory.o"
-	@echo "... 4_plot_trajectory.i"
-	@echo "... 4_plot_trajectory.s"
+	@echo "... joinMap_pnp"
+	@echo "... edit_cache"
+	@echo "... five_rgbd_map"
+	@echo "... five_rgbd_map.o"
+	@echo "... five_rgbd_map.i"
+	@echo "... five_rgbd_map.s"
 	@echo "... joinMap.o"
 	@echo "... joinMap.i"
 	@echo "... joinMap.s"
+	@echo "... joinMap_pnp.o"
+	@echo "... joinMap_pnp.i"
+	@echo "... joinMap_pnp.s"
+	@echo "... plot_trajectory.o"
+	@echo "... plot_trajectory.i"
+	@echo "... plot_trajectory.s"
 .PHONY : help
 
 
