@@ -1,66 +1,75 @@
 #include <iostream>
-#include <fstream>
 #include <vector>
-#include <map>
-#include <Eigen/Core>
-#include <Eigen/Geometry>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/calib3d/calib3d.hpp>
-#include <opencv2/core/eigen.hpp>
 #include <pcl/io/pcd_io.h>
 #include <pcl/point_types.h>
-#include <pcl/common/transforms.h>
-#include <pcl/filters/voxel_grid.h>
-#include <pcl/visualization/cloud_viewer.h>
-#include <pcl/features/normal_3d.h>
-#include <pcl/ModelCoefficients.h>
-#include <pcl/sample_consensus/method_types.h>
-#include <pcl/sample_consensus/model_types.h>
-#include <pcl/segmentation/sac_segmentation.h>
-#include <pcl/filters/extract_indices.h>
 #include <pcl/io/io.h>
 #include <boost/format.hpp>
 #include <pcl/visualization/pcl_visualizer.h>
 
 using namespace std;
 
+// 1. 读取图片
+void read_rgb_rgbd(vector<cv::Mat> &rgbs, vector<cv::Mat> &depths);
+
+// 2. 显示图片
+void show_rgb_rgbd(vector<cv::Mat> &rgbs);
+
+// 3. 提取特征点
+void extractor_rgb(vector<cv::Mat> &rgbs, std::vector<vector<cv::KeyPoint>> &kps, vector<cv::Mat> &desps);
+
+// 计算rt
+
+// 生成点云
+
+// 点云拼接
+
 // image2PonitCloud 将rgb图转换为点云
 pcl::PointCloud<pcl::PointXYZRGBA>::Ptr image2PointCloud(cv::Mat &rgb, cv::Mat &depth);
 
+
 int main(int argc, char **argv){
-    vector<cv::Mat> rgbImgs, depthImgs;
-    cv::Ptr<cv::FeatureDetector> detector = cv::ORB::create();
-    cv::Ptr<cv::DescriptorExtractor> descriptor = cv::ORB::create();
-    boost::format fmt( "../%s/%d.%s" ); 
-    for ( int i=0; i<5; i++ ){
-        rgbImgs.push_back( cv::imread((fmt%"color"%(i+1)%"png").str()));
-        depthImgs.push_back( cv::imread((fmt%"depth"%(i+1)%"pgm").str(), -1)); 
-    }
+    vector<cv::Mat> rgbs, depths;
+    read_rgb_rgbd(rgbs, depths);
 
-    std::vector<cv::KeyPoint> kp1, kp2;
-    detector->detect(rgbImgs[0], kp1);
-    detector->detect(rgbImgs[1], kp2);
-    cv::Mat imgShow;
+    // show_rgb_rgbd(rgbs);
 
-    cv::drawKeypoints(rgbImgs[0], kp1, imgShow, cv::Scalar::all(-1), cv::DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS);
-    cv::namedWindow("keypoints", CV_WINDOW_NORMAL);
-    cv::imshow("keypoints", imgShow);
-    cv::waitKey(0);
+    std::vector<vector<cv::KeyPoint>> kps;
+    std::vector<cv::Mat> desps;
+    extractor_rgb(rgbs, kps, desps);
 
-    cv::Mat desp1, desp2;
-    descriptor->compute(rgbImgs[0], kp1, desp1);
-    descriptor->compute(rgbImgs[1], kp2, desp2);
+//
+//    std::vector<cv::DMatch> matches;
+//    cv::BFMatcher matcher;
+//    matcher.match(desp1, desp2, matches);
+//    cout << "Find total " << matches.size() << " matches." << endl;
+//
+//    cv::Mat imgMatches;
+//    cv::drawMatches(rgbImgs[0], kp1, rgbImgs[1], kp2, matches, imgMatches);
+//    cv::imshow("matches", imgMatches);
+//    cv::waitKey(0);
+//
+//    std::vector<cv::DMatch> goodMatches;
+//    double minDis = 9999;
+//    for (size_t i = 0; i < matches.size(); i++){
+//        if (matches[i].distance < minDis)
+//            minDis = matches[i].distance;
+//    }
+//    cout << "min dis = " << minDis << endl;
+//
+//    for (size_t i = 0; i < matches.size(); i++){
+//        if (matches[i].distance < 10 * minDis)
+//            goodMatches.push_back(matches[i]);
+//    }
+//    cout << "good matches=" << goodMatches.size() << endl;
+//
+//    cv::drawMatches(rgbImgs[0], kp1, rgbImgs[1], kp2, goodMatches, imgMatches);
+//    cv::imshow("good matches", imgMatches);
+//    cv::waitKey(0);
 
-    std::vector<cv::DMatch> matches;
-    cv::BFMatcher matcher;
-    matcher.match(desp1, desp2, matches);
-    cout << "Find total " << matches.size() << " matches." << endl;
 
-    cv::Mat imgMatches;
-    cv::drawMatches(rgbImgs[0], kp1, rgbImgs[1], kp2, matches, imgMatches);
-    cv::imshow("matches", imgMatches);
-    cv::waitKey(0);
     return 0;
 }
 
@@ -71,33 +80,10 @@ int main(int argc, char **argv){
 
 
 
-
-
-
-//     std::vector<cv::DMatch> goodMatches;
-//     double minDis = 9999;
-//     for (size_t i = 0; i < matches.size(); i++){
-//         if (matches[i].distance < minDis)
-//             minDis = matches[i].distance;
-//     }
-//     cout << "min dis = " << minDis << endl;
-
-//     for (size_t i = 0; i < matches.size(); i++){
-//         if (matches[i].distance < 10 * minDis)
-//             goodMatches.push_back(matches[i]);
-//     }
-//     cout << "good matches=" << goodMatches.size() << endl;
-
-//     cv::drawMatches(rgb1, kp1, rgb2, kp2, goodMatches, imgMatches);
-//     cv::imshow("good matches", imgMatches);
-//     cv::waitKey(0);
-
-//     // 调用cv::solvePnPRansac()函数计算两张图像间的运动关系
 //     // 第一个张图像的三维点
 //     std::vector<cv::Point3f> pts_obj;
 //     // 第二个张图像的特征点
 //     std::vector<cv::Point2f> pts_img;
-
 //     for (size_t i = 0; i < goodMatches.size(); i++){
 //         // query 是第一个张图像, train 是第二个张图像
 //         cv::Point2f p = kp1[goodMatches[i].queryIdx].pt;
@@ -203,6 +189,47 @@ int main(int argc, char **argv){
 //     // while (!viewer.wasStopped ()) { // Display the visualiser until 'q' key is pressed
 //     //     viewer.spinOnce ();
 //     // }
+
+
+void read_rgb_rgbd(vector<cv::Mat> &rgbs, vector<cv::Mat> &depths){
+    boost::format fmt("../%s/%d.%s");
+    for (int i=0; i<5; i++){
+    rgbs.push_back( cv::imread((fmt%"color"%(i+1)%"png").str()));
+    depths.push_back( cv::imread((fmt%"depth"%(i+1)%"pgm").str(), -1));
+    }
+    cout << "rgbs.size() " << rgbs.size() << endl;
+    cout << "depths.size() " << depths.size() << endl;
+}
+
+void show_rgb_rgbd(vector<cv::Mat> &rgbs){
+    for (int i = 0; i < rgbs.size(); i++){
+        cv::namedWindow("rgb", CV_WINDOW_NORMAL);
+        cv::imshow("rgb", rgbs[i]);
+        cv::waitKey(0);
+    }
+}
+
+// 3. 提取特征点
+//std::vector<KeyPoint>& keypoints
+void extractor_rgb(vector<cv::Mat> &rgbs, std::vector<vector<cv::KeyPoint>> &kps, vector<cv::Mat> &desps){
+    cv::Ptr<cv::FeatureDetector> detector = cv::ORB::create();
+    cv::Ptr<cv::DescriptorExtractor> descriptor = cv::ORB::create();
+    cv::Mat imgShow;
+    std::vector<cv::KeyPoint> kp;
+    cv::Mat desp;
+    cv::namedWindow("keypoints", CV_WINDOW_NORMAL);
+    for (int i = 0; i < rgbs.size(); i++){
+        detector->detect(rgbs[i], kp);
+        descriptor->compute(rgbs[i], kp, desp);
+        kps.push_back(kp);
+        desps.push_back(desp);
+        cv::drawKeypoints(rgbs[i], kp, imgShow, cv::Scalar::all(-1), cv::DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS);
+        cv::imshow("keypoints", imgShow);
+        cv::waitKey(0);
+    }
+    cout << "kps " << kps.size() << endl;
+    cout << "desps " << desps.size() << endl;
+}
 
 
 

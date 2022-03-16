@@ -1,6 +1,6 @@
-/home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles/rebuild_cache.dir
-/home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles/plot_trajectory.dir
-/home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles/joinMap.dir
-/home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles/joinMap_pnp.dir
-/home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles/edit_cache.dir
-/home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles/five_rgbd_map.dir
+/home/q/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles/rebuild_cache.dir
+/home/q/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles/plot_trajectory.dir
+/home/q/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles/joinMap.dir
+/home/q/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles/joinMap_pnp.dir
+/home/q/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles/edit_cache.dir
+/home/q/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles/five_rgbd_map.dir

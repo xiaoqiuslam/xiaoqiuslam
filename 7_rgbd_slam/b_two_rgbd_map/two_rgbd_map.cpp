@@ -1,7 +1,5 @@
 #include <iostream>
-#include <fstream>
 #include <vector>
-#include <map>
 
 #include <Eigen/Core>
 #include <Eigen/Geometry>
@@ -14,35 +12,12 @@
 #include <pcl/io/pcd_io.h>
 #include <pcl/point_types.h>
 #include <pcl/common/transforms.h>
-#include <pcl/filters/voxel_grid.h>
 #include <pcl/visualization/cloud_viewer.h>
-
-#include <pcl/point_types.h>
 #include <pcl/features/normal_3d.h>
-#include <pcl/io/pcd_io.h>
-#include <iostream>
-#include <pcl/ModelCoefficients.h>
-#include <pcl/io/pcd_io.h>
-#include <pcl/point_types.h>
-#include <pcl/sample_consensus/method_types.h>
-#include <pcl/sample_consensus/model_types.h>
-#include <pcl/segmentation/sac_segmentation.h>
-#include <pcl/filters/voxel_grid.h>
-#include <pcl/filters/extract_indices.h>
-
-#include <pcl/visualization/cloud_viewer.h>
-#include <iostream>
 #include <pcl/io/io.h>
-#include <pcl/io/pcd_io.h>
-
 
 using namespace std;
 
-// 类型定义
-// typedef pcl::PointXYZRGBA PointT;
-// typedef pcl::pcl::PointCloud<pcl::PointXYZRGBA><pcl::PointXYZRGBA> pcl::PointCloud<pcl::PointXYZRGBA>;
-
-// image2PonitCloud 将rgb图转换为点云
 pcl::PointCloud<pcl::PointXYZRGBA>::Ptr image2PointCloud(cv::Mat &rgb, cv::Mat &depth);
 
 int main(int argc, char **argv){
@@ -102,7 +77,6 @@ int main(int argc, char **argv){
     std::vector<cv::Point3f> pts_obj;
     // 第二个张图像的特征点
     std::vector<cv::Point2f> pts_img;
-
     for (size_t i = 0; i < goodMatches.size(); i++){
         // query 是第一个张图像, train 是第二个张图像
         cv::Point2f p = kp1[goodMatches[i].queryIdx].pt;

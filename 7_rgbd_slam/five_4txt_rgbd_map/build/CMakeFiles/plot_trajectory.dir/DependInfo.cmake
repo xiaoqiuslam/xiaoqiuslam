@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/plot_trajectory.cpp" "/home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles/plot_trajectory.dir/plot_trajectory.cpp.o"
+  "/home/q/7_rgbd_slam/five_4txt_rgbd_map/plot_trajectory.cpp" "/home/q/7_rgbd_slam/five_4txt_rgbd_map/build/CMakeFiles/plot_trajectory.dir/plot_trajectory.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

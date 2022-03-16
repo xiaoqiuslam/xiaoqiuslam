@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/plot_trajectory.cpp
+/home/q/7_rgbd_slam/five_4txt_rgbd_map/plot_trajectory.cpp
 pangolin/pangolin.h
 -
 Eigen/Core

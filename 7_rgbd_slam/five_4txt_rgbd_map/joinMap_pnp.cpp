@@ -10,6 +10,8 @@
 
 using namespace std;
 
+
+
 int main( int argc, char** argv ){     
     // 相对可执行文件位置的相对路径
     ifstream fin("../pose.txt");

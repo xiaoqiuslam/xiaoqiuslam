@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/b_two_rgbd_map/two_rgbd_map.cpp" "/home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/b_two_rgbd_map/build/CMakeFiles/two_rgbd_map.dir/two_rgbd_map.cpp.o"
+  "/home/q/7_rgbd_slam/b_two_rgbd_map/two_rgbd_map.cpp" "/home/q/7_rgbd_slam/b_two_rgbd_map/build/CMakeFiles/two_rgbd_map.dir/two_rgbd_map.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

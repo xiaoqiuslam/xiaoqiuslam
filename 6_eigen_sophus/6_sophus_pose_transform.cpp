@@ -35,7 +35,7 @@ int main(int argc, char **argv) {
     std::cout << Sophus::SO3::vee(Sophus::SO3::hat(so3)).transpose() << std::endl;
 
     //李代数更新量
-    Eigen::Vector3d update_so3(1e-4, 0, 0);
+    Eigen::Vector3d update_so3(0.0001, 0, 0);
 
     //更新李群旋转矩阵
     Sophus::SO3 SO3_updated = Sophus::SO3::exp(update_so3) * SO3_rotation_matrix;

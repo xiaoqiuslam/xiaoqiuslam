@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/b_two_rgbd_map/two_rgbd_map.cpp
+/home/q/7_rgbd_slam/b_two_rgbd_map/two_rgbd_map.cpp
 iostream
 -
 fstream
