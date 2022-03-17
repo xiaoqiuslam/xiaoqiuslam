@@ -1,0 +1,6 @@
+<launch>
+    <node pkg="demo_rosparam" type="demo_rosparam" name="demo_rosparam" output="screen" > 
+        <!--这种加载方式与param无异，只不过对于参数抽象得更好一点-->
+        <rosparam file="$(find demo_rosparam)/config/rosparam_config_v1.yaml" command="load"/>
+    </node>
+</launch>

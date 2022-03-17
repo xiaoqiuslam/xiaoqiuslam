@@ -1,0 +1,5 @@
+<launch>
+    <node name="demo_log" pkg="demo_log" type="demo_log" output="screen">
+        <param name="PRINT_MODE" type="string" value="2"/>
+    </node>
+</launch>

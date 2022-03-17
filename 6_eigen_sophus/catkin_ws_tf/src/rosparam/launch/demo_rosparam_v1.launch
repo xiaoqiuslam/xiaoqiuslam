@@ -1,0 +1,10 @@
+<launch>
+    <!--这里面的param都是不额外带命名空间-->
+    <param name="string_param" type="string" value="test"/>
+
+    <node pkg="demo_rosparam" type="demo_rosparam" name="demo_rosparam" output="screen" > 
+        <!--这里面的param都是带demo_rosparam的命名空间，若node后面加ns，则等于在前面前缀加ns-->
+        <param name="string_param" type="string" value="test"/>
+        <param name="int_param" type="int" value="111"/>
+    </node>
+</launch>
