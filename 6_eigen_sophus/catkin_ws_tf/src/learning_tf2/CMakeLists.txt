@@ -10,9 +10,11 @@ project(learning_tf2)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
+        tf
   tf2
   tf2_ros
   turtlesim
+        tf_conversions
 )
 
 ## System dependencies are found with CMake's conventions
@@ -210,6 +212,8 @@ include_directories(
 add_executable(tf2_broadcaster src/tf2_broadcaster.cpp)
 target_link_libraries(tf2_broadcaster  ${catkin_LIBRARIES} )
 
+add_executable(tf2_broadcaster_imu src/tf2_broadcaster_imu.cpp)
+target_link_libraries(tf2_broadcaster_imu  ${catkin_LIBRARIES} )
 
 add_executable(turtle_tf2_broadcaster src/turtle_tf2_broadcaster.cpp)
 target_link_libraries(turtle_tf2_broadcaster ${catkin_LIBRARIES})
