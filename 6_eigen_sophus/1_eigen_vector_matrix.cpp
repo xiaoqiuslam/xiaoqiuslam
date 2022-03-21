@@ -4,8 +4,8 @@
 
 int main( int argc, char** argv ){
 
-     Eigen::Vector3d vector3d;
-     vector3d << 3, 2, 1;
+    Eigen::Vector3d vector3d;
+    vector3d << 3, 2, 1;
 
     Eigen::Matrix3d matrix3d = Eigen::Matrix3d::Zero();
     std::cout << matrix3d << std::endl;

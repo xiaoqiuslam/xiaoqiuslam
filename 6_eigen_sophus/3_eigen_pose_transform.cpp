@@ -4,7 +4,16 @@
 #include <Eigen/Geometry>
 
 int main( int argc, char** argv ){
-    // 1. 旋转向量(轴角)
+
+    // 旋转向量(角轴)Eigen::AngleAxisd(M_PI/2, Eigen::Vector3d ( 0,0,1 ) ); //以（0,0,1）z 为旋转轴，旋转45度
+    // 欧拉角Eigen::Vector3d(0, 0, M_PI/2);
+    // 旋转矩阵Eigen::Matrix3d
+    // 四元数Eigen::Quaterniond
+
+    // 平移向量（3X1）:Eigen::Vector3d
+    // 变换矩阵（4X4）:Eigen::Isometry3d
+
+    // 1. 旋转向量(角轴)
     // 弧度 = 角度*M_PI/180
     // 角度 = 弧度*180/M_PI
     Eigen::AngleAxisd rotation_vector_z(M_PI/2, Eigen::Vector3d ( 0,0,1 ) );
@@ -29,6 +38,16 @@ int main( int argc, char** argv ){
     // 3. 欧拉角
     Eigen::Vector3d euler_angle_1 = Eigen::Vector3d(0, 0, M_PI/2);
     std::cout<<"欧拉角: "<< euler_angle_1.transpose() << std::endl;
+
+    //  欧拉角转角轴
+    Eigen::AngleAxisd rollAngle(Eigen::AngleAxisd(euler_angle_1(0),Eigen::Vector3d::UnitX()));
+    Eigen::AngleAxisd pitchAngle(Eigen::AngleAxisd(euler_angle_1(1),Eigen::Vector3d::UnitY()));
+    Eigen::AngleAxisd yawAngle(Eigen::AngleAxisd(euler_angle_1(2),Eigen::Vector3d::UnitZ()));
+
+    Eigen::Matrix3d rotation_matrix;
+    rotation_matrix=yawAngle*pitchAngle*rollAngle;
+    std::cout << "rotation_matrix " << rotation_matrix <<  std::endl;
+
 
     // 4. 四元数
     Eigen::Quaterniond quaterniond;
