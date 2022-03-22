@@ -99,7 +99,7 @@ rule CXX_EXECUTABLE_LINKER__five_rgbd_map_DEBUG
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = /snap/clion/184/bin/cmake/linux/bin/cmake --regenerate-during-build -S/home/q/7_rgbd_slam/five_4txt_rgbd_map -B/home/q/7_rgbd_slam/five_4txt_rgbd_map/cmake-build-debug
+  command = /snap/clion/184/bin/cmake/linux/bin/cmake --regenerate-during-build -S/media/q/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map -B/media/q/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/cmake-build-debug
   description = Re-running CMake...
   generator = 1
 

@@ -1,4 +1,4 @@
-/snap/clion/184/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/snap/clion/184/bin/ninja/linux/ninja -G Ninja /home/q/7_rgbd_slam/five_4txt_rgbd_map
+/snap/clion/184/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/snap/clion/184/bin/ninja/linux/ninja -G Ninja /media/q/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map
 CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
   Compatibility with CMake < 2.8.12 will be removed from a future version of
   CMake.
@@ -7,6 +7,21 @@ CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
   CMake that the project does not need compatibility with older versions.
 
 
+-- The C compiler identification is GNU 5.4.0
+-- The CXX compiler identification is GNU 5.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found OpenCV: /usr/local (found version "3.4.0") 
+-- Checking for module 'eigen3'
+--   Found eigen3, version 3.2.92
 CMake Warning (dev) at /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/FindPackageHandleStandardArgs.cmake:438 (message):
   The package name passed to `find_package_handle_standard_args` (eigen) does
   not match the name of the calling package (PCL).  This can lead to problems
@@ -19,6 +34,19 @@ Call Stack (most recent call first):
   CMakeLists.txt:15 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
+-- Found eigen: /usr/include/eigen3  
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- Found Boost: /usr/include (found suitable version "1.58.0", minimum required is "1.40.0") found components: system filesystem thread date_time iostreams serialization chrono atomic regex 
+-- Checking for module 'libopenni'
+--   Found libopenni, version 1.5.4.0
 CMake Warning (dev) at /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/FindPackageHandleStandardArgs.cmake:438 (message):
   The package name passed to `find_package_handle_standard_args` (openni)
   does not match the name of the calling package (PCL).  This can lead to
@@ -31,6 +59,9 @@ Call Stack (most recent call first):
   CMakeLists.txt:15 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
+-- Found openni: /usr/lib/libOpenNI.so  
+-- Checking for module 'libopenni2'
+--   Found libopenni2, version 2.2.0.3
 CMake Warning (dev) at /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/FindPackageHandleStandardArgs.cmake:438 (message):
   The package name passed to `find_package_handle_standard_args` (OpenNI2)
   does not match the name of the calling package (PCL).  This can lead to
@@ -43,6 +74,7 @@ Call Stack (most recent call first):
   CMakeLists.txt:15 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
+-- Found OpenNI2: /usr/lib/libOpenNI2.so  
 ** WARNING ** io features related to pcap will be disabled
 ** WARNING ** io features related to png will be disabled
 -- The imported target "vtkRenderingPythonTkWidgets" references the file
@@ -75,6 +107,7 @@ Call Stack (most recent call first):
   CMakeLists.txt:15 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
+-- Found libusb-1.0: /usr/include  
 -- looking for PCL_COMPONENT
 CMake Warning (dev) at /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/FindPackageHandleStandardArgs.cmake:438 (message):
   The package name passed to `find_package_handle_standard_args`
@@ -98,6 +131,7 @@ Call Stack (most recent call first):
   CMakeLists.txt:15 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
+-- Found PCL_COMMON: /usr/lib/x86_64-linux-gnu/libpcl_common.so  
 -- looking for PCL_OCTREE
 CMake Warning (dev) at /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/FindPackageHandleStandardArgs.cmake:438 (message):
   The package name passed to `find_package_handle_standard_args` (PCL_OCTREE)
@@ -109,6 +143,7 @@ Call Stack (most recent call first):
   CMakeLists.txt:15 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
+-- Found PCL_OCTREE: /usr/lib/x86_64-linux-gnu/libpcl_octree.so  
 -- looking for PCL_IO
 CMake Warning (dev) at /snap/clion/184/bin/cmake/linux/share/cmake-3.21/Modules/FindPackageHandleStandardArgs.cmake:438 (message):
   The package name passed to `find_package_handle_standard_args` (PCL_IO)
@@ -120,6 +155,8 @@ Call Stack (most recent call first):
   CMakeLists.txt:15 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
+-- Found PCL_IO: /usr/lib/x86_64-linux-gnu/libpcl_io.so  
+-- Found PCL: /usr/lib/x86_64-linux-gnu/libboost_system.so;/usr/lib/x86_64-linux-gnu/libboost_filesystem.so;/usr/lib/x86_64-linux-gnu/libboost_thread.so;-lpthread;/usr/lib/x86_64-linux-gnu/libboost_date_time.so;/usr/lib/x86_64-linux-gnu/libboost_iostreams.so;/usr/lib/x86_64-linux-gnu/libboost_serialization.so;/usr/lib/x86_64-linux-gnu/libboost_chrono.so;/usr/lib/x86_64-linux-gnu/libboost_atomic.so;/usr/lib/x86_64-linux-gnu/libboost_regex.so;optimized;/usr/lib/x86_64-linux-gnu/libpcl_common.so;debug;/usr/lib/x86_64-linux-gnu/libpcl_common.so;optimized;/usr/lib/x86_64-linux-gnu/libpcl_octree.so;debug;/usr/lib/x86_64-linux-gnu/libpcl_octree.so;/usr/lib/libOpenNI.so;/usr/lib/libOpenNI2.so;vtkFiltersReebGraph;vtkFiltersCore;vtkCommonExecutionModel;vtkCommonDataModel;vtkCommonMath;vtkCommonCore;vtksys;vtkCommonMisc;vtkCommonSystem;vtkCommonTransforms;vtkIOParallelNetCDF;vtkParallelMPI;vtkParallelCore;vtkIOLegacy;vtkIOCore;/usr/lib/x86_64-linux-gnu/libz.so;/usr/lib/x86_64-linux-gnu/libnetcdf_c++.so;/usr/lib/x86_64-linux-gnu/libnetcdf.so;/usr/lib/x86_64-linux-gnu/hdf5/serial/lib/libhdf5.so;/usr/lib/x86_64-linux-gnu/libpthread.so;/usr/lib/x86_64-linux-gnu/libsz.so;/usr/lib/x86_64-linux-gnu/libdl.so;/usr/lib/x86_64-linux-gnu/libm.so;/usr/lib/x86_64-linux-gnu/hdf5/serial/lib/libhdf5_hl.so;vtkViewsQt;vtkGUISupportQt;vtkFiltersExtraction;vtkFiltersGeneral;vtkCommonComputationalGeometry;vtkFiltersStatistics;vtkImagingFourier;vtkImagingCore;vtkalglib;vtkInteractionStyle;vtkFiltersSources;vtkRenderingCore;vtkCommonColor;vtkFiltersGeometry;vtkRenderingOpenGL;vtkImagingHybrid;vtkIOImage;vtkDICOMParser;vtkmetaio;/usr/lib/x86_64-linux-gnu/libjpeg.so;/usr/lib/x86_64-linux-gnu/libpng.so;/usr/lib/x86_64-linux-gnu/libtiff.so;vtkViewsInfovis;vtkChartsCore;vtkInfovisCore;vtkRenderingContext2D;vtkRenderingFreeType;/usr/lib/x86_64-linux-gnu/libfreetype.so;vtkftgl;vtkFiltersImaging;vtkImagingGeneral;vtkImagingSources;vtkFiltersModeling;vtkInfovisLayout;vtkRenderingLabel;vtkViewsCore;vtkInteractionWidgets;vtkFiltersHybrid;vtkRenderingAnnotation;vtkImagingColor;vtkRenderingVolume;vtkParallelMPI4Py;/usr/lib/x86_64-linux-gnu/libpython2.7.so;vtkRenderingParallelLIC;vtkRenderingLIC;vtkIOXML;vtkIOGeometry;/usr/lib/x86_64-linux-gnu/libjsoncpp.so;vtkIOXMLParser;/usr/lib/x86_64-linux-gnu/libexpat.so;vtkIOLSDyna;vtkRenderingFreeTypeFontConfig;vtkIOParallel;vtkFiltersParallel;vtkIONetCDF;vtkexoIIc;vtkGUISupportQtSQL;vtkIOSQL;sqlite3;vtkFiltersParallelGeometry;vtkIOODBC;vtkIOMPIParallel;vtkRenderingGL2PS;vtkRenderingContextOpenGL;/usr/lib/libgl2ps.so;vtkIOMINC;vtkWrappingJava;vtkWrappingTools;vtkIOParallelExodus;vtkIOExodus;vtkIOImport;vtkIOParallelLSDyna;vtkIOMovie;/usr/lib/x86_64-linux-gnu/libtheoraenc.so;/usr/lib/x86_64-linux-gnu/libtheoradec.so;/usr/lib/x86_64-linux-gnu/libogg.so;vtkRenderingMatplotlib;vtkPythonInterpreter;vtkWrappingPythonCore;vtkIOVPIC;VPIC;vtkTestingGenericBridge;vtkFiltersProgrammable;vtkDomainsChemistry;vtkIOAMR;vtkFiltersAMR;/usr/lib/x86_64-linux-gnu/libxml2.so;vtkFiltersGeneric;vtkImagingMorphological;vtkIOMPIImage;vtkRenderingImage;vtkIOGeoJSON;vtkFiltersParallelMPI;vtkFiltersHyperTree;vtkTestingRendering;vtkIOExport;vtkImagingStatistics;vtkTestingIOSQL;vtkIOMySQL;vtkFiltersVerdict;verdict;vtkFiltersPython;vtkIOVideo;vtkRenderingParallel;vtkGUISupportQtOpenGL;vtkFiltersParallelFlowPaths;vtkFiltersFlowPaths;vtkViewsContext2D;vtkInfovisBoostGraphAlgorithms;vtkFiltersParallelImaging;vtkIOEnSight;vtkGeovisCore;/usr/lib/x86_64-linux-gnu/libproj.so;vtkImagingStencil;vtkIOInfovis;vtkxdmf2;vtkRenderingVolumeOpenGL;vtkIOPLY;vtkViewsGeovis;vtkFiltersParallelStatistics;vtkInteractionImage;vtkIOFFMPEG;vtkIOXdmf2;vtkIOParallelXML;vtkGUISupportQtWebkit;vtkRenderingQt;vtkFiltersTexture;vtkRenderingFreeTypeOpenGL;vtkFiltersSelection;vtkLocalExample;vtkRenderingExternal;vtkIOGDAL;vtkImagingMath;vtkRenderingLOD;vtkFiltersSMP;vtkIOPostgreSQL;optimized;/usr/lib/x86_64-linux-gnu/libpcl_io.so;debug;/usr/lib/x86_64-linux-gnu/libpcl_io.so;/usr/lib/x86_64-linux-gnu/libboost_system.so;/usr/lib/x86_64-linux-gnu/libboost_filesystem.so;/usr/lib/x86_64-linux-gnu/libboost_thread.so;-lpthread;/usr/lib/x86_64-linux-gnu/libboost_date_time.so;/usr/lib/x86_64-linux-gnu/libboost_iostreams.so;/usr/lib/x86_64-linux-gnu/libboost_serialization.so;/usr/lib/x86_64-linux-gnu/libboost_chrono.so;/usr/lib/x86_64-linux-gnu/libboost_atomic.so;/usr/lib/x86_64-linux-gnu/libboost_regex.so;/usr/lib/libOpenNI.so;/usr/lib/libOpenNI2.so;vtkFiltersReebGraph;vtkFiltersCore;vtkCommonExecutionModel;vtkCommonDataModel;vtkCommonMath;vtkCommonCore;vtksys;vtkCommonMisc;vtkCommonSystem;vtkCommonTransforms;vtkIOParallelNetCDF;vtkParallelMPI;vtkParallelCore;vtkIOLegacy;vtkIOCore;/usr/lib/x86_64-linux-gnu/libz.so;/usr/lib/x86_64-linux-gnu/libnetcdf_c++.so;/usr/lib/x86_64-linux-gnu/libnetcdf.so;/usr/lib/x86_64-linux-gnu/hdf5/serial/lib/libhdf5.so;/usr/lib/x86_64-linux-gnu/libpthread.so;/usr/lib/x86_64-linux-gnu/libsz.so;/usr/lib/x86_64-linux-gnu/libdl.so;/usr/lib/x86_64-linux-gnu/libm.so;/usr/lib/x86_64-linux-gnu/hdf5/serial/lib/libhdf5_hl.so;vtkViewsQt;vtkGUISupportQt;vtkFiltersExtraction;vtkFiltersGeneral;vtkCommonComputationalGeometry;vtkFiltersStatistics;vtkImagingFourier;vtkImagingCore;vtkalglib;vtkInteractionStyle;vtkFiltersSources;vtkRenderingCore;vtkCommonColor;vtkFiltersGeometry;vtkRenderingOpenGL;vtkImagingHybrid;vtkIOImage;vtkDICOMParser;vtkmetaio;/usr/lib/x86_64-linux-gnu/libjpeg.so;/usr/lib/x86_64-linux-gnu/libpng.so;/usr/lib/x86_64-linux-gnu/libtiff.so;vtkViewsInfovis;vtkChartsCore;vtkInfovisCore;vtkRenderingContext2D;vtkRenderingFreeType;/usr/lib/x86_64-linux-gnu/libfreetype.so;vtkftgl;vtkFiltersImaging;vtkImagingGeneral;vtkImagingSources;vtkFiltersModeling;vtkInfovisLayout;vtkRenderingLabel;vtkViewsCore;vtkInteractionWidgets;vtkFiltersHybrid;vtkRenderingAnnotation;vtkImagingColor;vtkRenderingVolume;vtkParallelMPI4Py;/usr/lib/x86_64-linux-gnu/libpython2.7.so;vtkRenderingParallelLIC;vtkRenderingLIC;vtkIOXML;vtkIOGeometry;/usr/lib/x86_64-linux-gnu/libjsoncpp.so;vtkIOXMLParser;/usr/lib/x86_64-linux-gnu/libexpat.so;vtkIOLSDyna;vtkRenderingFreeTypeFontConfig;vtkIOParallel;vtkFiltersParallel;vtkIONetCDF;vtkexoIIc;vtkGUISupportQtSQL;vtkIOSQL;sqlite3;vtkFiltersParallelGeometry;vtkIOODBC;vtkIOMPIParallel;vtkRenderingGL2PS;vtkRenderingContextOpenGL;/usr/lib/libgl2ps.so;vtkIOMINC;vtkWrappingJava;vtkWrappingTools;vtkIOParallelExodus;vtkIOExodus;vtkIOImport;vtkIOParallelLSDyna;vtkIOMovie;/usr/lib/x86_64-linux-gnu/libtheoraenc.so;/usr/lib/x86_64-linux-gnu/libtheoradec.so;/usr/lib/x86_64-linux-gnu/libogg.so;vtkRenderingMatplotlib;vtkPythonInterpreter;vtkWrappingPythonCore;vtkIOVPIC;VPIC;vtkTestingGenericBridge;vtkFiltersProgrammable;vtkDomainsChemistry;vtkIOAMR;vtkFiltersAMR;/usr/lib/x86_64-linux-gnu/libxml2.so;vtkFiltersGeneric;vtkImagingMorphological;vtkIOMPIImage;vtkRenderingImage;vtkIOGeoJSON;vtkFiltersParallelMPI;vtkFiltersHyperTree;vtkTestingRendering;vtkIOExport;vtkImagingStatistics;vtkTestingIOSQL;vtkIOMySQL;vtkFiltersVerdict;verdict;vtkFiltersPython;vtkIOVideo;vtkRenderingParallel;vtkGUISupportQtOpenGL;vtkFiltersParallelFlowPaths;vtkFiltersFlowPaths;vtkViewsContext2D;vtkInfovisBoostGraphAlgorithms;vtkFiltersParallelImaging;vtkIOEnSight;vtkGeovisCore;/usr/lib/x86_64-linux-gnu/libproj.so;vtkImagingStencil;vtkIOInfovis;vtkxdmf2;vtkRenderingVolumeOpenGL;vtkIOPLY;vtkViewsGeovis;vtkFiltersParallelStatistics;vtkInteractionImage;vtkIOFFMPEG;vtkIOXdmf2;vtkIOParallelXML;vtkGUISupportQtWebkit;vtkRenderingQt;vtkFiltersTexture;vtkRenderingFreeTypeOpenGL;vtkFiltersSelection;vtkLocalExample;vtkRenderingExternal;vtkIOGDAL;vtkImagingMath;vtkRenderingLOD;vtkFiltersSMP;vtkIOPostgreSQL  
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/q/7_rgbd_slam/five_4txt_rgbd_map/cmake-build-debug
+-- Build files have been written to: /media/q/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/cmake-build-debug

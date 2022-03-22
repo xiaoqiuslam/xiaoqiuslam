@@ -1,11 +1,11 @@
 Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
-Change Dir: /home/q/7_rgbd_slam/five_4txt_rgbd_map/cmake-build-debug/CMakeFiles/CMakeTmp
+Change Dir: /media/q/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/snap/clion/184/bin/ninja/linux/ninja cmTC_238db && [1/2] Building C object CMakeFiles/cmTC_238db.dir/src.c.o
-[2/2] Linking C executable cmTC_238db
-FAILED: cmTC_238db 
-: && /usr/bin/cc  -rdynamic CMakeFiles/cmTC_238db.dir/src.c.o -o cmTC_238db   && :
-CMakeFiles/cmTC_238db.dir/src.c.o: In function `main':
+Run Build Command(s):/snap/clion/184/bin/ninja/linux/ninja cmTC_176dc && [1/2] Building C object CMakeFiles/cmTC_176dc.dir/src.c.o
+[2/2] Linking C executable cmTC_176dc
+FAILED: cmTC_176dc 
+: && /usr/bin/cc  -rdynamic CMakeFiles/cmTC_176dc.dir/src.c.o -o cmTC_176dc   && :
+CMakeFiles/cmTC_176dc.dir/src.c.o: In function `main':
 src.c:(.text+0x3c): undefined reference to `pthread_create'
 src.c:(.text+0x48): undefined reference to `pthread_detach'
 src.c:(.text+0x54): undefined reference to `pthread_cancel'
@@ -37,12 +37,12 @@ int main(void)
 }
 
 Determining if the function pthread_create exists in the pthreads failed with the following output:
-Change Dir: /home/q/7_rgbd_slam/five_4txt_rgbd_map/cmake-build-debug/CMakeFiles/CMakeTmp
+Change Dir: /media/q/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/snap/clion/184/bin/ninja/linux/ninja cmTC_96f2b && [1/2] Building C object CMakeFiles/cmTC_96f2b.dir/CheckFunctionExists.c.o
-[2/2] Linking C executable cmTC_96f2b
-FAILED: cmTC_96f2b 
-: && /usr/bin/cc -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_96f2b.dir/CheckFunctionExists.c.o -o cmTC_96f2b  -lpthreads && :
+Run Build Command(s):/snap/clion/184/bin/ninja/linux/ninja cmTC_58432 && [1/2] Building C object CMakeFiles/cmTC_58432.dir/CheckFunctionExists.c.o
+[2/2] Linking C executable cmTC_58432
+FAILED: cmTC_58432 
+: && /usr/bin/cc -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_58432.dir/CheckFunctionExists.c.o -o cmTC_58432  -lpthreads && :
 /usr/bin/ld: cannot find -lpthreads
 collect2: error: ld returned 1 exit status
 ninja: build stopped: subcommand failed.

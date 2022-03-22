@@ -20,6 +20,9 @@ void show_rgb_rgbd(vector<cv::Mat> &rgbs);
 // 3. 提取特征点
 void extractor_rgb(vector<cv::Mat> &rgbs, std::vector<vector<cv::KeyPoint>> &kps, vector<cv::Mat> &desps);
 
+// 4. 筛选匹配特征点
+void descriptor_filter(vector<cv::Mat> &rgbs, std::vector<vector<cv::KeyPoint>> &kps,std::vector<cv::Mat> &desps, std::vector<vector<cv::DMatch>> &vmatches);
+
 // 计算rt
 
 // 生成点云
@@ -32,52 +35,26 @@ pcl::PointCloud<pcl::PointXYZRGBA>::Ptr image2PointCloud(cv::Mat &rgb, cv::Mat &
 
 int main(int argc, char **argv){
     vector<cv::Mat> rgbs, depths;
+    // 1. 读取图片
     read_rgb_rgbd(rgbs, depths);
 
+    // 2. 显示图片
     // show_rgb_rgbd(rgbs);
 
+
+    // 3. 提取特征点
     std::vector<vector<cv::KeyPoint>> kps;
     std::vector<cv::Mat> desps;
     extractor_rgb(rgbs, kps, desps);
 
-//
-//    std::vector<cv::DMatch> matches;
-//    cv::BFMatcher matcher;
-//    matcher.match(desp1, desp2, matches);
-//    cout << "Find total " << matches.size() << " matches." << endl;
-//
-//    cv::Mat imgMatches;
-//    cv::drawMatches(rgbImgs[0], kp1, rgbImgs[1], kp2, matches, imgMatches);
-//    cv::imshow("matches", imgMatches);
-//    cv::waitKey(0);
-//
-//    std::vector<cv::DMatch> goodMatches;
-//    double minDis = 9999;
-//    for (size_t i = 0; i < matches.size(); i++){
-//        if (matches[i].distance < minDis)
-//            minDis = matches[i].distance;
-//    }
-//    cout << "min dis = " << minDis << endl;
-//
-//    for (size_t i = 0; i < matches.size(); i++){
-//        if (matches[i].distance < 10 * minDis)
-//            goodMatches.push_back(matches[i]);
-//    }
-//    cout << "good matches=" << goodMatches.size() << endl;
-//
-//    cv::drawMatches(rgbImgs[0], kp1, rgbImgs[1], kp2, goodMatches, imgMatches);
-//    cv::imshow("good matches", imgMatches);
-//    cv::waitKey(0);
+    // 4. 特征点筛选
+    std::vector<vector<cv::DMatch>> vmatches;
+    descriptor_filter(rgbs, kps, desps, vmatches);
+
 
 
     return 0;
 }
-
-//     cv::Mat rgb1 = cv::imread("../rgb1.png");
-//     cv::Mat rgb2 = cv::imread("../rgb2.png");
-//     cv::Mat depth1 = cv::imread("../depth1.png", -1);
-//     cv::Mat depth2 = cv::imread("../depth2.png", -1);
-
 
 
 //     // 第一个张图像的三维点
@@ -217,21 +194,59 @@ void extractor_rgb(vector<cv::Mat> &rgbs, std::vector<vector<cv::KeyPoint>> &kps
     cv::Mat imgShow;
     std::vector<cv::KeyPoint> kp;
     cv::Mat desp;
-    cv::namedWindow("keypoints", CV_WINDOW_NORMAL);
+//    cv::namedWindow("keypoints", CV_WINDOW_NORMAL);
     for (int i = 0; i < rgbs.size(); i++){
         detector->detect(rgbs[i], kp);
         descriptor->compute(rgbs[i], kp, desp);
         kps.push_back(kp);
         desps.push_back(desp);
         cv::drawKeypoints(rgbs[i], kp, imgShow, cv::Scalar::all(-1), cv::DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS);
-        cv::imshow("keypoints", imgShow);
-        cv::waitKey(0);
+//        cv::imshow("keypoints", imgShow);
+//        cv::waitKey(0);
     }
     cout << "kps " << kps.size() << endl;
     cout << "desps " << desps.size() << endl;
 }
 
+// 4. 筛选匹配特征点
+void descriptor_filter(vector<cv::Mat> &rgbs, std::vector<vector<cv::KeyPoint>> &kps, std::vector<cv::Mat> &desps, std::vector<vector<cv::DMatch>> &vmatches){
+    std::vector<cv::DMatch> matches;
+    cv::BFMatcher matcher;
+    for (int i = 0; i < desps.size()-1; i++){
+        matcher.match(desps[i], desps[i+1], matches);
+        cout << "i i+1 " << matches.size() << " matches." << endl;
+        vmatches.push_back(matches);
+    }
 
+    double minDis = 9999;
+    cout << vmatches.size() << endl;
+    for (size_t j = 0; j < vmatches.size(); j++){
+        cout << vmatches[j].size() << endl;
+        for (size_t k = 0; k < vmatches[j].size(); k++){
+            cout << vmatches[j][k].distance << endl;
+            if (vmatches[j][k].distance < minDis){
+                minDis = vmatches[j][k].distance;
+                cout << "min dis = " << minDis << endl;
+            }
+        }
+    }
+
+    std::vector<cv::DMatch> goodMatches;
+    for (size_t j = 0; j < vmatches.size(); j++){
+        for (size_t k = 0; k < vmatches[j].size(); k++){
+            if (vmatches[j][k].distance < 10 * minDis){
+                goodMatches.push_back(vmatches[j][k]);
+            }
+        }
+    }
+    cout << "good matches=" << goodMatches.size() << endl;
+    for (int i = 0; i < desps.size()-1; i++){
+        cv::Mat imgMatches;
+        cv::drawMatches(rgbs[i], kps[i], rgbs[i+1], kps[i+1], goodMatches, imgMatches);
+        cv::imshow("good matches", imgMatches);
+        cv::waitKey(0);
+    }
+}
 
 pcl::PointCloud<pcl::PointXYZRGBA>::Ptr image2PointCloud(cv::Mat &rgb, cv::Mat &depth){
     // 相机内参
