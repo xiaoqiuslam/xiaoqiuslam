@@ -1,22 +1,22 @@
 ## 小秋SLAM实战教程
 
 ### CSDN
-![](./iamge/csdn.jpg)
+![](./data/iamge/csdn.jpg)
 
 ### 哔哩哔哩
-![](./iamge/bilibili.jpg)
+![](./data/iamge/bilibili.jpg)
 
 ### 微信号码
-![](./iamge/weixin.jpg)
+![](./data/iamge/weixin.jpg)
 
 ### 订阅号
-![](./iamge/xiaoqiuslambiji.jpg)
+![](./data/iamge/xiaoqiuslambiji.jpg)
 
 ### 订阅号
-![](./iamge/xiaoqiuslamshizhanjiaocheng.jpg)
+![](./data/iamge/xiaoqiuslamshizhanjiaocheng.jpg)
 
 ### QQ
-![](./iamge/qq.jpg)
+![](./data/iamge/qq.jpg)
 
 ### QQ群
-![](./iamge/qqqun.jpg)
+![](./data/iamge/qqqun.jpg)
