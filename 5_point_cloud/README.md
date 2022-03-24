@@ -1,46 +1,3 @@
-<!--
- * @Description: 
- * @Author: HCQ
- * @Company(School): UCAS
- * @Date: 2020-10-04 18:17:00
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-01-31 22:13:50
--->
-
-# pcl
-
-PCL（Point Cloud Library）点云库  **个人开发环境：Ubuntu18.04**
-
-**墙裂建议先看下：[PCL(Point Cloud Library)学习指南&资料推荐](https://zhuanlan.zhihu.com/p/268524083)**
-
-**<font color='red'>PCL学习入门指南&代码实践(最新版)入门视频： </font> https://www.bilibili.com/video/BV1HS4y1y7AB**
-
-**代码对应系列笔记：[PCL(Point Cloud Library)学习记录（2021）](https://www.yuque.com/huangzhongqing/pcl)**
-
-**相关项目实战:**
-
-* 3D-MOT(多目标检测和追踪):
-  [https://github.com/HuangCongQing/3D-LIDAR-Multi-Object-Tracking/tree/kitti](https://github.com/HuangCongQing/3D-LIDAR-Multi-Object-Tracking/tree/kitti)
-    * 需要学习ROS：https://github.com/HuangCongQing/ROS
-
-@[双愚](https://github.com/HuangCongQing/pcl-learning) , 若fork或star请注明来源
-
-> * 点云数据的处理可以采用获得广泛应用的Point Cloud Library (点云库，PCL库)。
-> * PCL库是一个最初发布于2013年的开源C++库。它实现了大量点云相关的通用算法和高效的数据管理。
-> * 支持多种操作系统平台，可在Windows、Linux、Android、Mac OS X、部分嵌入式实时系统上运行。如果说OpenCV是2D信息获取与处理的技术结晶，那么PCL在3D信息获取与处理上，就与OpenCV具有同等地位
-> * PCL是BSD授权方式，可以免费进行商业和学术应用。
-
-* 英文官网：https://pcl.readthedocs.io/projects/tutorials/en/latest/#
-  * https://pointclouds.org/
-* GitHub：https://github.com/PointCloudLibrary/pcl
-  * 学习基于pcl1.9.1：https://github.com/PointCloudLibrary/pcl/tree/pcl-1.9.1
-
-**Tips:**
-
-* ubuntu下使用PCL，需要写**CMakeLists.txt**文件，然后编译才可以生成可执行文件.
-* 可执行文件在build文件夹下，所以运行可执行文件时，后面添加参数的pcd文件，应放在build文件夹下才能获取到。**（注意文件路径）**
-* `make -j `   (-j 自动多线程， -j4 四线程)
-
 ## 目录contents
 
 a graph of code libraries
@@ -76,6 +33,41 @@ a graph of code libraries
 * [16 keypoints关键点](16keypoints关键点)
 * [17tracking](17tracking )
 
+
+PCL完全是一个的模块化的现代C++模板库。其基于以下第三方库：**Boost、Eigen、FLANN、VTK、CUDA、OpenNI、Qhull**，
+实现点云相关的**获取、滤波、分割、配准、检索、特征提取、识别、追踪、曲面重建、可视化等。**
+
+- [01common](https://github.com/HuangCongQing/pcl-learning/blob/master/01common)
+- [02kdtree k维tree](https://github.com/HuangCongQing/pcl-learning/blob/master/02kdtree)
+- [03octree 八叉树](https://github.com/HuangCongQing/pcl-learning/blob/master/03octree)
+- [04search](https://github.com/HuangCongQing/pcl-learning/blob/master/04search)
+- [05sample consensus 抽样一致性模块](https://github.com/HuangCongQing/pcl-learning/blob/master/05sampleconsensus%E6%8A%BD%E6%A0%B7%E4%B8%80%E8%87%B4%E6%80%A7%E6%A8%A1%E5%9D%97)
+- [06range-images深度图像](https://github.com/HuangCongQing/pcl-learning/blob/master/06range-images%E6%B7%B1%E5%BA%A6%E5%9B%BE%E5%83%8F)
+- [07tracking](https://github.com/HuangCongQing/pcl-learning/blob/master/17tracking) （此模块，没有官方示例代码）
+- [08 io 输入输出](https://github.com/HuangCongQing/pcl-learning/blob/master/08IO%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA)
+- [09 filters 滤波](https://github.com/HuangCongQing/pcl-learning/blob/master/09filters%E6%BB%A4%E6%B3%A2)
+- [10 features 特征](https://github.com/HuangCongQing/pcl-learning/blob/master/10features%E7%89%B9%E5%BE%81)
+- [11 surface表面](https://github.com/HuangCongQing/pcl-learning/blob/master/11surface%E8%A1%A8%E9%9D%A2)
+- [12 segmentation分割](https://github.com/HuangCongQing/pcl-learning/blob/master/12segmentation%E5%88%86%E5%89%B2)
+- [13 recognition识别](https://github.com/HuangCongQing/pcl-learning/blob/master/13recognition%E8%AF%86%E5%88%AB)（下图中没有）
+- [14 registration配准](https://github.com/HuangCongQing/pcl-learning/blob/master/14registration%E9%85%8D%E5%87%86)
+- [15 visualization可视化](https://github.com/HuangCongQing/pcl-learning/blob/master/15visualization%E5%8F%AF%E8%A7%86%E5%8C%96)
+- [16 keypoints关键点](https://github.com/HuangCongQing/pcl-learning/blob/master/16keypoints%E5%85%B3%E9%94%AE%E7%82%B9)
+
+
+- [01-点云中的数学](http://robot.czxy.com/docs/pcl/chapter03/point_cloud_math/)
+- [02-点云配准原理概述](http://robot.czxy.com/docs/pcl/chapter03/registration_intro/)
+- [03-点云配准流程示例 *](http://robot.czxy.com/docs/pcl/chapter03/registration/)
+- [使用迭代最近点算法(ICP)](http://robot.czxy.com/docs/pcl/chapter03/registration/#icp)
+- [正态分布变换配准(NDT)](http://robot.czxy.com/docs/pcl/chapter03/registration/#ndt)
+- [刚性物体的鲁棒姿态估计](http://robot.czxy.com/docs/pcl/chapter03/registration/#_9)
+- [04-配准之交互式ICP](http://robot.czxy.com/docs/pcl/chapter03/registration_interactive_icp/)
+- [05-点云配准数学原理](http://robot.czxy.com/docs/pcl/chapter03/registration_theory/)
+- [PCL 可视化](https://www.cnblogs.com/li-yao7758258/p/6442156.html)
+- [PCLVisualizer可视化类](https://www.cnblogs.com/li-yao7758258/p/6445127.html)
+- [可视化深度图像](https://www.cnblogs.com/li-yao7758258/p/6444207.html)
+
+
 ## 编译过程
 
 ```shell
@@ -85,44 +77,3 @@ cmake .. // 对上一级进行编译
 make  // 生成可执行文件命令
 ./executedemo  // 运行可执行文件
 ```
-
-## 实战项目
-
-不理解的地方,欢迎提issue: https://github.com/HuangCongQing/pcl-learning/issues
-
-* 3D-MOT(多目标检测和追踪)
-  * https://github.com/HuangCongQing/3D-LIDAR-Multi-Object-Tracking/tree/kitti
-* 3D点云目标检测&语义分割-SOTA方法,代码,论文,数据集等
-  * https://github.com/HuangCongQing/3D-Point-Clouds
-
-## 相关链接
-
-* 公众号：点云PCL
-* https://github.com/Yochengliu/awesome-point-cloud-analysis
-* https://github.com/QingyongHu/SoTA-Point-Cloud
-* https://github.com/PointCloudLibrary/pcl
-* 参考书籍：点云库PCL学习教程，朱德海，北京航空航天大学出版社
-* Plus：ROS学习-https://github.com/HuangCongQing/ROS
-
-**入门资料：**
-
-- **视频**：[bilibili-PCL点云库官网教程](https://space.bilibili.com/504859351/channel/detail?cid=130387)
-- **点云库PCL学习教程书籍每章总结：**[https://github.com/MNewBie/PCL-Notes](https://github.com/MNewBie/PCL-Notes)
-- 百度网盘资料：
-
-链接：[https://pan.baidu.com/s/1ziq8s_kj5QpM8eXO_d6RJg](https://pan.baidu.com/s/1ziq8s_kj5QpM8eXO_d6RJg)<br />提取码：g6ny<br />
-
-**代码实践资料：**
-
-- 官方各模块示例(和对应的对象函数对照着看)【英文】：[https://pcl.readthedocs.io/projects/tutorials/en/latest/#](https://pcl.readthedocs.io/projects/tutorials/en/latest/#)
-- 官方各模块对应的对象和函数【英文】：
-  - [https://pointclouds.org/documentation/modules.html](https://pointclouds.org/documentation/modules.html)
-  - [https://pointclouds.org/](https://pointclouds.org/) 点击网站中的12宫图，没一格对应一个模块的对象函数详解
-- [黑马机器人系列文档：PCL-3D点云](http://robot.czxy.com/docs/pcl/)：[http://robot.czxy.com/docs/pcl/](http://robot.czxy.com/docs/pcl/)
-- [CSDN博主系列文章PCL学习(64篇)](https://www.cnblogs.com/li-yao7758258/category/954066.html)：[https://www.cnblogs.com/li-yao7758258/category/954066.html](https://www.cnblogs.com/li-yao7758258/category/954066.html)
-
-### License
-
-Copyright (c) [双愚](https://github.com/HuangCongQing/pcl-learning). All rights reserved.
-
-Licensed under the [MIT](./LICENSE) License.

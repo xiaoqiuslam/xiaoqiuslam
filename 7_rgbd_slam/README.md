@@ -12,3 +12,10 @@ two_rgbd_Rt_map
 
 # 四张深度图像和四张彩色图像生成点云图像**Rt**来自文件
 five_4txt_rgbd_map
+
+【一起做RGB-D SLAM (6)】报错
+https://blog.csdn.net/qq_21950671/article/details/122194532
+
+「视觉SLAM」用一张彩色图像和深度图像生成点云图像（ros）
+https://blog.csdn.net/qq_21950671/article/details/121678165
+
