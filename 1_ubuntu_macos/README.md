@@ -39,16 +39,23 @@
 [「linux」搭建远程可视化桌面Mac、Ubuntu16.04、vnc4server、VNC Viewer、x11vnc](https://chunqiushenye.blog.csdn.net/article/details/122022262)
 
 
-![CSDN](./iamge/csdn.jpg)
+### CSDN
+![](./iamge/csdn.jpg)
 
-![哔哩哔哩](./iamge/bilibili.jpg)
+### 哔哩哔哩
+![](./iamge/bilibili.jpg)
 
-![微信号码](./iamge/weixin.jpg)
+### 微信号码
+![](./iamge/weixin.jpg)
 
-![订阅号](./iamge/xiaoqiuslambiji.jpg)
+### 订阅号
+![](./iamge/xiaoqiuslambiji.jpg)
 
-![订阅号](./iamge/xiaoqiuslamshizhanjiaocheng.jpg)
+### 订阅号
+![](./iamge/xiaoqiuslamshizhanjiaocheng.jpg)
 
-![QQ](./iamge/qq.jpg)
+### QQ
+![](./iamge/qq.jpg)
 
-![QQ群](./iamge/qqqun.jpg)
+### QQ群
+![](./iamge/qqqun.jpg)
