@@ -39,6 +39,8 @@
 [「linux」搭建远程可视化桌面Mac、Ubuntu16.04、vnc4server、VNC Viewer、x11vnc](https://chunqiushenye.blog.csdn.net/article/details/122022262)
 
 
+## 小秋SLAM实战教程
+
 ### CSDN
 ![](./iamge/csdn.jpg)
 
