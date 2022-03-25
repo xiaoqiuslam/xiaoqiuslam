@@ -1,3 +1,0 @@
-/home/q/Downloads/mcptam_calibrations2multicol_calibrations/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/q/Downloads/mcptam_calibrations2multicol_calibrations/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/q/Downloads/mcptam_calibrations2multicol_calibrations/cmake-build-debug/CMakeFiles/mcptam_cali2multicol_cali.dir
