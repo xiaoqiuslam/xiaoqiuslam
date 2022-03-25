@@ -1,7 +1,6 @@
 ## 小秋SLAM实战教程
 
-[「linux」制作系统盘、安装双系统、惠普单系统安装禁用nouveau显卡安装nvidia显卡驱动]
-(https://blog.csdn.net/qq_21950671/article/details/90698632)
+[「linux」制作系统盘、安装双系统、惠普单系统安装禁用nouveau显卡安装nvidia显卡驱动](https://blog.csdn.net/qq_21950671/article/details/90698632)
 
 
 [「linux」VIM普通模式、插入模式、可视模式详细图文教程]
@@ -13,7 +12,7 @@
 
 
 [「linux」VScode和Clion高频快捷键、高效插件、clang-format格式化代码实战教程]
-https://blog.csdn.net/qq_21950671/article/details/112624415)
+(https://blog.csdn.net/qq_21950671/article/details/112624415)
 
 
 [「Ubuntu Mac」Visual Studio Code 代码跳转、回退、折叠、展开、字体大小、注释、调试C++、ROS代码]
@@ -21,7 +20,7 @@ https://blog.csdn.net/qq_21950671/article/details/112624415)
 
 
 [「linux」foxit pdf阅读器、typora编辑、flameshot截图、动图peek、Simple Screen Recorder录屏、网速显示安装教程]
-https://blog.csdn.net/qq_21950671/article/details/90770604)
+(https://blog.csdn.net/qq_21950671/article/details/90770604)
 
 
 [「linux」设置笔记本合盖不进入休眠、外接显示器不黑屏、不锁屏、不关闭屏幕]
