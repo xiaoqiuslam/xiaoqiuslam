@@ -1,0 +1,87 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-DEBUG-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.8"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"name" : "DEBUG",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "joinMap",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "five_rgbd_map::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-five_rgbd_map-DEBUG-2e7ffb6199ac1276bad9.json",
+					"name" : "five_rgbd_map",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "joinMap::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-joinMap-DEBUG-c6188a518bc96ac1fad2.json",
+					"name" : "joinMap",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "joinMap_pnp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-joinMap_pnp-DEBUG-ef8c3242c1b7da33b4ca.json",
+					"name" : "joinMap_pnp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "plot_trajectory::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-plot_trajectory-DEBUG-cc3c136aa8f4e4acb450.json",
+					"name" : "plot_trajectory",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/media/q/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map/cmake-build-debug",
+		"source" : "/media/q/q/xiaoqiuslamshizhanjiaocheng/7_rgbd_slam/five_4txt_rgbd_map"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}
