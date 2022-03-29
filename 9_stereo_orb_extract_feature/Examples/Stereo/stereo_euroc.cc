@@ -107,6 +107,7 @@ void LoadImages(const string &strPathLeft,
         getline(fTimes,s);
         if(!s.empty())
         {
+            // https://blog.csdn.net/sunshineacm/article/details/78068987
             stringstream ss;
             ss << s;
             vstrImageLeft.push_back(strPathLeft + "/" + ss.str() + ".png");
