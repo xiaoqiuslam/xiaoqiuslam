@@ -89,6 +89,7 @@ int main(int argc, char **argv){
     return 0;
 }
 
+// C++函数的参数加了const和&有什么作用？ https://blog.csdn.net/qq_21950671/article/details/103528012#t42
 void LoadImages(const string &strPathLeft,
                 const string &strPathRight,
                 const string &strPathTimes,
