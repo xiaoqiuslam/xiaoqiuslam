@@ -13,15 +13,17 @@ int main(int argc, char **argv){
     vector<string> vstrImageLeft;
     vector<string> vstrImageRight;
     vector<double> vTimeStamp;
-    LoadImages("/Users/q/Desktop/xiaoqiuslamshizhanjiaocheng/8_extract_feature/stereo_orb_extractor/Examples/Stereo/MH_01_easy/mav0/cam0/data",
-               "/Users/q/Desktop/xiaoqiuslamshizhanjiaocheng/8_extract_feature/stereo_orb_extractor/Examples/Stereo/MH_01_easy/mav0/cam1/data",
-               "/Users/q/Desktop/xiaoqiuslamshizhanjiaocheng/8_extract_feature/stereo_orb_extractor/Examples/Stereo/MH01.txt",
+    LoadImages("../MH_01_easy/mav0/cam0/data",
+               "../MH_01_easy/mav0/cam1/data",
+               "./MH01.txt",
                vstrImageLeft, vstrImageRight, vTimeStamp);
+    const int nImages = vstrImageLeft.size();
+    cout << "Images in the sequence: " << nImages << endl;
 
     // 2. 加载相机参数文件对图像进行去畸变
     // Read rectification parameters
     // https://chunqiushenye.blog.csdn.net/article/details/108703089
-    cv::FileStorage fsSettings("/Users/q/Desktop/xiaoqiuslamshizhanjiaocheng/8_extract_feature/stereo_orb_extractor/Examples/Stereo/EuRoC.yaml", cv::FileStorage::READ);
+    cv::FileStorage fsSettings("./EuRoC.yaml", cv::FileStorage::READ);
 
     cv::Mat K_l, K_r, P_l, P_r, R_l, R_r, D_l, D_r;
     fsSettings["LEFT.K"] >> K_l;
@@ -41,6 +43,15 @@ int main(int argc, char **argv){
     int rows_r = fsSettings["RIGHT.height"];
     int cols_r = fsSettings["RIGHT.width"];
 
+    cout << "Camera Parameters: " << endl;
+    cout << "K_l\n" << K_l << endl;
+    cout << "K_r\n" << K_r << endl;
+    cout << "P_l\n" << P_l << endl;
+    cout << "P_r\n" << P_r << endl;
+    cout << "R_l\n" << R_l << endl;
+    cout << "R_r\n" << R_r << endl;
+    cout << "D_l\n" << D_l << endl;
+    cout << "D_r\n" << D_r << endl;
 
     // 图片畸变矫正的映射矩阵mapx、mapy
     //第一个参数cameraMatrix为相机内参矩阵
@@ -57,20 +68,14 @@ int main(int argc, char **argv){
 
     // 3. 创建 ORB_SLAM2::System 对象
     // Create SLAM system. It initializes all system threads and gets ready to process frames.
-    ORB_SLAM2::System SLAM("/Users/q/Desktop/xiaoqiuslamshizhanjiaocheng/8_extract_feature/stereo_orb_extractor/Examples/Stereo/EuRoC.yaml");
+    ORB_SLAM2::System SLAM("./EuRoC.yaml");
 
     // Main loop
     cv::Mat imLeft, imRight, imLeftRect, imRightRect;
-    const int nImages = vstrImageLeft.size();
-    cout << "Images in the sequence: " << nImages << endl << endl;
-    for(int ni=0; ni<nImages; ni++)
-    {
+    for(int ni=0; ni<nImages; ni++){
         // Read left and right images from file
         imLeft = cv::imread(vstrImageLeft[ni],CV_LOAD_IMAGE_UNCHANGED);
         imRight = cv::imread(vstrImageRight[ni],CV_LOAD_IMAGE_UNCHANGED);
-
-        cv::imwrite("../imLeft.png", imLeft);
-        cv::imwrite("../imRight.png", imRight);
 
         // 重映射原理：通过移动像素修改图像的外观，这个过程不会修改像素值,而是把每个像素的位置重新映射到新的位置。
         // 第一个参数src畸变图像
@@ -81,9 +86,7 @@ int main(int argc, char **argv){
         cv::remap(imLeft, imLeftRect, M1l, M2l, cv::INTER_LINEAR);
         cv::remap(imRight, imRightRect, M1r, M2r, cv::INTER_LINEAR);
 
-        cv::imwrite("../imLeftRect.png", imLeftRect);
-        cv::imwrite("../imRightRect.png", imRightRect);
-
+        // 6. 执行 ORB_SLAM2::System 函数 TrackStereo
         SLAM.TrackStereo(imLeftRect, imRightRect);
     }
     return 0;
