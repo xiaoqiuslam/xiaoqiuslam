@@ -431,7 +431,6 @@ namespace ORB_SLAM2 {
          * 第7层 87
          * 第8层 0
          */
-
         // 参考大佬讲解 https://zhuanlan.zhihu.com/p/61738607 4. 计算Rotation-Aware BRIEF rBRIEF
         const int npoints = 512;
         // "static int bit_pattern_31_[256 * 4] = {" 是一个1024维的数组,数组数据类型是int,是特征点keypoint为中心周围256对点的坐标
@@ -872,15 +871,21 @@ namespace ORB_SLAM2 {
  * allKeypoints：对应mvImagePyramid中每一层图像的特征点，个人觉得是图像坐标对应的，就是在原图像的基础啊上已经放大过
  * _keypoints：对allKeypoints中每一个点找到对应的描述子后，再进行scale, 作为后面mvkeys;
  */
+
+    // monoLeft = (*mpORBextractorLeft)(im, cv::Mat(), mvKeys, mDescriptors, vLapping);
     int ORBextractor::operator()(InputArray _image, InputArray _mask,
                                  vector<KeyPoint> &_keypoints,
                                  OutputArray _descriptors,
                                  std::vector<int> &vLappingArea) {
         Mat image = _image.getMat();
         assert(image.type() == CV_8UC1);
+
+        // 10. 执行 ORB_SLAM2::ORBextractor 函数 ComputePyramid 计算图像金字塔
         // Pre-compute the scale pyramid
         ComputePyramid(image);
         vector<vector<KeyPoint> > allKeypoints;
+
+        // 11. 执行 ORB_SLAM2::ORBextractor 函数 ComputeKeyPointsOctTree 特征点均衡化
         ComputeKeyPointsOctTree(allKeypoints);
         // ComputeKeyPointsOld(allKeypoints);
 
@@ -942,6 +947,7 @@ namespace ORB_SLAM2 {
         return monoIndex;
     }
 
+    // 10. 执行 ORB_SLAM2::ORBextractor::ComputePyramid 计算图像金字塔函数
     void ORBextractor::ComputePyramid(cv::Mat image) {
         for (int level = 0; level < nlevels; ++level) {
             // std::vector<float> mvInvScaleFactor; 每层缩放因子的倒数
@@ -949,7 +955,7 @@ namespace ORB_SLAM2 {
             std::cout << "scale: " << scale <<  std::endl;
             Size sz(cvRound((float) image.cols * scale),cvRound((float) image.rows * scale));
             std::cout << "sz: " << sz <<  std::endl;
-            // const int EDGE_THRESHOLD = 19; 图像向外扩充19个像素
+            // const int EDGE_THRESHOLD = 19; 图像向外扩充19个像素, 只是创建了图像的尺寸, 每个像素还没有赋值
             Mat temp(Size(sz.width + EDGE_THRESHOLD * 2, sz.height + EDGE_THRESHOLD * 2), image.type());
             Mat masktemp;
             // std::vector<cv::Mat> mvImagePyramid; 图像金字塔
@@ -958,16 +964,15 @@ namespace ORB_SLAM2 {
             // rect.width; //表示矩形的宽度
             // rect.height; //表示矩形的高度
             // 截取图片temp中Rect部分图片
+            // 这里是将创建的还没有给像素赋值图像 赋值给图像金字塔容器,  真正的像素赋值在下面的的,if和else里面,else是原图, if是剩下七层
             mvImagePyramid[level] = temp(Rect(EDGE_THRESHOLD, EDGE_THRESHOLD, sz.width, sz.height));
-            // cv::imwrite("mvImagePyramid_" + to_string(level) + ".png", mvImagePyramid[level]);
+            // cv::imwrite("mvImagePyramid_" + to_string(level) + ".png", mvImagePyramid[level]); cv::namedWindow("image");
             // Compute the resized image
-//            cv::namedWindow("image");
             if (level != 0) {
                 // INTER_NEAREST最近邻插值, INTER_CUBIC三次样条插值, INTER_LINEAR线性插值, INTER_AREA区域插值
                 resize(mvImagePyramid[level - 1], mvImagePyramid[level], sz, 0, 0,INTER_LINEAR);
                 cv::imwrite("../mvImagePyramid_" + to_string(level) + ".png", mvImagePyramid[level]);
-//                cv::imshow("image", mvImagePyramid[level]);
-//                cv::waitKey(0);
+                // cv::imshow("image", mvImagePyramid[level]); // cv::waitKey(0);
                 // 图片设置边界框
                 copyMakeBorder(mvImagePyramid[level], temp, EDGE_THRESHOLD,EDGE_THRESHOLD, EDGE_THRESHOLD, EDGE_THRESHOLD,BORDER_REFLECT_101 + BORDER_ISOLATED);
                 cv::imwrite("../copyMakeBorder_mvImagePyramid_" + to_string(level) + ".png", temp);
