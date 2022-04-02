@@ -18,9 +18,10 @@ namespace ORB_SLAM2 {
     const int Tracking::TH_LOW = 50;
     int tmp_number = 0;
 
-
     Tracking::Tracking(System *pSys, const string &strSettingPath){
+
         cv::FileStorage fSettings(strSettingPath, cv::FileStorage::READ);
+        // 相机内参
         cv::Mat K = cv::Mat::eye(3, 3, CV_32F);
         K.at<float>(0, 0) = fSettings["Camera.fx"];
         K.at<float>(1, 1) = fSettings["Camera.fy"];
@@ -28,61 +29,38 @@ namespace ORB_SLAM2 {
         K.at<float>(1, 2) = fSettings["Camera.cy"];
         K.copyTo(mK);
 
+        // 相机畸变系数
         cv::Mat DistCoef(4, 1, CV_32F);
         DistCoef.at<float>(0) = fSettings["Camera.k1"];
         DistCoef.at<float>(1) = fSettings["Camera.k2"];
         DistCoef.at<float>(2) = fSettings["Camera.p1"];
         DistCoef.at<float>(3) = fSettings["Camera.p2"];
-        const float k3 = fSettings["Camera.k3"];
-        if (k3 != 0) {
-            DistCoef.resize(5);
-            DistCoef.at<float>(4) = k3;
-        }
         DistCoef.copyTo(mDistCoef);
-        {
-            cv::Mat tmp_K_r, tmp_DistCoef_r;
-            fSettings["RIGHT.K"] >> tmp_K_r;
-            fSettings["RIGHT.D"] >> tmp_DistCoef_r;
-            cv::Mat K_r = cv::Mat::eye(3, 3, CV_32F);
-            tmp_K_r.convertTo(K_r, CV_32F);
 
-            cv::Mat DistCoef_r(4, 1, CV_32F);
-            tmp_DistCoef_r.convertTo(DistCoef_r, CV_32F);
+        cv::Mat tmp_K_r;
+        // 右目相机内参数
+        fSettings["RIGHT.K"] >> tmp_K_r;
+        cv::Mat K_r = cv::Mat::eye(3, 3, CV_32F);
+        tmp_K_r.convertTo(K_r, CV_32F);
+        K_r.copyTo(mK_r);
 
-            K_r.copyTo(mK_r);
-            DistCoef_r.copyTo(mDistCoef_r);
+        cv::Mat tmp_DistCoef_r;
+        // 右目相机畸变参数
+        fSettings["RIGHT.D"] >> tmp_DistCoef_r;
+        cv::Mat DistCoef_r(4, 1, CV_32F);
+        tmp_DistCoef_r.convertTo(DistCoef_r, CV_32F);
+        DistCoef_r.copyTo(mDistCoef_r);
 
-            cv::Mat tmp_RotationRL, tmp_tlinr;
-            fSettings["CAMERA.R"] >> tmp_RotationRL;
-            fSettings["CAMERA.T"] >> tmp_tlinr;
-            cv::Mat RotationRL(3, 3, CV_32F);
-            tmp_RotationRL.convertTo(RotationRL, CV_32F);
-            cv::Mat tlinr(3, 1, CV_32F);
-            tmp_tlinr.convertTo(tlinr, CV_32F);
-
-            RotationRL.copyTo(mRrl);
-            tlinr.copyTo(mtlinr);
-        }
-
-        float fps = fSettings["Camera.fps"];
-        if (fps == 0) {
-            fps = 30;
-        }
-        if (DistCoef.rows == 5) cout << "- k3: " << DistCoef.at<float>(4) << endl;
-        // Eigen::Vector3d euler_angles_mRrl = Tracking::MattoEulerAngle(mRrl);
         int nRGB = fSettings["Camera.RGB"];
         mbRGB = nRGB;
-        if (mbRGB) {
-            //cout << "[Tracking] color order: RGB (ignored if grayscale)" << endl;
-        } else {
-            //cout << "[Tracking] ncolor order: BGR (ignored if grayscale)" << endl;
-        }
+
         int nFeatures = fSettings["ORBextractor.nFeatures"];
         float fScaleFactor = fSettings["ORBextractor.scaleFactor"];
         int nLevels = fSettings["ORBextractor.nLevels"];
         int fIniThFAST = fSettings["ORBextractor.iniThFAST"];
         int fMinThFAST = fSettings["ORBextractor.minThFAST"];
 
+        // 5. 创建 ORB_SLAM2::ORBextractor 对象
         mpORBextractorLeft = new ORBextractor(nFeatures, fScaleFactor, nLevels, fIniThFAST, fMinThFAST);
         cout << "Left ORB extractor " << endl;
         mpORBextractorRight = new ORBextractor(nFeatures, fScaleFactor, nLevels, fIniThFAST, fMinThFAST);
@@ -110,15 +88,19 @@ namespace ORB_SLAM2 {
             }
         }
 
+        // 8. 执行 ORB_SLAM2::Tracking 函数 Frame
         Frame();
         return cv::Mat::eye(4, 4, CV_32F);
     }
 
     void Tracking::Frame() {
         // 存储缩放系数平方的vector
+        // std::vector<float> inline GetScaleSigmaSquares() { return mvLevelSigma2; }
         mvLevelSigma2 = mpORBextractorLeft->GetScaleSigmaSquares();
         // 存储缩放系数平方倒数的vector
+        // std::vector<float> inline GetInverseScaleSigmaSquares() { return mvInvLevelSigma2; }
         mvInvLevelSigma2 = mpORBextractorLeft->GetInverseScaleSigmaSquares();
+
         thread threadLeft(&Tracking::ExtractORB, this, 0, mImGray);
         thread threadRight(&Tracking::ExtractORB, this, 1, imGrayRight);
         threadLeft.join();
@@ -217,6 +199,7 @@ namespace ORB_SLAM2 {
     void Tracking::ExtractORB(int flag, const cv::Mat &im) {
         vector<int> vLapping = {100, 600};
         if (flag == 0)
+            // 9. 执行 ORB_SLAM2::ORBextractor 函数 ORBextractor::operator()
             monoLeft = (*mpORBextractorLeft)(im, cv::Mat(), mvKeys, mDescriptors, vLapping);
         else
             monoRight = (*mpORBextractorRight)(im, cv::Mat(), mvKeysRight, mDescriptorsRight, vLapping);
