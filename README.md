@@ -1,4 +1,4 @@
-## 小秋SLAM实战教程
+## SLAM实战教程
 
 ### CSDN
 ![](./iamge/csdn.jpg)
