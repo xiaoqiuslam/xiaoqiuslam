@@ -74,27 +74,43 @@ const int PATCH_SIZE = 31;
 const int HALF_PATCH_SIZE = 15;
 const int EDGE_THRESHOLD = 19;
 
-
+// keypoint->angle = IC_Angle(image, keypoint->pt, umax);
 static float IC_Angle(const Mat& image, Point2f pt,  const vector<int> & u_max)
 {
     int m_01 = 0, m_10 = 0;
 
     const uchar* center = &image.at<uchar> (cvRound(pt.y), cvRound(pt.x));
 
-    // Treat the center line differently, v=0
+    // Treat the center line differently, v=0 -> -15 < u < 15
+    // 特征点所在行的每一个像素值 center[u]
     for (int u = -HALF_PATCH_SIZE; u <= HALF_PATCH_SIZE; ++u)
         m_10 += u * center[u];
 
-    // Go line by line in the circuI853lar patch
-    int step = (int)image.step1();
+    // Go line by line in the circular patch
+    /**
+     * 假设图像为 1024*768 感兴趣区域ROI为 400*200
+     * 访问这个感兴趣区域的下一行,图像数据指针的步长step应该为 1024 而不是 200
+     * CV_8UC1(CV_位数+数据类型+通道数 C1~C4表示对应的通道数，即有1~4个通道)8位无符号单通道->灰度图片
+     *
+     */
+    int step = (int)image.step1();// 790
+    std::cout << "(int)image.step1() " << image.step1() << endl;// 790
+    std::cout << "(int)image.step " << image.step << endl;// 790
+    std::cout << "(int)image.step[0] " << image.step[0] << endl;// 790
+    std::cout << "(int)image.step[1] " << image.step[1] << endl;// 1
+    std::cout << "image.cols " << image.cols << endl;// 752
+    std::cout << "image.rows " << image.rows << endl;// 480
+    // 1 < v < 15
     for (int v = 1; v <= HALF_PATCH_SIZE; ++v)
     {
         // Proceed over the two lines
         int v_sum = 0;
         int d = u_max[v];
+        // - u_max[v] < u < u_max[v]
         for (int u = -d; u <= d; ++u)
         {
-            int val_plus = center[u + v*step], val_minus = center[u - v*step];
+            int val_plus = center[u + v*step];
+            int val_minus = center[u - v*step];
             v_sum += (val_plus - val_minus);
             m_10 += u * (val_plus + val_minus);
         }
@@ -423,21 +439,22 @@ ORBextractor::ORBextractor(int _nfeatures, float _scaleFactor, int _nlevels, int
     mvScaleFactor[0]=1.0f;
     // 存储缩放系数平方的vector
     mvLevelSigma2[0]=1.0f;
+    /**
+     * mvScaleFactor[0]: 1.0
+     * mvScaleFactor[1]: 1.2
+     * mvScaleFactor[2]: 1.44
+     * mvScaleFactor[3]: 1.728
+    * mvScaleFactor[4]: 2.0736
+    * mvScaleFactor[5]: 2.48832
+    * mvScaleFactor[6]: 2.98598
+    * mvScaleFactor[7]: 3.58318
+    */
     for(int i=1; i<nlevels; i++)
     {
         mvScaleFactor[i]=mvScaleFactor[i-1]*scaleFactor;
         mvLevelSigma2[i]=mvScaleFactor[i]*mvScaleFactor[i];
     }
     /**
-     * mvScaleFactor[0]: 1.0
-     * mvScaleFactor[1]: 1.2
-     * mvScaleFactor[2]: 1.44
-     * mvScaleFactor[3]: 1.728
-     * mvScaleFactor[4]: 2.0736
-     * mvScaleFactor[5]: 2.48832
-     * mvScaleFactor[6]: 2.98598
-     * mvScaleFactor[7]: 3.58318
-     *
      * mvLevelSigma2[0]: 1.0
      * mvLevelSigma2[1]: 1.44
      * mvLevelSigma2[2]: 2.0736
@@ -458,46 +475,42 @@ ORBextractor::ORBextractor(int _nfeatures, float _scaleFactor, int _nlevels, int
     }
 
     mvImagePyramid.resize(nlevels);
-
     mnFeaturesPerLevel.resize(nlevels);
     // 图像缩放系数的倒数 double scaleFactor;
     float factor = 1.0f / scaleFactor;
-    // 计算第0层图像也就是原始图像需要提取特征点的数目 https://zhuanlan.zhihu.com/p/61738607
     // 第一层：nfeatures*(1 - factor)/(1 - (float)pow((double)factor, (double)nlevels))
     // 第二层：nfeatures*(1 - factor)/(1 - (float)pow((double)factor, (double)nlevels))*factor
     // 第三层：nfeatures*(1 - factor)/(1 - (float)pow((double)factor, (double)nlevels))*factor*factor
     //  .........
     // 第nlevels层：nfeatures*(1 - factor)/(1 - (float)pow((double)factor, (double)nlevels))*q^nlevels
     // 那么前nlevels层的和为总的特征点数量nfeatures等比数列的前n相和
-    // 可以看出ORB特征点是如何实现尺度不变性的,原始图像那一层特征点最多,依次递减
-    // 主要是将每层的特征点数量进行均匀控制
-    // 参考大佬讲解：https://blog.csdn.net/qq_30356613/article/details/75231440
+    // 参考大佬讲解
+    // https://zhuanlan.zhihu.com/p/61738607
+    // https://blog.csdn.net/qq_30356613/article/details/75231440
+    /**
+     * 层需要提取的特征点数目
+     * 第1层 261
+     * 第2层 217
+     * 第3层 181
+     * 第4层 151
+     * 第5层 126
+     * 第6层 105
+     * 第7层 87
+     * 第8层 0
+     */
     float nDesiredFeaturesPerScale = nfeatures*(1 - factor)/(1 - (float)pow((double)factor, (double)nlevels));
-
     int sumFeatures = 0;
     for( int level = 0; level < nlevels-1; level++ )
     {
         // std::vector<int> mnFeaturesPerLevel; 这个vector存储图像金字塔每层需要提取的特征点个数
-        // cvRound 取整将第1层提取到的特征点数目取整然后存储到vector->mnFeaturesPerLevel
+        // 第1层提取到的特征点数目取整然后存储到vector->mnFeaturesPerLevel
         mnFeaturesPerLevel[level] = cvRound(nDesiredFeaturesPerScale);
         // 特征点数目累加,这个变量的用途是为了计算第8层图像需要提取的特征点数目.
         sumFeatures += mnFeaturesPerLevel[level];
-        // 计算每层需要提取的特征点数目
-        /**
-         * 第1层 261
-         * 第2层 217
-         * 第3层 181
-         * 第4层 151
-         * 第5层 126
-         * 第6层 105
-         * 第7层 87
-         * 第8层 0
-         */
         nDesiredFeaturesPerScale *= factor;
     }
     // 从给定的两个值中查找最大值,上面只是计算前七层,这句代码是计算第8层需要提取特征点数目.
     mnFeaturesPerLevel[nlevels-1] = std::max(nfeatures - sumFeatures, 0);
-
 
     // https://zhuanlan.zhihu.com/p/61738607 4. 计算Rotation-Aware BRIEF rBRIEF
     // "static int bit_pattern_31_[256 * 4] = {" 是一个1024维的数组,数组数据类型是int,是特征点keypoint为中心周围256对点的坐标
@@ -519,24 +532,17 @@ ORBextractor::ORBextractor(int _nfeatures, float _scaleFactor, int _nlevels, int
 
     // This is for orientation pre-compute the end of a row in a circular patch
     // 以特征点keypoint像素坐标点为中心的patch圆内计算关键点keypoint的方向,直径为PATCH_SIZE=31,半径为HALF_PATCH_SIZE=15
-    // 储存不同v对应的umax来描述这个patch圆的范围.
     // 参考大佬讲解 https://blog.csdn.net/liu502617169/article/details/89423494
     // 参考大佬讲解 https://zhuanlan.zhihu.com/p/61738607 3. Oriented FAST,旋转角度计算
+    // 参考大佬链接：http://the7.net/news/show-44083.html#!
     // cvRound() 即四舍五入返回跟参数最接近的整数值
     // cvFloor() 即向下取整返回不大于参数的最大整数值
     // cvCeil()  即向上取整返回不小于参数的最小整数值
-    umax.resize(HALF_PATCH_SIZE + 1);
-    // const int PATCH_SIZE = 31;
-    // const int HALF_PATCH_SIZE = 15;
-    // Patch一般取15为半径的圆,根据图像的分辨率进行改变
-    // "sqrt(" 返回一个数字的平方根 根号2对应45°圆心角 根号2等于1.41421356237
+
+    // "sqrt(" 返回一个数字的平方根 根号2对应45°圆心角
     // 1. 最大行数vmax初始化为R*sin45°(根号2/2)+1, +1是为了vmax和vmin边界值在遍历的过程中产生交叉,因为做了取整操作防止漏掉.
     // 2. 最大行数vmax单纯是0-45°这个过程的最大行数,而不是这个圆的最大行数.
-    // 参考大佬链接：http://the7.net/news/show-44083.html#!
-    // Make sure we are symmetric
-    // vmax为最大行数向下取整,是0-45°过程的最大行数,而不是这个圆的最大行数.
-    // vmin为最小行数向上取整,是45-90°过程中的最小行数
-    // int vmax = cvFloor(HALF_PATCH_SIZE * sqrt(2.f) / 2 + 1);// 11
+    // 3. vmin为最小行数向上取整,是45-90°过程中的最小行数
     int v, v0, vmax = cvFloor(HALF_PATCH_SIZE * sqrt(2.f) / 2 + 1);// 11
     int vmin = cvCeil(HALF_PATCH_SIZE * sqrt(2.f) / 2);
     // 半径R的平方 圆的半径取为15, 整个patch圆是31×31的
@@ -544,7 +550,7 @@ ORBextractor::ORBextractor(int _nfeatures, float _scaleFactor, int _nlevels, int
     // std::vector<int> umax;, ".resize(" 调整容器的大小
     umax.resize(HALF_PATCH_SIZE + 1);
     // umax 16个数值依次是：15 15 15 15 14 14 14 13 13 12 11 10 9 8 6 3
-    // 这里补充一个四分之一圆,图像坐标系
+    // 图像坐标系,四分之一圆
     /**
      * ------------------------------------>X
      * | * * * * * * * * * * * * * * *
@@ -582,75 +588,65 @@ ORBextractor::ORBextractor(int _nfeatures, float _scaleFactor, int _nlevels, int
     }
 }
 
-
+// 每个特征点所在图像区块的每行的边界 u_max 组成的vector
 static void computeOrientation(const Mat& image, vector<KeyPoint>& keypoints, const vector<int>& umax)
 {
-    for (vector<KeyPoint>::iterator keypoint = keypoints.begin(),
-         keypointEnd = keypoints.end(); keypoint != keypointEnd; ++keypoint)
+    for (vector<KeyPoint>::iterator keypoint = keypoints.begin(), keypointEnd = keypoints.end(); keypoint != keypointEnd; ++keypoint)
     {
         keypoint->angle = IC_Angle(image, keypoint->pt, umax);
     }
 }
 
-
+/**
+* 1. 加载 Euroc 数据集 --->更多SLAM学习内容获取请关注 订阅号 小秋SLAM实战教程 小秋SLAM笔记
+* 2. 加载 Euroc 数据集参数 对图像进行去畸变 --->更多SLAM学习内容获取请关注 订阅号 小秋SLAM实战教程 小秋SLAM笔记
+* 3. 创建 ORB_SLAM2::System 对象, 初始化 System Tracking Frame ORBextractor --->更多SLAM学习内容获取请关注 订阅号 小秋SLAM实战教程 小秋SLAM笔记
+* 4. 执行 ORBextractor 构造函数 a.金字塔每层图像缩放系数 b.金字塔每层图像提取特征点数量 c.计算umax --->更多SLAM学习内容获取请关注 订阅号 小秋SLAM实战教程 小秋SLAM笔记
+* 5. 执行 System::TrackStereo Tracking::GrabImageStereo Frame::Frame Frame::ExtractORB ORBextractor::operator() 函数 计算图像金子塔 --->更多SLAM学习内容获取请关注 订阅号 小秋SLAM实战教程 小秋SLAM笔记
+* 6. a.图像分块 b.提取特征 c.特征均匀 --->更多SLAM学习内容获取请关注 订阅号 小秋SLAM实战教程 小秋SLAM笔记
+* 7. 节点分裂 ExtractorNode::DivideNode --->更多SLAM学习内容获取请关注 订阅号 小秋SLAM实战教程 小秋SLAM笔记
+*/
+// 这部分代码主要是将节点划分为四部分(四叉树), 并且计算每部分的左上右下点的坐标, 然后根据坐标将特征点存储到对应的节点中
 void ExtractorNode::DivideNode(ExtractorNode &n1, ExtractorNode &n2, ExtractorNode &n3, ExtractorNode &n4){
-//    ni.UL = cv::Point2i(hX*static_cast<float>(i),0);
-//    std::cout << "ni.UL " << ni.UL << std::endl;// [0, 0], [360, 0]
-//    ni.UR = cv::Point2i(hX*static_cast<float>(i+1),0);
-//    std::cout << "ni.UR " << ni.UR << std::endl;// [360, 0], [720, 0]
-//    ni.BL = cv::Point2i(ni.UL.x,maxY-minY);
-//    std::cout << "ni.BL " << ni.BL << std::endl;// [0, 448], [360, 448]
-//    ni.BR = cv::Point2i(ni.UR.x,maxY-minY);
-//    std::cout << "ni.BR " << ni.BR << std::endl;// [360, 448], [720, 448]
-
     const int halfX = ceil(static_cast<float>(UR.x-UL.x)/2);// 180
     const int halfY = ceil(static_cast<float>(BR.y-UL.y)/2);// 224
 
     // Define boundaries of childs
-    // 这部分代码主要是将图像划分为四部分(四叉树), 并且计算每部分的左上右下点的坐标
     n1.UL = UL;
-    std::cout << "n1.UL " << n1.UL << std::endl;// [0, 0], [360, 0]
     n1.UR = cv::Point2i(UL.x+halfX,UL.y);
-    std::cout << "n1.UR " << n1.UR << std::endl;// [180, 0], [540, 0]
     n1.BL = cv::Point2i(UL.x,UL.y+halfY);
-    std::cout << "n1.BL " << n1.BL << std::endl;// [0, 224], [360, 224]
     n1.BR = cv::Point2i(UL.x+halfX,UL.y+halfY);
-    std::cout << "n1.BR " << n1.BR << std::endl;// [180, 224], [540, 224]
     n1.vKeys.reserve(vKeys.size());
+    std::cout << "n1: UL " << n1.UL << " UR " << n1.UR << " BL " << n1.BR << " BR " << n1.BL << std::endl;
+
 
     n2.UL = n1.UR;
-    std::cout << "n2.UL " << n2.UL << std::endl;// [180, 0], [540, 0]
     n2.UR = UR;
-    std::cout << "n2.UR " << n2.UR << std::endl;// [360, 0], [720, 0]
     n2.BL = n1.BR;
-    std::cout << "n2.BL " << n2.BL << std::endl;// [180, 224], [540, 224]
     n2.BR = cv::Point2i(UR.x,UL.y+halfY);
-    std::cout << "n2.BR " << n2.BR << std::endl;// [360, 224], [720, 224]
     n2.vKeys.reserve(vKeys.size());
+    std::cout << "n2: UL " << n2.UL << " UR " << n2.UR << " BL " << n2.BR << " BR " << n2.BL << std::endl;
+
 
     n3.UL = n1.BL;
-    std::cout << "n3.UL " << n3.UL << std::endl;//[0, 224], [360, 224]
     n3.UR = n1.BR;
-    std::cout << "n3.UR " << n3.UR  << std::endl;// [180, 224], [540, 224]
     n3.BL = BL;
-    std::cout << "n3.BL " << n3.BL << std::endl;// [0, 448], [360, 448]
     n3.BR = cv::Point2i(n1.BR.x,BL.y);
-    std::cout << "n3.BR " << n3.BR << std::endl;// [180, 448], [540, 448]
     n3.vKeys.reserve(vKeys.size());
+    std::cout << "n3: UL " << n3.UL << " UR " << n3.UR << " BL " << n3.BR << " BR " << n3.BL << std::endl;
 
     n4.UL = n3.UR;
-    std::cout << "n4.UL " << n4.UL << std::endl;// [180, 224], [540, 224]
     n4.UR = n2.BR;
-    std::cout << "n4.UR " << n4.UR << std::endl;// [360, 224], [720, 224]
     n4.BL = n3.BR;
-    std::cout << "n4.BL " << n4.BL << std::endl;// [180, 448], [540, 448]
     n4.BR = BR;
-    std::cout << "n4.BR " << n4.BR << std::endl;// [360, 448], [720, 448]
     n4.vKeys.reserve(vKeys.size());
+    std::cout << "n4: UL " << n4.UL << " UR " << n4.UR << " BL " << n4.BR << " BR " << n4.BL << std::endl;
 
-    //Associate points to childs
-    // 这部分是根据特征点的坐标, 将特征点存储到对应的节点里面的vKeys中
+    // Associate points to childs
+    // 这部分是根据特征点的坐标, 将特征点存储到对应的子节点里面的vKeys中
+    // 循环次数是父亲节点存储的特征点数目
     for(size_t i=0; i<vKeys.size(); i++){
+        // 定义特征点的引用
         const cv::KeyPoint &kp = vKeys[i];
         if(kp.pt.x<n1.UR.x)
         {
@@ -674,7 +670,6 @@ void ExtractorNode::DivideNode(ExtractorNode &n1, ExtractorNode &n2, ExtractorNo
         n3.bNoMore = true;
     if(n4.vKeys.size()==1)
         n4.bNoMore = true;
-
 }
 
 /**
@@ -683,65 +678,69 @@ void ExtractorNode::DivideNode(ExtractorNode &n1, ExtractorNode &n2, ExtractorNo
 * 3. 创建 ORB_SLAM2::System 对象, 初始化 System Tracking Frame ORBextractor --->更多SLAM学习内容获取请关注 订阅号 小秋SLAM实战教程 小秋SLAM笔记
 * 4. 执行 ORBextractor 构造函数 a.金字塔每层图像缩放系数 b.金字塔每层图像提取特征点数量 c.计算umax --->更多SLAM学习内容获取请关注 订阅号 小秋SLAM实战教程 小秋SLAM笔记
 * 5. 执行 System::TrackStereo Tracking::GrabImageStereo Frame::Frame Frame::ExtractORB ORBextractor::operator() 函数 计算图像金子塔 --->更多SLAM学习内容获取请关注 订阅号 小秋SLAM实战教程 小秋SLAM笔记
-* 6. a.图像分块 b.提取特征 c.特征均匀 --->更多SLAM学习内容获取请关注 订阅号 小秋SLAM实战教程 小秋SLAM笔记
+* 6. a.图像分块 b.提取特征点 c.特征点均匀（node分裂） --->更多SLAM学习内容获取请关注 订阅号 小秋SLAM实战教程 小秋SLAM笔记
 */
 vector<cv::KeyPoint> ORBextractor::DistributeOctTree(const vector<cv::KeyPoint>& vToDistributeKeys, const int &minX, const int &maxX, const int &minY, const int &maxY, const int &N, const int &level){
     // Compute how many initial nodes 类型转换
-    std::cout << "maxX " << maxX << std::endl;// 736
-    std::cout << "minX " << minX << std::endl;// 16
-    std::cout << "maxY " << maxY << std::endl;// 464
-    std::cout << "minY " << minY << std::endl;// 16
-    std::cout << "maxX-minX " << maxX-minX << std::endl;// 720
-    std::cout << "maxY-minY " << maxY-minY << std::endl;// 448
+    // const float width = (maxBorderX-minBorderX);// 原始图像宽752 可提取特征图像宽 752-32=720
+    // const float height = (maxBorderY-minBorderY);// 原始图像高480 可提取特征图像宽 480-32=448
+    // 初始节点的数目
     const int nIni = round(static_cast<float>(maxX-minX)/(maxY-minY));// 2
     std::cout << "nIni " << nIni << std::endl;// 2
     const float hX = static_cast<float>(maxX-minX)/nIni;// 360
     std::cout << "hX " << hX << std::endl;// 360
 
-    // class ExtractorNode
+    //class ExtractorNode
+    //{
+    //public:
+    //    ExtractorNode():bNoMore(false){}
+    //    void DivideNode(ExtractorNode &n1, ExtractorNode &n2, ExtractorNode &n3, ExtractorNode &n4);
+    //    std::vector<cv::KeyPoint> vKeys;
+    //    cv::Point2i UL, UR, BL, BR;
+    //    std::list<ExtractorNode>::iterator lit;
+    //    bool bNoMore;
+    //};
+    // 定义 list ExtractorNode 用于存储节点(KeyPoint)
     list<ExtractorNode> lNodes;
-
+    // 定义 vector ExtractorNode* 用于索引节点
     vector<ExtractorNode*> vpIniNodes;
-    //vector数组长度调整
     vpIniNodes.resize(nIni);
 
+    // 这个循环存储每个节点的 起始点坐标和终止点坐标
     for(int i=0; i<nIni; i++){
+        // 创建节点
         ExtractorNode ni;
         ni.UL = cv::Point2i(hX*static_cast<float>(i),0);
-        std::cout << "ni.UL " << ni.UL << std::endl;// [0, 0], [360, 0]
         ni.UR = cv::Point2i(hX*static_cast<float>(i+1),0);
-        std::cout << "ni.UR " << ni.UR << std::endl;// [360, 0], [720, 0]
         ni.BL = cv::Point2i(ni.UL.x,maxY-minY);
-        std::cout << "ni.BL " << ni.BL << std::endl;// [0, 448], [360, 448]
         ni.BR = cv::Point2i(ni.UR.x,maxY-minY);
-        std::cout << "ni.BR " << ni.BR << std::endl;// [360, 448], [720, 448]
+        std::cout << i << " : UL " << ni.UL << " UR " << ni.UR << " BL " << ni.BR << " BR " << ni.BL << std::endl;
         // vToDistributeKeys 是前面一帧图像提取到的所有特征点
         ni.vKeys.reserve(vToDistributeKeys.size());
-
         lNodes.push_back(ni);
         // list::back() 输出容器中最后一个元素
         vpIniNodes[i] = &lNodes.back();
     }
 
-    //Associate points to childs
+    // Associate points to childs
+    // 这个循环将特征点下存储到上面的节点里面
     for(size_t i=0;i<vToDistributeKeys.size();i++){
         const cv::KeyPoint &kp = vToDistributeKeys[i];
-        std::cout << "kp.pt.x/hX " << kp.pt.x/hX << std::endl;
-        // 隐含取整操作 和hX相比 只有俩个结果, 小于1, 大于1, 小于1都放在第一个节点里面, 大于1都放在第二个节点里面
+        // std::cout << "kp.pt.x/hX " << kp.pt.x/hX << std::endl;
+        // 隐含取整操作 kp.pt.x/hX相比 只有俩个结果, 小于1, 大于1, 小于1都放在第一个节点里面, 大于1都放在第二个节点里面
         vpIniNodes[kp.pt.x/hX]->vKeys.push_back(kp);
     }
 
-    // 通过迭代器（iterator）访问顺序容器和关联容器中的元素
+    // 通过迭代器（iterator）可以访问顺序容器和关联容器中的元素
     list<ExtractorNode>::iterator lit = lNodes.begin();
-
-    // 这部分代码相当与预处理,边界值判断
+    // 这个循环的功能是节点预处理,如果节点中的特征点数目是零,就在节点列表中将这个节点删除,如果这个节点中特征点数目只有一个那就设置一个标记后面不再分裂
     while(lit!=lNodes.end()){
-        // 第一个节点中特征点的数目是否等于1, 等于1 bNoMore 就赋值为 true
+        // 节点中特征点的数目是否等于1, 等于1 bNoMore 就赋值为 true
         if(lit->vKeys.size()==1){
             lit->bNoMore=true;
             lit++;
         }
-        // 第一个节点中特征点的数目是否为空, 为空就删除第一个节点
+        // 节点中特征点的数目是否为空, 为空就删除这个节点
         else if(lit->vKeys.empty())
             lit = lNodes.erase(lit);
         // 迭代器自增
@@ -749,24 +748,21 @@ vector<cv::KeyPoint> ORBextractor::DistributeOctTree(const vector<cv::KeyPoint>&
             lit++;
     }
 
-    bool bFinish = false;
 
-    int iteration = 0;
-
+    // 创建一个vector里面存储的数据是一个数据对, int是节点中特征点的数目 ExtractorNode*是节点
     vector<pair<int,ExtractorNode*> > vSizeAndPointerToNode;
     vSizeAndPointerToNode.reserve(lNodes.size()*4);
 
+    bool bFinish = false;
+    int iteration = 0;
+    // 这个循环实现了将节点分裂的功能
     while(!bFinish){
         iteration++;
-
         int prevSize = lNodes.size();
-
         lit = lNodes.begin();
-
         int nToExpand = 0;
-
         vSizeAndPointerToNode.clear();
-
+        // 分裂的结束条件是迭代器指向节点列表末尾 (list::end()函数将迭代器返回到列表最后一个元素之后的元素)
         while(lit!=lNodes.end())
         {
             if(lit->bNoMore)
@@ -779,16 +775,19 @@ vector<cv::KeyPoint> ORBextractor::DistributeOctTree(const vector<cv::KeyPoint>&
             {
                 // If more than one point, subdivide
                 ExtractorNode n1,n2,n3,n4;
+                // 四叉树 每次新增四个节点
                 lit->DivideNode(n1,n2,n3,n4);
 
                 // Add childs if they contain points
                 if(n1.vKeys.size()>0){
+                    //  list push_front()函数在列表的开头添加了一个新元素
                     lNodes.push_front(n1);                    
                     if(n1.vKeys.size()>1)
                     {
                         nToExpand++;
                         // list<ExtractorNode> lNodes;  通过front()可以获得list容器中的头部元素, 通过back()可以获得list容器的最后一个元素
                         vSizeAndPointerToNode.push_back(make_pair(n1.vKeys.size(),&lNodes.front()));
+                        // list 迭代器 begin 返回指向起始的迭代器
                         lNodes.front().lit = lNodes.begin();
                     }
                 }
@@ -822,17 +821,20 @@ vector<cv::KeyPoint> ORBextractor::DistributeOctTree(const vector<cv::KeyPoint>&
                         lNodes.front().lit = lNodes.begin();
                     }
                 }
-
-                lit=lNodes.erase(lit);
+                // erase() 该成员函数删除 list 容器中指定位置处的元素
+                // 理解为迭代器重新指向了删除节点后的新的list的第一个节点
+                lit = lNodes.erase(lit);
                 continue;
             }
         }       
 
-        // Finish if there are more nodes than required features
-        // or all nodes contain just one point
+
+        // Finish if there are more nodes than required features or all nodes contain just one point
+        // 随时准备提前结束分裂：当前的节点数已经超过了要求的特征点数, 当前所有的节点中都只包含一个特征点
         if((int)lNodes.size()>=N || (int)lNodes.size()==prevSize){
             bFinish = true;
         }
+        // 随时准备提前结束分裂 这里借助vector<pair<int,ExtractorNode*> > vPrevSizeAndPointerToNode 在可分裂的前提下, 对可以分裂的节点进行优先分裂,在这个过程中也会随时检测准备退出结束分裂
         else if(((int)lNodes.size()+nToExpand*3)>N)
         {
 
@@ -844,10 +846,12 @@ vector<cv::KeyPoint> ORBextractor::DistributeOctTree(const vector<cv::KeyPoint>&
                 vector<pair<int,ExtractorNode*> > vPrevSizeAndPointerToNode = vSizeAndPointerToNode;
                 vSizeAndPointerToNode.clear();
 
+                // 对需要划分的节点进行排序,对pair对的第一个元素进行排序,默认是从小到大排序, 优先分裂特征点多的节点,使得特征点密集的区域保留更少的特征点
                 sort(vPrevSizeAndPointerToNode.begin(),vPrevSizeAndPointerToNode.end());
                 for(int j=vPrevSizeAndPointerToNode.size()-1;j>=0;j--)
                 {
                     ExtractorNode n1,n2,n3,n4;
+                    // 取出 vPrevSizeAndPointerToNode 中的节点
                     vPrevSizeAndPointerToNode[j].second->DivideNode(n1,n2,n3,n4);
 
                     // Add childs if they contain points
@@ -901,24 +905,30 @@ vector<cv::KeyPoint> ORBextractor::DistributeOctTree(const vector<cv::KeyPoint>&
         }
     }
 
+
     // Retain the best point in each node
+    // 节点分裂好了之后, 节点的数目就是要提取特征点的数目, 所以一个节点只保留一个特征点, 特征点的筛选条件是特征点的响应强度
     vector<cv::KeyPoint> vResultKeys;
     vResultKeys.reserve(nfeatures);
     for(list<ExtractorNode>::iterator lit=lNodes.begin(); lit!=lNodes.end(); lit++)
     {
+        // 节点特征点的索引
         vector<cv::KeyPoint> &vNodeKeys = lit->vKeys;
+        // 节点第一个特征点的指针
         cv::KeyPoint* pKP = &vNodeKeys[0];
+        // 获取特征点的响应值
         float maxResponse = pKP->response;
-
+        // 遍历特征点寻找响应值大的特征点
         for(size_t k=1;k<vNodeKeys.size();k++)
         {
+            // 如果发现响应值大的就替换指针
             if(vNodeKeys[k].response>maxResponse)
             {
                 pKP = &vNodeKeys[k];
                 maxResponse = vNodeKeys[k].response;
             }
         }
-
+        // 将满足条件的特征点存储到vResultKeys
         vResultKeys.push_back(*pKP);
     }
 
@@ -931,48 +941,49 @@ vector<cv::KeyPoint> ORBextractor::DistributeOctTree(const vector<cv::KeyPoint>&
  * 3. 创建 ORB_SLAM2::System 对象, 初始化 System Tracking Frame ORBextractor --->更多SLAM学习内容获取请关注 订阅号 小秋SLAM实战教程 小秋SLAM笔记
  * 4. 执行 ORBextractor 构造函数 a.金字塔每层图像缩放系数 b.金字塔每层图像提取特征点数量 c.计算umax --->更多SLAM学习内容获取请关注 订阅号 小秋SLAM实战教程 小秋SLAM笔记
  * 5. 执行 System::TrackStereo Tracking::GrabImageStereo Frame::Frame Frame::ExtractORB ORBextractor::operator() 函数 计算图像金子塔 --->更多SLAM学习内容获取请关注 订阅号 小秋SLAM实战教程 小秋SLAM笔记
- * 6. a.图像分块 b.提取特征 c.特征均匀 --->更多SLAM学习内容获取请关注 订阅号 小秋SLAM实战教程 小秋SLAM笔记
+ * 6. a.图像分块 b.提取特征 c.特征均匀 d.旋转不变性 --->更多SLAM学习内容获取请关注 订阅号 小秋SLAM实战教程 小秋SLAM笔记
  */
 void ORBextractor::ComputeKeyPointsOctTree(vector<vector<KeyPoint> >& allKeypoints)
 {
+    cv::Mat image;
     allKeypoints.resize(nlevels);
     const float W = 30;
-    // for 循环遍历金字塔每层图像
+    // for 循环遍历金字塔每层图像, 计算特征点（分块）, 特征点均匀化（四叉树）
     for (int level = 0; level < nlevels; ++level)
     {
-        rectangle(mvImagePyramid[level], Point(19, 19), Point(mvImagePyramid[level].cols-EDGE_THRESHOLD, mvImagePyramid[level].rows-EDGE_THRESHOLD), Scalar(0), 1);
-        cv::imwrite("./rectangle/" + to_string(level) + "_rectangle_19.png", mvImagePyramid[level]);
+//        rectangle(mvImagePyramid[level], Point(19, 19), Point(mvImagePyramid[level].cols-EDGE_THRESHOLD, mvImagePyramid[level].rows-EDGE_THRESHOLD), Scalar(0), 1);
+//        cv::imwrite( to_string(level) + "_rectangle_19.png", mvImagePyramid[level]);
         // 3 fast 角点像素半径为3
         const int minBorderX = EDGE_THRESHOLD-3;// 16=19-3
         const int minBorderY = minBorderX;// 16=19-3
         const int maxBorderX = mvImagePyramid[level].cols-EDGE_THRESHOLD+3;// 736=752-19+3
         const int maxBorderY = mvImagePyramid[level].rows-EDGE_THRESHOLD+3;// 464=480-19+3
         rectangle(mvImagePyramid[level], Point(minBorderX, minBorderY), Point(maxBorderX, maxBorderY), Scalar(0), 1);
-        cv::imwrite("./rectangle/" + to_string(level) + "_rectangle_16.png", mvImagePyramid[level]);
+//        cv::imwrite(to_string(level) + "_rectangle_16.png", mvImagePyramid[level]);
 
-        vector<cv::KeyPoint> vToDistributeKeys;
-        vToDistributeKeys.reserve(nfeatures*10);
+        const float width = (maxBorderX-minBorderX);// 原始图像宽752 可提取特征图像宽 752-32=720
+        const float height = (maxBorderY-minBorderY);// 原始图像高480 可提取特征图像宽 480-32=448
 
-        // 待提取特征点图像的size(736的起始点是16所以求图像的宽度要减去16)
-        const float width = (maxBorderX-minBorderX);// 原始图像宽752 可提取特征图像宽 720=736-16 752-720=32
-        const float height = (maxBorderY-minBorderY);// 原始图像高480 可提取特征图像宽 448=464-16 480-448=32
         // 宽720 分24个图像块
-        const int nCols = width/W;//24
+        const int nCols = width/W;
         // 高448 分14个图像块剩余余28个像素 每块高30个像素
-        const int nRows = height/W;//14
+        const int nRows = height/W;
 
         // 每块图像宽720/24=30个像素
         const int wCell = ceil(width/nCols);
         // 每块图像高448/14=32个像素
         const int hCell = ceil(height/nRows);
 
+        // 存储提取到的所有特征点
+        vector<cv::KeyPoint> vToDistributeKeys;
+        vToDistributeKeys.reserve(nfeatures*10);
         // 双层for循环遍历某层图像的所有小图像块(宽30*高32pixel)
         // 外层for循环遍历行, 内层for循环遍历列
         for(int i=0; i<nRows; i++){
-            // 计算每个图像块左上角的y坐标
+            // 计算每个图像块左上角的iniY坐标
             const float iniY =minBorderY + i*hCell;// iniY=16 = minBorderY=6 + i=0×hCell=32
             // 可以提取特征点的图像范围是从(19, 19)开始的, 然后为了考虑边界像素提取Fast特征点的时候是以特征点为中心半径为3个像素的圆计算的
-            // 计算每个图像块右下角的y坐标
+            // 计算每个图像块左下角的maxY坐标
             float maxY = iniY + 3 + hCell + 3;// maxY=54 = iniY=16 + 3 + hCell=32 + 3
             // 计算到图像块边缘像素坐标和图像边界之间已经不足3个像素时, 就没有计算的必要了, 因为提取提取Fast特征点以特征点为中心半径为3个像素的圆计算的
             if(iniY>=maxBorderY-3)
@@ -983,11 +994,11 @@ void ORBextractor::ComputeKeyPointsOctTree(vector<vector<KeyPoint> >& allKeypoin
 
             // 外层for循环遍历行, 内层for循环遍历列
             for(int j=0; j<nCols; j++){
-                // 计算每个图像块左上角的x坐标
+                // 计算每个图像块左上角的iniX坐标
                 const float iniX = minBorderX+j*wCell;// iniX=16 = minBorderX=16 + j=0×wCell=30
-                // 计算每个图像块右下角的x坐标
+                // 计算每个图像块右上角的maxX坐标
                 float maxX = iniX+3+wCell+3;//maxX=52 = iniX=16 + j=0×wCell=30
-                // 计算到图像块边缘像素坐标和图像边界之间已经不足6个像素时,停止当前图像块的计算,继续下一次循环
+                // 计算到图像块边缘像素坐标和图像边界之间已经不足6个像素时,停止当前图像块的计算,继续下一个图像块
                 if(iniX>=maxBorderX-6)
                     continue;
                 // 计算到图像块边缘像素坐标大于图像边界时直接赋值为可以提取特征点的图像的边界
@@ -995,52 +1006,64 @@ void ORBextractor::ComputeKeyPointsOctTree(vector<vector<KeyPoint> >& allKeypoin
                     maxX = maxBorderX;
 
                 vector<cv::KeyPoint> vKeysCell;
-                std::cout << "iniX " << iniX << std::endl;
-                std::cout << "iniY " << iniY << std::endl;
-                std::cout << "maxX " << maxX << std::endl;
-                std::cout << "maxY " << maxY << std::endl;
+                // std::cout << "iniX " << iniX << " iniY " << iniY << " maxX " << maxX << " maxY " << maxY << std::endl;
+                // 绘制提取特征的小图像块
                 rectangle(mvImagePyramid[level], Point(iniX, iniY), Point(maxX, maxY), Scalar(0), 1);
-                cv::imwrite("./rectangle/" + to_string(level) + "_" + to_string(int(iniY)) + "_" + to_string(int(iniX)) + "_rectangle_3.png", mvImagePyramid[level]);
-                cv::imwrite("./cell/" + to_string(level) + "_" + to_string(int(iniY)) + "_" + to_string(int(iniX)) + ".png", mvImagePyramid[level].rowRange(iniY,maxY).colRange(iniX,maxX));
+//                cv::imwrite(to_string(level) + to_string(i) + to_string(j) +".png", mvImagePyramid[level]);
+
                 FAST(mvImagePyramid[level].rowRange(iniY,maxY).colRange(iniX,maxX), vKeysCell,iniThFAST,true);
+//                cv::imwrite(to_string(level) + to_string(i) + to_string(j) + "_fast.png", mvImagePyramid[level].rowRange(iniY,maxY).colRange(iniX,maxX));
 
                 if(vKeysCell.empty())
                 {
                     FAST(mvImagePyramid[level].rowRange(iniY,maxY).colRange(iniX,maxX),vKeysCell,minThFAST,true);
                 }
 
+
                 if(!vKeysCell.empty()){
                     for(vector<cv::KeyPoint>::iterator vit=vKeysCell.begin(); vit!=vKeysCell.end();vit++){
-                        // 像素相对与格子的坐标转换到相对与检测特征点全图像的的像素坐标
+                        // 像素相对与图像块的坐标转换到相对与检测特征点全图像的的像素坐标
+//                        std::cout << "(*vit).pt.x " << (*vit).pt.x << " (*vit).pt.y " << (*vit).pt.y << std::endl;
                         (*vit).pt.x+=j*wCell;
                         (*vit).pt.y+=i*hCell;
+//                        std::cout << "(*vit).pt.x " << (*vit).pt.x << " (*vit).pt.y " << (*vit).pt.y << std::endl;
                         vToDistributeKeys.push_back(*vit);
+                        image = mvImagePyramid[level].rowRange(minBorderY,maxBorderY).colRange(minBorderX,maxBorderX);
+                        // 绘制提取到的特征点
+                        cv::circle(image, (*vit).pt,1,cv::Scalar(0),-1);
                     }
+                    cv::imwrite( to_string(level) + "_keypoint.png", image);
                 }
 
             }
         }
 
 
+        // 当前金字塔图层 均匀化处理后的特征点vector
         vector<KeyPoint> & keypoints = allKeypoints[level];
         keypoints.reserve(nfeatures);
         keypoints = DistributeOctTree(vToDistributeKeys, minBorderX, maxBorderX, minBorderY, maxBorderY,mnFeaturesPerLevel[level], level);
 
+        // PATCH_SIZE 也会随着图层进行缩放 为下一次计算做准备工作
         const int scaledPatchSize = PATCH_SIZE*mvScaleFactor[level];
 
         // Add border to coordinates and scale information
         const int nkps = keypoints.size();
         for(int i=0; i<nkps ; i++)
         {
+            // 将特征点的坐标转换到 包含提取特征点的图像的16个扩充像素的大图中
             keypoints[i].pt.x+=minBorderX;
             keypoints[i].pt.y+=minBorderY;
+            // 同时存储特征点是提取自那一个图层
             keypoints[i].octave=level;
+            // 同时存储要计算特征点旋转不变性的圆半径
             keypoints[i].size = scaledPatchSize;
         }
     }
 
 
     // compute orientations
+    // 当提取完所有金字塔图层的特征点之后开始计算旋转不变性
     for (int level = 0; level < nlevels; ++level)
         computeOrientation(mvImagePyramid[level], allKeypoints[level], umax);
 }
@@ -1245,6 +1268,10 @@ void ORBextractor::operator()( InputArray _image, InputArray _mask, vector<KeyPo
 
     // Pre-compute the scale pyramid
     ComputePyramid(image);
+//    for (int level = 0; level < nlevels; ++level)// 遍历图像金字塔 0 1 2 3 4 5 6 7
+//    {
+//        cv::imwrite("show_mvImagePyramid_" + to_string(level) + ".png", mvImagePyramid[level]);
+//    }
     vector < vector<KeyPoint> > allKeypoints;
     ComputeKeyPointsOctTree(allKeypoints);
 
@@ -1305,27 +1332,28 @@ void ORBextractor::operator()( InputArray _image, InputArray _mask, vector<KeyPo
  */
 void ORBextractor::ComputePyramid(cv::Mat image)
 {
-    for (int level = 0; level < nlevels; ++level)
+    for (int level = 0; level < nlevels; ++level)// 遍历图像金字塔 0 1 2 3 4 5 6 7
     {
-        float scale = mvInvScaleFactor[level];
-        Size sz(cvRound((float)image.cols*scale), cvRound((float)image.rows*scale));
-        Size wholeSize(sz.width + EDGE_THRESHOLD*2, sz.height + EDGE_THRESHOLD*2);
-        Mat temp(wholeSize, image.type()), masktemp;
-        mvImagePyramid[level] = temp(Rect(EDGE_THRESHOLD, EDGE_THRESHOLD, sz.width, sz.height));
+        float scale = mvInvScaleFactor[level];// 图像缩放系数 1 0.83
+        Size sz(cvRound((float)image.cols*scale), cvRound((float)image.rows*scale));// 缩放后图像的宽高
+        Size wholeSize(sz.width + EDGE_THRESHOLD*2, sz.height + EDGE_THRESHOLD*2);// 对缩放后图像的加上边框后图像宽高
+        Mat temp(wholeSize, image.type()), masktemp;// 创建两个 CV::Mat
+        mvImagePyramid[level] = temp(Rect(EDGE_THRESHOLD, EDGE_THRESHOLD, sz.width, sz.height));// 给图像金字塔赋值,注意这里只是图像的宽高和像素的类型，还没有为每个像素赋值
         // Compute the resized image
         if( level != 0 )
         {
             resize(mvImagePyramid[level-1], mvImagePyramid[level], sz, 0, 0, INTER_LINEAR);
-            copyMakeBorder(mvImagePyramid[level], temp, EDGE_THRESHOLD, EDGE_THRESHOLD, EDGE_THRESHOLD, EDGE_THRESHOLD,
-                           BORDER_REFLECT_101+BORDER_ISOLATED);
-            cv::imwrite("mvImagePyramid_" + to_string(level) + ".png", mvImagePyramid[level]);
-            cv::imwrite("temp_" + to_string(level) + ".png", temp);
+            copyMakeBorder(mvImagePyramid[level], temp, EDGE_THRESHOLD, EDGE_THRESHOLD, EDGE_THRESHOLD, EDGE_THRESHOLD, BORDER_REFLECT_101+BORDER_ISOLATED);
+            // cv::imwrite("mvImagePyramid_" + to_string(level) + ".png", mvImagePyramid[level]);
+            // cv::imwrite("temp_" + to_string(level) + ".png", temp);
         }
         else
         {
+            // 原始图像不需要缩放, 直接进行边界19个像素的对称扩充理解为加边框, 这里生成了第一张金字塔图像
             copyMakeBorder(image, temp, EDGE_THRESHOLD, EDGE_THRESHOLD, EDGE_THRESHOLD, EDGE_THRESHOLD,BORDER_REFLECT_101);
-            cv::imwrite("image.png", image);
-            cv::imwrite("temp.png", temp);
+            // cv::imwrite("image.png", image);
+            // cv::imwrite("temp.png", temp);
+            // cv::imwrite("mvImagePyramid_" + to_string(level) + ".png", mvImagePyramid[level]);
         }
     }
 
