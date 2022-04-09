@@ -1,7 +1,6 @@
-## SLAM实战教程
 
-### 添加微信号码可以邀请加入微信群
-![](./iamge/weixin.jpg)
+
+## 添加微信号码"slamshizhanjiaocheng"可以邀请加入微信群
 
 ### CSDN
 ![](./iamge/csdn.jpg)
