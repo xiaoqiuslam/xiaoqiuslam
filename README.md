@@ -1,13 +1,14 @@
 ## SLAM实战教程
 
+### 添加微信号码可以邀请加入微信群
+![](./iamge/weixin.jpg)
+
 ### CSDN
 ![](./iamge/csdn.jpg)
 
 ### 哔哩哔哩
 ![](./iamge/bilibili.jpg)
 
-### 微信号码
-![](./iamge/weixin.jpg)
 
 ### 订阅号
 ![](./iamge/xiaoqiuslambiji.jpg)
