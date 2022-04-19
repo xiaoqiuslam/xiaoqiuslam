@@ -1,3 +1,5 @@
+## 小秋SLAM实战教程
+
 [「ROS Point Cloud」点云数据类型、公共字段、ROS的PCL接口](https://blog.csdn.net/qq_21950671/article/details/121673843)
 
 [「Point Cloud」点云数据类型、公共字段、ROS的PCL接口](https://chunqiushenye.blog.csdn.net/article/details/121673843)
@@ -109,25 +111,3 @@
 [PCLVisualizer可视化类](https://www.cnblogs.com/li-yao7758258/p/6445127.html)
 
 [可视化深度图像](https://www.cnblogs.com/li-yao7758258/p/6444207.html)
-
-## 小秋SLAM实战教程
-### CSDN
-![](../iamge/csdn.jpg)
-
-### 哔哩哔哩
-![](../iamge/bilibili.jpg)
-
-### 微信号码
-![](../iamge/weixin.jpg)
-
-### 订阅号
-![](../iamge/xiaoqiuslambiji.jpg)
-
-### 订阅号
-![](../iamge/xiaoqiuslamshizhanjiaocheng.jpg)
-
-### QQ
-![](../iamge/qq.jpg)
-
-### QQ群
-![](../iamge/qqqun.jpg)

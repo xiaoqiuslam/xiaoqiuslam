@@ -1,1 +1,0 @@
-/usr/bin/c++  -g  -rdynamic CMakeFiles/convert_sba_slam3d.dir/convert_sba_slam3d.o  -o convert_sba_slam3d  -lcore -ltypes_slam3d -ltypes_sba 

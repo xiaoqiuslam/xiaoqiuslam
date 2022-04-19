@@ -1,3 +1,5 @@
+## 小秋SLAM实战教程
+
 [「OpenCV3.4」模拟图像、数字图像、表示图像](https://blog.csdn.net/qq_21950671/article/details/90449301)
 
 [「小孔成像、图像采集卡、线阵相机、面阵相机」](https://blog.csdn.net/qq_21950671/article/details/122187071)
@@ -29,26 +31,3 @@
 [「ROS OpenCV」读取视频然后发布图像话题并在rviz中显示](https://blog.csdn.net/qq_21950671/article/details/121761622)
 
 [「ROS OpenCV」读取一张图像然后发布图像话题并在rviz中显示](https://blog.csdn.net/qq_21950671/article/details/121760654)
-
-
-## 小秋SLAM实战教程
-### CSDN
-![](../iamge/csdn.jpg)
-
-### 哔哩哔哩
-![](../iamge/bilibili.jpg)
-
-### 微信号码
-![](../iamge/weixin.jpg)
-
-### 订阅号
-![](../iamge/xiaoqiuslambiji.jpg)
-
-### 订阅号
-![](../iamge/xiaoqiuslamshizhanjiaocheng.jpg)
-
-### QQ
-![](../iamge/qq.jpg)
-
-### QQ群
-![](../iamge/qqqun.jpg)

@@ -1,7 +1,8 @@
+## 小秋SLAM实战教程
+
 [「ROS Kinetic」整体框架和组成部分功能介绍](https://blog.csdn.net/qq_21950671/article/details/121700544)
 
 [「ROS Point Cloud」对点云进行位姿态变换](https://blog.csdn.net/qq_21950671/article/details/121773405)
-
 
 [「ROS」publish发布和subscribe订阅topic话题中的消息message](https://blog.csdn.net/qq_21950671/article/details/108120269)
 
@@ -56,25 +57,5 @@
 [「tf2」发布静态坐标系](https://blog.csdn.net/qq_21950671/article/details/)
 
 
-## 小秋SLAM实战教程
-### CSDN
-![](../iamge/csdn.jpg)
 
-### 哔哩哔哩
-![](../iamge/bilibili.jpg)
-
-### 微信号码
-![](../iamge/weixin.jpg)
-
-### 订阅号
-![](../iamge/xiaoqiuslambiji.jpg)
-
-### 订阅号
-![](../iamge/xiaoqiuslamshizhanjiaocheng.jpg)
-
-### QQ
-![](../iamge/qq.jpg)
-
-### QQ群
-![](../iamge/qqqun.jpg)
 

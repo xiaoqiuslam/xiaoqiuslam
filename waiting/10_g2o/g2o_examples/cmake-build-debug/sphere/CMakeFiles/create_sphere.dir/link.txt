@@ -1,1 +1,0 @@
-/usr/bin/c++  -g  -rdynamic CMakeFiles/create_sphere.dir/create_sphere.o  -o create_sphere  -lcore -ltypes_slam3d 

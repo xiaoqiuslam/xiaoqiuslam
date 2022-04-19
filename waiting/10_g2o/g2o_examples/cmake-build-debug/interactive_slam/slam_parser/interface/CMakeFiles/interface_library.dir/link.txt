@@ -1,2 +1,0 @@
-/usr/bin/ar qc libinterface.a  CMakeFiles/interface_library.dir/parser_interface.o CMakeFiles/interface_library.dir/slam_context_interface.o
-/usr/bin/ranlib libinterface.a

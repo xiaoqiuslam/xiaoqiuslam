@@ -1,2 +1,0 @@
-/usr/bin/ar qc libparser.a  CMakeFiles/parser_library.dir/slam_context.o CMakeFiles/parser_library.dir/bison_parser.o CMakeFiles/parser_library.dir/driver.o CMakeFiles/parser_library.dir/flex_scanner.o
-/usr/bin/ranlib libparser.a
