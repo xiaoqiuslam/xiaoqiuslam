@@ -20,7 +20,7 @@ int main(int argc, char** argv)
   // 第一个参数是话题的名称，第二个是缓冲区的大小（消息队列的长度发布图像消息时消息队列的长度只能是1）
   image_transport::Publisher pub = it.advertise("image", 1);
 
-  cv::Mat image = cv::imread("/media/q/Q/vo/catkin_ws/src/pub_sub_image_topic_pkg/image/meinv.png", CV_LOAD_IMAGE_COLOR);
+  cv::Mat image = cv::imread("/media/q/Q/vo/catkin_ws/src/pub_sub_image_topic_pkg/image/meinv.png", cv::IMREAD_COLOR);
   if(image.empty()){
     printf("image empty\n");
   }

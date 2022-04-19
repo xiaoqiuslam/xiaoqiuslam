@@ -2,14 +2,14 @@
 #include <tf/transform_broadcaster.h>
 #include <nav_msgs/Odometry.h>
 
-#include <Eigen/Eigen>
-#include <Eigen/Dense>
-#include <Eigen/Geometry>
-#include <Eigen/Eigenvalues>
+#include <eigen3/Eigen/Eigen>
+#include <eigen3/Eigen/Dense>
+#include <eigen3/Eigen/Geometry>
+#include <eigen3/Eigen/Eigenvalues>
 
 
 #include <iostream>
-#include <Eigen/Core>
+#include <eigen3/Eigen/Core>
 #include <cmath>
 
 using namespace std;
