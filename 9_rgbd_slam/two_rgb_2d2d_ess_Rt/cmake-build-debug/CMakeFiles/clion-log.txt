@@ -1,0 +1,36 @@
+/snap/clion/178/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/snap/clion/178/bin/ninja/linux/ninja -G Ninja /media/q/q/rgbd-slam-tutorial/two_rgb_2d2d_ess_Rt
+CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 2.8.12 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+-- The C compiler identification is GNU 5.4.0
+-- The CXX compiler identification is GNU 5.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found OpenCV: /usr/local (found version "3.4.0") 
+CMake Warning (dev) at /snap/clion/178/bin/cmake/linux/share/cmake-3.21/Modules/FindPackageHandleStandardArgs.cmake:438 (message):
+  The package name passed to `find_package_handle_standard_args` (CSPARSE)
+  does not match the name of the calling package (CSparse).  This can lead to
+  problems in calling code that expects `find_package` result variables
+  (e.g., `_FOUND`) to follow a certain pattern.
+Call Stack (most recent call first):
+  cmake_modules/FindCSparse.cmake:24 (find_package_handle_standard_args)
+  CMakeLists.txt:25 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Found CSPARSE: /usr/include/suitesparse  
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /media/q/q/rgbd-slam-tutorial/two_rgb_2d2d_ess_Rt/cmake-build-debug
