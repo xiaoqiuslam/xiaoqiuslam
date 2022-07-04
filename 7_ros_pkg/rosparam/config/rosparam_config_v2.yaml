@@ -1,0 +1,2 @@
+#另外一种yaml的表达形式，若前后两个命名空间重复了，就当成同一个
+{/demo_rosparam/int_param: 321, string_param: xxx}

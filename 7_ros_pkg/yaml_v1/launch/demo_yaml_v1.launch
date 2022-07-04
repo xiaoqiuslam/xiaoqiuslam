@@ -1,0 +1,6 @@
+<launch>
+	<arg name="file_path" value="$(find demo_yaml_v1)/config/test.yaml"/>
+	<node name="demo_yaml_v1" pkg="demo_yaml_v1" type="demo_yaml_v1" output="screen">
+		<param name="path" type="string" value="$(arg file_path)"/>	
+	</node>
+</launch>
