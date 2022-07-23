@@ -4,5 +4,5 @@ using namespace std;
 
 void printHello()
 {
-    std::cout<<"小秋SLAM代码实战笔记"<<std::endl;
+    std::cout<<"小秋SLAM实战教程"<<std::endl;
 }

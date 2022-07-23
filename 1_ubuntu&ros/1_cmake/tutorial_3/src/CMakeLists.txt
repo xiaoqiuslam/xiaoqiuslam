@@ -6,4 +6,3 @@ add_library( tutorial_3 STATIC hello.cpp)
 
 
 
-        
