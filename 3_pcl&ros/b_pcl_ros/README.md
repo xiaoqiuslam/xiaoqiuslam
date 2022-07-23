@@ -1,4 +1,4 @@
-![](image/小秋SLAM实战教程.png)
+![](./2_opencv&ros/a_opencv_cvmat/小秋SLAM实战教程.png)
 
 PCL&ROS｜创建点云并发布ROS点云话题（从零开始手写VO视频课程）
 [【Point Cloud ROS】创建点云并发布ROS点云话题](https://blog.csdn.net/qq_21950671/article/details/119819293)
