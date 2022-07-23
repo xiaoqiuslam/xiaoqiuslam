@@ -1,3 +1,0 @@
-/media/q/q/rgbd-slam-tutorial/two_rgb_2d2d_ess_Rt/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/media/q/q/rgbd-slam-tutorial/two_rgb_2d2d_ess_Rt/cmake-build-debug/CMakeFiles/edit_cache.dir
-/media/q/q/rgbd-slam-tutorial/two_rgb_2d2d_ess_Rt/cmake-build-debug/CMakeFiles/two_rgb_rt_2d2d.dir

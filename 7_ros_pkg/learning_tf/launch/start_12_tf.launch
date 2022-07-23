@@ -1,5 +1,0 @@
-<launch>
-    <node pkg="tf" type="static_transform_publisher" name="turtle1" args="5 0 0 0 0 0 1 world turtle1 100" />
-    <node pkg="tf" type="static_transform_publisher" name="turtle2" args="1 0 0 0 0 0 1 world turtle2 100" />
-    <node pkg="tf" type="static_transform_publisher" name="eye" args="1 0 0 0 0 0 1 turtle1 eye 100" />
-</launch>
