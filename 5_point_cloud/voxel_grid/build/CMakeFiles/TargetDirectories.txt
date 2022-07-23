@@ -1,3 +1,0 @@
-/home/q/xiaoqiuslamshizhanjiaocheng/pcl_stu/voxel_grid/build/CMakeFiles/edit_cache.dir
-/home/q/xiaoqiuslamshizhanjiaocheng/pcl_stu/voxel_grid/build/CMakeFiles/rebuild_cache.dir
-/home/q/xiaoqiuslamshizhanjiaocheng/pcl_stu/voxel_grid/build/CMakeFiles/voxel_grid.dir
