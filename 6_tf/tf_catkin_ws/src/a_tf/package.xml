@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>tf_pkg</name>
+  <name>a_tf</name>
   <version>0.0.0</version>
-  <description>The tf_pkg package</description>
+  <description>The a_tf package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
