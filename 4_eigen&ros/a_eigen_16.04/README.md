@@ -1,3 +1,5 @@
+[![小秋SLAM实战教程](/小秋SLAM实战教程.png)如果不能下载代码可以关注订阅号小秋SLAM实战教程添加微信slamshizhanjiaocheng获取代码](https://mp.weixin.qq.com/s/3Z129tEr6gWKgNAoXYYk4Q)
+
 Eigen&ROS｜Eigen中向量和矩阵的用法（从零开始手写VO视频课程）
 Eigen&ROS｜位置姿态的表示和变换（从零开始手写VO视频课程）
 Eigen&ROS｜Eigen中旋转矩阵和变换矩阵的用法（从零开始手写VO视频课程）
