@@ -1,4 +1,4 @@
-![](./2_opencv&ros/a_opencv_cvmat/小秋SLAM实战教程.png)
+[![小秋SLAM实战教程](/小秋SLAM实战教程.png)如果不能下载代码可以关注订阅号小秋SLAM实战教程添加微信slamshizhanjiaocheng获取代码](https://mp.weixin.qq.com/s/3Z129tEr6gWKgNAoXYYk4Q)
 
 OpenCV&ROS｜图像数据Mat的属性（从零开始手写VO视频课程）
  [【OpenCV】模拟图像、数字图像](https://chunqiushenye.blog.csdn.net/article/details/90449301)
