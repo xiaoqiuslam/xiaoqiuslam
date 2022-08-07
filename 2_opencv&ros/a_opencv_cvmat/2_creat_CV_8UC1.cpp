@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/opencv.hpp>
@@ -7,8 +6,19 @@
 
 int main()
 {
-    cv::Mat mat(4, 6, CV_8UC1, cv::Scalar(22));
-    randu(mat, cv::Scalar::all(0), cv::Scalar::all(255));
+    cv::Mat mat(4, 6, CV_8UC1);
+    for (int i = 0; i < mat.rows; i++)
+    {
+        for (int j = 0; j < mat.cols; j++)
+        {
+            if (j == 3)
+            {
+                mat.at<char>(i, j) = 0;
+            }
+        }
+    }
+
+
     cv::namedWindow( "creat_image", cv::WINDOW_NORMAL);
     imshow( "creat_image", mat);
     cv::waitKey(0);
