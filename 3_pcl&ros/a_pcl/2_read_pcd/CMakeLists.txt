@@ -6,7 +6,7 @@ project(1write_pcd)                                        #建立的工程名�
 #           一个组件  find_package(PCL 1.6 REQUIRED COMPONENTS  io)
 #           多个组件  find_package(PCL 1.6 REQUIRED COMPONENTS commom io)
 #           所有组件  find_package(PCL 1.6 REQUIRED )                    
-find_package(PCL 1.3 REQUIRED)  
+find_package(PCL REQUIRED)
 
 
 #下面的语句是利用CMake的宏完成对PCL的头文件路径和链接路径变量的配置和添加，如果缺少下面几行，生成文件的过程中就会提示
@@ -23,10 +23,10 @@ link_directories(${PCL_LIBRARIES_DIRS})
 add_definitions(${PCL_DEFINITIONS})
 
 #这句话告诉CMake从单个源文件write_pcd建立一个可执行文件
-add_executable(write_pcd.o ../1write_pcd/write_pcd.cpp)
+#add_executable(write_pcd.o read_pcd.cpp)
 add_executable(read_pcd read_pcd.cpp) # 注意路径=====
 #虽然包含了PCL的头文件，因此编译器知道我们现在访问所用的方法，我们也需要让链接器知道所链接的库，PCL找到库文件由
 #PCL_COMMON_LIBRARIES变量指示，通过target_link_libraries这个宏来出发链接操作
 # target_link_libraries(write_pcd ${PCL_COMMON_LIBRARIES} ${PCL_IO_LIBRARIES}) # 链接common和IO  会报错
-target_link_libraries(write_pcd.o ${PCL_LIBRARIES}) # 链接PCL所有库
+#target_link_libraries(write_pcd.o ${PCL_LIBRARIES}) # 链接PCL所有库
 target_link_libraries(read_pcd ${PCL_LIBRARIES}) # 链接PCL所有库

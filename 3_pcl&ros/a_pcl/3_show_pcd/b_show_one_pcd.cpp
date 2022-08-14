@@ -24,7 +24,7 @@ int main()
     // 设置显示点云的颜色
     pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> red(cloud, 255, 0, 0);
     viewer.addPointCloud<pcl::PointXYZ>(cloud, red, "cloud");
-    viewer.setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 3, "cloud");
+    viewer.setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 30, "cloud");
     while (!viewer.wasStopped())
     {
         viewer.spinOnce();

@@ -15,6 +15,8 @@ int main(int argc, char **argv)
               << cloud->width * cloud->height // 宽*高
               << " data points from test_pcd.pcd with the following fields: "
               << std::endl;
+
+    std::cout << cloud->width  << std::endl;
     for (size_t i = 0; i < cloud->points.size(); ++i)
         std::cout << "    " << cloud->points[i].x
                   << " " << cloud->points[i].y

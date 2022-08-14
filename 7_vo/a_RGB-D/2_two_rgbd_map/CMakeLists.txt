@@ -18,7 +18,7 @@ add_definitions(${PCL_DEFINITIONS})
 include_directories("/usr/include/eigen3")
 
 # 安装视觉SLAM十四讲第一版slambook下面的Sophus
-set(Sophus_LIBRARIES /usr/local/lib/libSophus.so)
+# set(Sophus_LIBRARIES /usr/local/lib/libSophus.so)
 
 find_package(Pangolin REQUIRED)
 include_directories(${Pangolin_INCLUDE_DIRS})
