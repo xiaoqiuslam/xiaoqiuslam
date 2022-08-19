@@ -218,3 +218,6 @@ target_link_libraries(creat_point_cloud_pub ${PCL_LIBRARIES}  ${catkin_LIBRARIES
 
 add_executable(point_cloud_transform src/point_cloud_transform.cpp)
 target_link_libraries(point_cloud_transform ${PCL_LIBRARIES} ${catkin_LIBRARIES})
+
+add_executable(creat_spiral_point_cloud src/creat_spiral_point_cloud.cpp)
+target_link_libraries(creat_spiral_point_cloud ${PCL_LIBRARIES}  ${catkin_LIBRARIES} pcl_visualization )
