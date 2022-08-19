@@ -28,7 +28,7 @@ public:
         // 1 为待处理信息队列大小，一次只处理一个消息
         // &pcl_sub::getcloud 调用的函数指针，即回调函数。
         // this 回调函数所在的类
-        subCloud = n.subscribe<sensor_msgs::PointCloud2>("/point_cloud_pub_topic", 1, &pcl_sub::getcloud, this); 
+        subCloud = n.subscribe<sensor_msgs::PointCloud2>("/point_cloud_topic", 1, &pcl_sub::getcloud, this); 
         // 发布位姿变换后的点云/adjusted_cloud
         pubCloud = n.advertise<sensor_msgs::PointCloud2>("/adjustd_cloud", 1);                                     
     }
