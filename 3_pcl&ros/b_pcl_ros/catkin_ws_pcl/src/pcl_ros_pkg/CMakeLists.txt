@@ -221,3 +221,9 @@ target_link_libraries(point_cloud_transform ${PCL_LIBRARIES} ${catkin_LIBRARIES}
 
 add_executable(creat_spiral_point_cloud src/creat_spiral_point_cloud.cpp)
 target_link_libraries(creat_spiral_point_cloud ${PCL_LIBRARIES}  ${catkin_LIBRARIES} pcl_visualization )
+
+add_executable(laser_scan src/laser_scan.cpp)
+target_link_libraries(laser_scan ${catkin_LIBRARIES} pcl_visualization )
+
+add_executable(ros_point_cloud src/ros_point_cloud.cpp)
+target_link_libraries(ros_point_cloud ${catkin_LIBRARIES} pcl_visualization)
