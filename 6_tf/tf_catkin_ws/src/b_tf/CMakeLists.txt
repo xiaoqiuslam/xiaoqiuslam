@@ -210,11 +210,16 @@ include_directories(
 # catkin_add_nosetests(test)
 
 add_executable(static_tf_broadcaster_eigen2tf src/static_tf_broadcaster_eigen2tf.cpp)
-target_link_libraries(static_tf_broadcaster_eigen2tf ${catkin_LIBRARIES} )
+target_link_libraries(static_tf_broadcaster_eigen2tf ${catkin_LIBRARIES})
 
 add_executable(static_tf_broadcaster_setRPY src/static_tf_broadcaster_setRPY.cpp)
-target_link_libraries(static_tf_broadcaster_setRPY ${catkin_LIBRARIES} )
-
+target_link_libraries(static_tf_broadcaster_setRPY ${catkin_LIBRARIES})
 
 add_executable(static_tf_broadcaster_setRPY_mul src/static_tf_broadcaster_setRPY_mul.cpp)
-target_link_libraries(static_tf_broadcaster_setRPY_mul  ${catkin_LIBRARIES} )
+target_link_libraries(static_tf_broadcaster_setRPY_mul  ${catkin_LIBRARIES})
+
+add_executable(static_tf_broadcaster_createQuaternionMsgFromRollPitchYaw src/static_tf_broadcaster_createQuaternionMsgFromRollPitchYaw.cpp)
+target_link_libraries(static_tf_broadcaster_createQuaternionMsgFromRollPitchYaw ${catkin_LIBRARIES})
+
+
+
