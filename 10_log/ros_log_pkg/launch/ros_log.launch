@@ -1,0 +1,5 @@
+<launch>
+    <node name="ros_log_node" pkg="ros_log_pkg" type="ros_log" output="screen">
+        <param name="PRINT_MODE" type="string" value="2"/>
+    </node>
+</launch>
