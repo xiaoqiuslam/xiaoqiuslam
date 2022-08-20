@@ -10,8 +10,11 @@ project(b_tf)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
+  tf
   tf2
   tf2_ros
+  turtlesim
+  tf_conversions
 )
 
 ## System dependencies are found with CMake's conventions
@@ -206,6 +209,12 @@ include_directories(
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
+add_executable(static_tf_broadcaster_eigen2tf src/static_tf_broadcaster_eigen2tf.cpp)
+target_link_libraries(static_tf_broadcaster_eigen2tf ${catkin_LIBRARIES} )
 
-add_executable(static_tf_broadcaster src/static_tf_broadcaster.cpp)
-target_link_libraries(static_tf_broadcaster ${catkin_LIBRARIES} )
+add_executable(static_tf_broadcaster_setRPY src/static_tf_broadcaster_setRPY.cpp)
+target_link_libraries(static_tf_broadcaster_setRPY ${catkin_LIBRARIES} )
+
+
+add_executable(static_tf_broadcaster_setRPY_mul src/static_tf_broadcaster_setRPY_mul.cpp)
+target_link_libraries(static_tf_broadcaster_setRPY_mul  ${catkin_LIBRARIES} )

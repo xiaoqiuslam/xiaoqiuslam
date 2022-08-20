@@ -6,6 +6,7 @@
 
 int main(int argc, char **argv)
 {
+  // rosrun b_tf static_tf_broadcaster_eigen2tf child_frame_name 1 0 0 0 0 0
   ros::init(argc,argv, "my_static_tf2_broadcaster");
   if(argc != 8){
     ROS_ERROR("usage: static_turtle_tf2_broadcaster child_frame_name x y z roll pitch yaw");
