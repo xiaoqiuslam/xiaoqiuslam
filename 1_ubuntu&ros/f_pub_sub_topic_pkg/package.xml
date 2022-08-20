@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>pub_sub_topic_pkg</name>
+  <name>f_pub_sub_topic_pkg</name>
   <version>0.0.0</version>
-  <description>The pub_sub_topic_pkg package</description>
+  <description>The f_pub_sub_topic_pkg package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->

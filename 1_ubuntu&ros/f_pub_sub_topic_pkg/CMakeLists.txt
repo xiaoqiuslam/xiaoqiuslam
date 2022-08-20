@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(pub_sub_topic_pkg)
+project(f_pub_sub_topic_pkg)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)

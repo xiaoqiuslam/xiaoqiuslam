@@ -1,0 +1,6 @@
+<launch>
+
+<node pkg="f_pub_sub_topic_pkg" type="listener" name="talker" />
+<node pkg="f_pub_sub_topic_pkg" type="listener" name="listener" />
+
+</launch>
