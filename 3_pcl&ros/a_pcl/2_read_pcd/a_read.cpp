@@ -11,6 +11,7 @@ int main(int argc, char **argv)
         PCL_ERROR("Couldn't read file test_pcd.pcd \n");
         return (-1);
     }
+
     std::cout << "Loaded "
               << cloud->width * cloud->height // 宽*高
               << " data points from test_pcd.pcd with the following fields: "

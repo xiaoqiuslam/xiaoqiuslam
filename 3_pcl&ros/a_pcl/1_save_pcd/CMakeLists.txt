@@ -7,8 +7,8 @@ include_directories(${PCL_INCLUDE_DIRS})
 link_directories(${PCL_LIBRARY_DIRS})
 add_definitions(${PCL_DEFINITIONS})
 
-add_executable(1_save_pcd 1_save_pcd.cpp)
-target_link_libraries (1_save_pcd ${PCL_LIBRARIES})
+add_executable(a_save a_save.cpp)
+target_link_libraries (a_save ${PCL_LIBRARIES})
 
-add_executable(2_save_pcd 2_save_pcd.cpp)
-target_link_libraries (2_save_pcd ${PCL_LIBRARIES})
+add_executable(b_save b_save.cpp)
+target_link_libraries (b_save ${PCL_LIBRARIES})
