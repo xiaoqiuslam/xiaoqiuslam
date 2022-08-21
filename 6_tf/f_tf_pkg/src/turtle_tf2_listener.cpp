@@ -3,9 +3,6 @@
 #include <geometry_msgs/TransformStamped.h>
 #include <geometry_msgs/Twist.h>
 
-// https://blog.csdn.net/qq_21950671/article/details/122212412
-
-
 int main(int argc, char** argv){
   ros::init(argc, argv, "my_tf2_listener");
 
