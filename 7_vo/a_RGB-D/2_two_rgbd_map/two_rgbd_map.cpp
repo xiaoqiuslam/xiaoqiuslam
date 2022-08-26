@@ -16,7 +16,7 @@
 #include <pcl/features/normal_3d.h>
 #include <pcl/io/io.h>
 
-// using namespace std;
+using namespace std;
 
 pcl::PointCloud<pcl::PointXYZRGBA>::Ptr image2PointCloud(cv::Mat &rgb, cv::Mat &depth);
 
@@ -36,7 +36,7 @@ int main(int argc, char **argv){
 
     cv::Mat imgShow;
     cv::drawKeypoints(rgb1, kp1, imgShow, cv::Scalar::all(-1), cv::DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS);
-    cv::namedWindow("keypoints", cv::WINDOW_NORMAL);
+    cv::namedWindow("keypoints", CV_WINDOW_NORMAL);
     cv::imshow("keypoints", imgShow);
     cv::waitKey(0);
 
@@ -118,7 +118,7 @@ int main(int argc, char **argv){
     cout << "t=" << tvec << endl;
 
 
-    std::vector< cv::DMatch > matchesShow;
+    vector< cv::DMatch > matchesShow;
     for (size_t i=0; i<inliers.rows; i++){
         matchesShow.push_back( goodMatches[inliers.ptr<int>(i)[0]] );    
     }
