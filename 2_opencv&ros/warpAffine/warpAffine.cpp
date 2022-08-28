@@ -119,8 +119,6 @@ imshow("src", image);
 cv::waitKey();
 
 
-// 摄影变换 明天继续把这些变换搞完？
-//
 
 
 
