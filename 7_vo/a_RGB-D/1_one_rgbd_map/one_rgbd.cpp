@@ -1,21 +1,22 @@
 #include <iostream>
+
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
+
 #include <pcl/io/pcd_io.h>
 #include <pcl/point_types.h>
 #include <pcl/common/common_headers.h>
 #include <pcl/features/normal_3d.h>
 #include <pcl/visualization/pcl_visualizer.h>
+
 #include <boost/thread/thread.hpp>
 
-// 相机内参
 const double camera_factor = 1000;
 const double camera_cx = 325.5;
 const double camera_cy = 253.5;
 const double camera_fx = 518.0;
 const double camera_fy = 519.0;
 
-// 主函数
 int main( int argc, char** argv )
 {
     // 读取rgb.png和depth.png并转化为点云
@@ -49,7 +50,7 @@ int main( int argc, char** argv )
             p.g = rgb.ptr<uchar>(u)[v*3+1];
             p.r = rgb.ptr<uchar>(u)[v*3+2];
 
-            // 把p加入到点云中
+            // p加入到点云中
             cloud->points.push_back( p );
         }
     // 设置并保存点云
@@ -63,7 +64,6 @@ int main( int argc, char** argv )
     // 可视化点云
     pcl::visualization::PCLVisualizer viewer("cloud");
     viewer.setBackgroundColor(0, 0, 0);
-
     pcl::visualization::PointCloudColorHandlerRGBField<pcl::PointXYZRGB> fildColor(cloud);
     viewer.addPointCloud<pcl::PointXYZRGB>(cloud, fildColor, "sample");
     viewer.setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 2, "sample");
@@ -71,7 +71,6 @@ int main( int argc, char** argv )
     while (!viewer.wasStopped()) {
         viewer.spinOnce();
     }
-    // 清除数据并退出
     cloud->points.clear();
     return 0;
 }
