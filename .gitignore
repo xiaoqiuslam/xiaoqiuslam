@@ -1,11 +1,5 @@
 .idea/
-3_pcl&ros/a_pcl/1_save_pcd/1_save_pcd.pcd
-3_pcl&ros/a_pcl/1_save_pcd/cmake-build-debug/
-3_pcl&ros/a_pcl/2_read_pcd/cmake-build-debug/
-3_pcl&ros/a_pcl/3_show_pcd/cmake-build-debug/
-7_vo/a_RGB-D/1_one_rgbd_map/build/
-7_vo/a_RGB-D/2_two_rgbd_map/build/
-7_vo/a_RGB-D/2_two_rgbd_map/cmake-build-debug/
-7_vo/a_RGB-D/2_two_rgbd_map/fpst.pcd
-7_vo/a_RGB-D/2_two_rgbd_map/spft.pcd
 
+
+7_vo/a_RGB-D/depth_png
+7_vo/a_RGB-D/rgb_png
