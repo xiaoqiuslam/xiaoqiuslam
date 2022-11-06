@@ -3,3 +3,6 @@
 
 7_vo/a_RGB-D/depth_png
 7_vo/a_RGB-D/rgb_png
+
+7_vo/a_RGB-D/5_two_rgb_Rt/cmake-build-debug/
+7_vo/a_RGB-D/6_triangulatePoints/cmake-build-debug/

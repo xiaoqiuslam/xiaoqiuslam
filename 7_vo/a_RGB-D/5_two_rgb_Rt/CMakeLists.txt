@@ -19,9 +19,9 @@ include_directories(${EIGEN3_INCLUDE_DIRS})
 
 # find_package(G2O REQUIRED)
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake_modules)
-set(G2O_INCLUDE_DIRS /usr/local/include/g2o/)
 set(CERES_LIBRARIES /usr/local/lib/)
-include_directories(${G2O_INCLUDE_DIRS})
+
+
 
 find_package(CSparse REQUIRED)
 include_directories(${CSPARSE_INCLUDE_DIR})
