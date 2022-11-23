@@ -6,3 +6,5 @@
 
 7_vo/a_RGB-D/5_two_rgb_Rt/cmake-build-debug/
 7_vo/a_RGB-D/6_triangulatePoints/cmake-build-debug/
+
+7_vo/vo_g2o_map/rgbd_dataset_freiburg1_xyz/
