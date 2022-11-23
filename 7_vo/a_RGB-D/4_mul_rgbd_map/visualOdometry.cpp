@@ -194,14 +194,14 @@ int main( int argc, char** argv){
     // 读取上一帧
     FRAME lastFrame;
     std::stringstream ss;
-    ss<< "/media/q/256/xqslam/rgbd_slam/rgb_png/" <<currIndex<< ".png";
+    ss<< "../rgb_png/" <<currIndex<< ".png";
     std::string filename;
     ss>>filename;
     lastFrame.rgb = cv::imread( filename );
 
     ss.clear();
     filename.clear();
-    ss<<"/media/q/256/xqslam/rgbd_slam/depth_png/"<<currIndex<< ".png";
+    ss<<"../depth_png/"<<currIndex<< ".png";
     ss>>filename;
     lastFrame.depth = cv::imread( filename, -1 );
 
@@ -221,14 +221,14 @@ int main( int argc, char** argv){
         // 读取当前帧
         FRAME currFrame;
         std::stringstream ss;
-        ss<< "/media/q/256/xqslam/rgbd_slam/rgb_png/" <<currIndex<< ".png";
+        ss<< "../rgb_png/" <<currIndex<< ".png";
         std::string filename;
         ss>>filename;
         currFrame.rgb = cv::imread( filename );
 
         ss.clear();
         filename.clear();
-        ss<<"/media/q/256/xqslam/rgbd_slam/depth_png/"<<currIndex<< ".png";
+        ss<<"../depth_png/"<<currIndex<< ".png";
         ss>>filename;
         currFrame.depth = cv::imread( filename, -1 );
 
