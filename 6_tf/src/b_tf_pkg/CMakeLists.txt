@@ -209,8 +209,8 @@ include_directories(
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
-# add_executable(tf2_broadcaster src/tf2_broadcaster.cpp)
-# target_link_libraries(tf2_broadcaster  ${catkin_LIBRARIES} )
+add_executable(static_tf_broadcaster src/static_tf_broadcaster.cpp)
+target_link_libraries(static_tf_broadcaster  ${catkin_LIBRARIES} )
 
 add_executable(tf2_broadcaster_imu src/tf2_broadcaster_imu.cpp)
 target_link_libraries(tf2_broadcaster_imu  ${catkin_LIBRARIES} )
