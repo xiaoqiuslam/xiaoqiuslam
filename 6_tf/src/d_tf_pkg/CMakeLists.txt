@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(c_tf)
+project(d_tf_pkg)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -10,7 +10,8 @@ project(c_tf)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
-  tf
+  tf2
+  tf2_ros
 )
 
 ## System dependencies are found with CMake's conventions
@@ -104,8 +105,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES c_tf
-#  CATKIN_DEPENDS roscpp rospy tf tf_ros
+#  LIBRARIES d_tf
+#  CATKIN_DEPENDS roscpp rospy tf2 tf2_ros
 #  DEPENDS system_lib
 )
 
@@ -122,7 +123,7 @@ include_directories(
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/c_tf.cpp
+#   src/${PROJECT_NAME}/d_tf.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -133,7 +134,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/c_tf_node.cpp)
+# add_executable(${PROJECT_NAME}_node src/d_tf_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -197,7 +198,7 @@ include_directories(
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_c_tf.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_d_tf.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
@@ -205,5 +206,5 @@ include_directories(
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
-add_executable(transform_point src/transform_point.cpp)
-target_link_libraries(transform_point ${catkin_LIBRARIES})
+add_executable(turtle_tf2_listener src/turtle_tf2_listener.cpp)
+target_link_libraries(turtle_tf2_listener ${catkin_LIBRARIES})
