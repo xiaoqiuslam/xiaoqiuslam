@@ -10,3 +10,7 @@
 7_vo/a_RGB-D/4_mul_rgbd_map/depth_png/
 7_vo/a_RGB-D/4_mul_rgbd_map/result.pcd
 7_vo/a_RGB-D/4_mul_rgbd_map/rgb_png/
+
+.catkin_workspace
+build/
+devel/
