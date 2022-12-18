@@ -9,9 +9,9 @@ int main(int argc, char** argv){
   ros::NodeHandle nh;
   // 话题 rostopic list -> /odom 
   // rostopic type /odom -> nav_msgs/Odometry
-  ros::Publisher odom_pub = nh.advertise<nav_msgs::Odometry>("odom", 50);
+  ros::Publisher nav_msgs_odometry_publisher = nh.advertise<nav_msgs::Odometry>("nav_msgs_odometry", 50);
   // tf
-  tf::TransformBroadcaster odom_broadcaster;
+  tf::TransformBroadcaster transform_broadcaster;
   // 初始x点的位置
   double x = 0.0;
   // 初始y点的位置
@@ -52,44 +52,39 @@ int main(int argc, char** argv){
     th += delta_th;
 
     // odometry is 6DOF we'll need a quaternion created from yaw
-    geometry_msgs::Quaternion odom_quat = tf::createQuaternionMsgFromYaw(th);
+    geometry_msgs::Quaternion quaternion = tf::createQuaternionMsgFromYaw(th);
 
     /**
     first, we'll publish the transform over tf
     创建TransformStamped消息，通过tf发送odom为父坐标系,base_link为子坐标系
     */
-    geometry_msgs::TransformStamped odom_trans;
-    odom_trans.header.stamp = current_time;
-    odom_trans.header.frame_id = "odom";
-    odom_trans.child_frame_id = "base_link";
-
-    odom_trans.transform.translation.x = x;
-    odom_trans.transform.translation.y = y;
-    odom_trans.transform.translation.z = 0.0;
-    odom_trans.transform.rotation = odom_quat;
-
+    geometry_msgs::TransformStamped transform_stamped;
+    transform_stamped.header.stamp = current_time;
+    transform_stamped.header.frame_id = "map";
+    transform_stamped.child_frame_id = "base_link";
+    transform_stamped.transform.translation.x = x;
+    transform_stamped.transform.translation.y = y;
+    transform_stamped.transform.translation.z = 0.0;
+    transform_stamped.transform.rotation = quaternion;
     // send the transform
-    odom_broadcaster.sendTransform(odom_trans);
+    transform_broadcaster.sendTransform(transform_stamped);
 
     // publish the odometry message over ROS 使得导航从中获取速度信息
-    nav_msgs::Odometry odom;
-    odom.header.stamp = current_time;
-    odom.header.frame_id = "odom";
-
+    nav_msgs::Odometry odometry;
+    odometry.header.stamp = current_time;
+    odometry.header.frame_id = "map";
+    odometry.child_frame_id = "base_link";
     // set the position
-    odom.pose.pose.position.x = x;
-    odom.pose.pose.position.y = y;
-    odom.pose.pose.position.z = 0.0;
-    odom.pose.pose.orientation = odom_quat;
-
+    odometry.pose.pose.position.x = x;
+    odometry.pose.pose.position.y = y;
+    odometry.pose.pose.position.z = 0.0;
+    odometry.pose.pose.orientation = quaternion;
     // set the velocity 
-    odom.child_frame_id = "base_link";
-    odom.twist.twist.linear.x = vx;
-    odom.twist.twist.linear.y = vy;
-    odom.twist.twist.angular.z = vth;
-
+    odometry.twist.twist.linear.x = vx;
+    odometry.twist.twist.linear.y = vy;
+    odometry.twist.twist.angular.z = vth;
     // publish the message
-    odom_pub.publish(odom);
+    nav_msgs_odometry_publisher.publish(odometry);
 
     last_time = current_time;
     rate.sleep();
