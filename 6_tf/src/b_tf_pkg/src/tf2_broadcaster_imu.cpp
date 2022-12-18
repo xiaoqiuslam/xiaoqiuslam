@@ -38,7 +38,6 @@ int main(int argc, char **argv){
 
   ros::init(argc,argv, "my_tf2_broadcaster_imu");
   ros::NodeHandle node;
-  ros::Time::init();
   ros::Rate rate(1.0);
   tf2_ros::StaticTransformBroadcaster static_transform_broadcaster;
   while (node.ok()){
