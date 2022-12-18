@@ -47,6 +47,7 @@ int main(int argc, char** argv){
     q.setRPY(0, 0, euler_angle.z());
     // q.setRPY(0, 0, 0.785398);
     transform.setRotation( q );
+    // 发布的话题是　/tf
     br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "map", "base_link"));
     rate.sleep();
   }

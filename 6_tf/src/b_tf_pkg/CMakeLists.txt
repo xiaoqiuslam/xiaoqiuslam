@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(b_tf)
+project(b_tf_pkg)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -215,13 +215,13 @@ include_directories(
 add_executable(tf2_broadcaster_imu src/tf2_broadcaster_imu.cpp)
 target_link_libraries(tf2_broadcaster_imu  ${catkin_LIBRARIES} )
 
-add_executable(turtle_tf2_broadcaster src/turtle_tf2_broadcaster.cpp)
-target_link_libraries(turtle_tf2_broadcaster ${catkin_LIBRARIES})
+# add_executable(turtle_tf_broadcaster src/turtle_tf_broadcaster.cpp)
+# target_link_libraries(turtle_tf_broadcaster ${catkin_LIBRARIES})
 
-add_executable(turtle_tf2_listener src/turtle_tf2_listener.cpp)
-target_link_libraries(turtle_tf2_listener ${catkin_LIBRARIES})
+# add_executable(turtle_tf_listener src/turtle_tf_listener.cpp)
+# target_link_libraries(turtle_tf_listener ${catkin_LIBRARIES})
 
 # 添加一个坐标系
-add_executable(frame_tf2_broadcaster src/frame_tf2_broadcaster.cpp)
-target_link_libraries(frame_tf2_broadcaster ${catkin_LIBRARIES})
+# add_executable(frame_tf_broadcaster src/frame_tf_broadcaster.cpp)
+# target_link_libraries(frame_tf_broadcaster ${catkin_LIBRARIES})
 
