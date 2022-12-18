@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>f_tf</name>
+  <name>g_tf</name>
   <version>0.0.0</version>
-  <description>The f_tf package</description>
+  <description>The g_tf package</description>
 
   <maintainer email="q@todo.todo">q</maintainer>
 

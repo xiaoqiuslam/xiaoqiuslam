@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(learning_tf)
+project(e_tf)
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp

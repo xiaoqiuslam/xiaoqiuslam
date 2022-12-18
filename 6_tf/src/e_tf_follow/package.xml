@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>learning_tf</name>
+  <name>e_tf</name>
   <version>0.0.0</version>
-  <description>The learning_tf package</description>
+  <description>The e_tf package</description>
 
   <maintainer email="q@todo.todo">q</maintainer>
 
