@@ -9,12 +9,10 @@
 #include <eigen3/Eigen/Core>
 #include <cmath>
 
-using namespace std;
-using namespace Eigen;
-
-
 int main(int argc, char** argv){
+
   ros::init(argc, argv, "my_tf_broadcaster");
+
   ros::NodeHandle node;
 
   tf::TransformBroadcaster br;
@@ -22,12 +20,11 @@ int main(int argc, char** argv){
 
   ros::Rate rate(10.0);
   while (node.ok()){
-
     transform.setOrigin(tf::Vector3(1.0, 0.0, 0.0));
 
     Eigen::Matrix3d rotation_matrix3d_orb_rviz;
     rotation_matrix3d_orb_rviz << 0,  0, 1, 
-                                  -1,  0, 0, 
+                                 -1,  0, 0, 
                                   0, -1, 0;
 
     // 旋转矩阵转换为欧拉角,"2" represents the z axis , "0" x axis, "1" y axis

@@ -9,9 +9,6 @@
 #include <eigen3/Eigen/Core>
 #include <cmath>
 
-using namespace std;
-using namespace Eigen;
-
 
 int main(int argc, char** argv){
   ros::init(argc, argv, "my_tf_broadcaster");

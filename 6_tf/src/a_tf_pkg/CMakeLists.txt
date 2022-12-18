@@ -221,3 +221,6 @@ target_link_libraries(tf_zy ${catkin_LIBRARIES})
 
 add_executable(tf_zyx src/tf_zyx.cpp)
 target_link_libraries(tf_zyx ${catkin_LIBRARIES})
+
+add_executable(odometry src/odometry.cpp)
+target_link_libraries(odometry ${catkin_LIBRARIES})
