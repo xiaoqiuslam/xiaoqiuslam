@@ -11,44 +11,39 @@
 
 int main(int argc, char** argv){
 
-  ros::init(argc, argv, "my_tf_broadcaster");
+  Eigen::AngleAxisd rotation_vector(M_PI/4, Eigen::Vector3d ( 0, 0, 1 ) );
+  std::cout << "angle is: " << rotation_vector.angle() * 180 / M_PI << " axis is: " << rotation_vector.axis().transpose() << std::endl;
 
-  ros::NodeHandle node;
+  //旋转向量转化为旋转矩阵
+  Eigen::Matrix3d rotation_matrix3d = rotation_vector.matrix();
+  std::cout<<"rotation_matrix3d \n"<< rotation_matrix3d << std::endl;
+  //      cos45 -sin45         0
+  //      sin45  cos45         0
+  //      0         0          1
 
-  tf::TransformBroadcaster br;
+  //      0.707107 -0.707107         0
+  //      0.707107  0.707107         0
+  //      0         0                1
+
+  // 旋转矩阵转换为欧拉角,"2" represents the z axis , "0" x axis, "1" y axis
+  Eigen::Vector3d euler_angle = rotation_matrix3d.eulerAngles(0, 1, 2);
+  std::cout << "绕z轴旋转的角度是 " << euler_angle.z() << std::endl;
+  std::cout << "绕z轴旋转的角度是 " << euler_angle.z() * 180 / M_PI << std::endl;
+
+  tf::Quaternion q;
+  q.setRPY(0, 0, euler_angle.z());
+  // q.setRPY(0, 0, 0.785398);
   tf::Transform transform;
-
-  ros::Rate rate(10.0);
-
-  while (node.ok()){
-
-    transform.setOrigin(tf::Vector3(1.0, 0.0, 0.0));
-
-    Eigen::AngleAxisd rotation_vector(M_PI/4, Eigen::Vector3d ( 0, 0, 1 ) );
-    std::cout << "angle is: " << rotation_vector.angle() * 180 / M_PI << " axis is: " << rotation_vector.axis().transpose() << std::endl;
-
-    //旋转向量转化为旋转矩阵
-    Eigen::Matrix3d rotation_matrix3d = rotation_vector.matrix();
-    std::cout<<"rotation_matrix3d \n"<< rotation_matrix3d << std::endl;
-    //      cos45 -sin45         0
-    //      sin45  cos45         0
-    //      0         0          1
-
-    //      0.707107 -0.707107         0
-    //      0.707107  0.707107         0
-    //      0         0                1
-
-    // 旋转矩阵转换为欧拉角,"2" represents the z axis , "0" x axis, "1" y axis
-    Eigen::Vector3d euler_angle = rotation_matrix3d.eulerAngles(0, 1, 2);
-    std::cout << "绕z轴旋转的角度是 " << euler_angle.z() << std::endl;
-    std::cout << "绕z轴旋转的角度是 " << euler_angle.z() * 180 / M_PI << std::endl;
+  transform.setRotation( q );
+  transform.setOrigin(tf::Vector3(1.0, 0.0, 0.0));
                           
-    tf::Quaternion q;
-    q.setRPY(0, 0, euler_angle.z());
-    // q.setRPY(0, 0, 0.785398);
-    transform.setRotation( q );
+  ros::init(argc, argv, "my_tf_broadcaster");
+  ros::NodeHandle node;
+  ros::Rate rate(10.0);
+  tf::TransformBroadcaster transform_broadcaster;
+  while (node.ok()){
     // 发布的话题是　/tf
-    br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "map", "base_link"));
+    transform_broadcaster.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "map", "base_link"));
     rate.sleep();
   }
   return 0;

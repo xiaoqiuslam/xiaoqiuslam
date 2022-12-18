@@ -40,8 +40,7 @@ int main(int argc, char **argv){
   ros::NodeHandle node;
   ros::Time::init();
   ros::Rate rate(1.0);
-  static tf2_ros::StaticTransformBroadcaster static_transform_broadcaster;
-  tf2_ros::TransformBroadcaster tfb;
+  tf2_ros::StaticTransformBroadcaster static_transform_broadcaster;
   while (node.ok()){
     geometry_msgs_transform_stamped.header.stamp = ros::Time::now();
     // 发布的话题是　/tf_static
