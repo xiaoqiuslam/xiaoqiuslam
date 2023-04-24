@@ -1,7 +1,7 @@
 #include <iostream>
-#include <Eigen/Core>
+#include <eigen3/Eigen/Core>
 #include <cmath>
-#include <Eigen/Geometry>
+#include <eigen3/Eigen/Geometry>
 
 int main( int argc, char** argv ){
 

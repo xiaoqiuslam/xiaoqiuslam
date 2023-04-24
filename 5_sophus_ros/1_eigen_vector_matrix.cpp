@@ -1,5 +1,5 @@
 #include <iostream>
-#include <Eigen/Core>
+#include <eigen3/Eigen/Core>
 
 
 int main( int argc, char** argv ){

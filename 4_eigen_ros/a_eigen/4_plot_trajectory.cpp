@@ -1,6 +1,6 @@
 #include <pangolin/pangolin.h>
-#include <Eigen/Core>
-#include <Eigen/Geometry>
+#include <eigen3/Eigen/Core>
+#include <eigen3/Eigen/Geometry>
 #include <unistd.h>
 
 int main(int argc, char **argv) {

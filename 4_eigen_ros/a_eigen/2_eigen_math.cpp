@@ -1,6 +1,6 @@
 #include <iostream>
-#include <Eigen/Core>
-#include <Eigen/Dense>
+#include <eigen3/Eigen/Core>
+#include <eigen3/Eigen/Dense>
 
 int main( int argc, char** argv ){
 

@@ -8,9 +8,9 @@
 #include <sophus/se3.h>
 #include <pangolin/pangolin.h>
 #include <opencv2/core/core.hpp>
-#include <Eigen/Core>
-#include <Eigen/Geometry>
-#include <Eigen/SVD>
+#include <eigen3/Eigen/Core>
+#include <eigen3/Eigen/Geometry>
+#include <eigen3/Eigen/SVD>
 
 void DrawTrajectory(std::vector<Sophus::SE3, Eigen::aligned_allocator<Sophus::SE3>>pose1, std::vector<Sophus::SE3, Eigen::aligned_allocator<Sophus::SE3>> pose2);
 

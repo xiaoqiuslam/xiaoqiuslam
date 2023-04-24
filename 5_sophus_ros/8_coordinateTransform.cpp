@@ -1,6 +1,6 @@
 #include <iostream>
-#include <Eigen/Core>
-#include <Eigen/Geometry>
+#include <eigen3/Eigen/Core>
+#include <eigen3/Eigen/Geometry>
 
 int main() {
     // 构造位姿变换矩阵:这个变换矩阵可以把世界坐标系转到R1坐标系

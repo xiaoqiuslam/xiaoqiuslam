@@ -1,5 +1,5 @@
 #include <iostream>
-#include <Eigen/Core>
+#include <eigen3/Eigen/Core>
 #include "sophus/se3.hpp"
 
 int main(int argc, char **argv){

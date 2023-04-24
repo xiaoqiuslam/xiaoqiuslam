@@ -7,9 +7,9 @@
 #include <iostream>
 #include <pangolin/pangolin.h>
 // #include <opencv2/core/core.hpp>
-#include <Eigen/Core>
-#include <Eigen/Geometry>
-#include <Eigen/SVD>
+#include <eigen3/Eigen/Core>
+#include <eigen3/Eigen/Geometry>
+#include <eigen3/Eigen/SVD>
 #include "sophus/se3.hpp"
 
 

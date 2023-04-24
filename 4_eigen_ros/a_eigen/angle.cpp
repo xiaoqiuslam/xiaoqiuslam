@@ -1,6 +1,6 @@
 #include <iostream>
-#include <Eigen/Core>
-#include <Eigen/Dense>
+#include <eigen3/Eigen/Core>
+#include <eigen3/Eigen/Dense>
 
 int main() {
     std::cout << "小秋SLAM实战教程公众号后台回复“0704”获取可执行代码" << std::endl;
